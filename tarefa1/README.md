@@ -1,20 +1,19 @@
-## Getting Started
+### Tarefa 1 - [Nome do Jogo]
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+O jogo implementado consiste em uma dinâmica de luta. Ao longo do mapa, o jogador enfrentará diversos adversários diferentes, com uma dificuldade progressiva. A cada round, o jogador poderá escolher, dentre as opções, uma **carta de dano ou de escudo**, que poderá contribuir para sua vitória.
 
-## Folder Structure
+# Como jogar
 
-The workspace contains two folders by default, where:
+sdhuahsduhasidhiashdshdiaushdi
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+# Dinâmica das cartas
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Compilação
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Execução
 
-## Dependency Management
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
 
-// Esse arquivo será usado para descrever o projeto
+
+
+// Esse arquivo será usado para descrever o projetojoj
