@@ -47,9 +47,9 @@ public class App {
 
         IO.println("    Boa sorte, " + player.getName() + "!\n" + //
                                                         "                                    -=(o`'. _¬\r\n" + //
-                                                        "                                      '.-.\\// \r\n" + //
-                                                        "    Lembre-se: para vencer, use       /|  \\\\ \r\n" + //
-                                                        "    as cartas ao seu favor            '|  || \r\n" + //
+                                                        "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
+                                                        "    as cartas ao seu favor            /|  \\\\ \r\n" + //
+                                                        "                                      '|  || \r\n" + //
                                                         "                                       _\\_):,_\n");
         IO.println("Digite qualquer coisa para continuar");
         String rand = scanner.nextLine();
@@ -63,7 +63,12 @@ public class App {
 
     public static void startLevel(Heroi player) {
         IO.println("Nível " + level + "\n");
-        IO.println(player.getName() + " acaba de encontrar [Nome do inimigo]");
+        IO.println(player.getName() + " acaba de encontrar [Nome do inimigo]\n");
+        IO.println("     .'´o)=-      -=(o`'.\n" + //
+                        "     /.-.'          '.-.\\\n" + //
+                        "    //  |\\    VS    /|  \\\\\n" + //
+                        "    ||  |'          '|  ||\n" + //
+                        "  _,:(_/_            _\\_):,_\n");
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 Sim!");
         IO.println("2 Não...\n"); 
