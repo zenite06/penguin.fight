@@ -1,7 +1,8 @@
 public class Heroi {
     private String nome;
     private int vida;
-    private int escudo;
+    private int escudo; // Obs: O escudo do jogador não é cumulativo ao longo dos turnos
+    private int energia;
 
     public Heroi(String nome) { // Setup do herói
         this.nome = nome;
@@ -15,6 +16,7 @@ public class Heroi {
             this.vida = 60;
 
         this.escudo = 0;
+        this.energia = 100; // Energia máxima
     }
 
     public void receberDano(int dano) {

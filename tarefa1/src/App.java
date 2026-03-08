@@ -27,17 +27,23 @@ public class App {
                                 "     _\\_):,_\n");
 
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        startGame();
+        startGame(inimigos);
         scanner.close();
     }
 
     public static Inimigo[] criaInimigos() {
-        Inimigo inimigos[] = new Inimigo[maxLevel];
         // Nessa "função" serão instanciados todos os inimigos do jogo
+        Inimigo inimigos[] = new Inimigo[maxLevel];
+        inimigos[0] = new Inimigo("Gary", 40, 2, "     .'´o)=-      -=(O¬'.\n" + //
+                        "     /.-.'           '._.\\\n" + //
+                        "    //  |\\    VS    /| V \\\\\n" + //
+                        "    ||  |'          '|   ||\n" + //
+                        "  _,:(_/_            _\\ _):,_\n"); 
+        // Inimigo da primeira fase
         return inimigos;
     }
 
-    public static void startGame() { 
+    public static void startGame(Inimigo inimigos[]) { 
         Scanner scanner = new Scanner(System.in);
 
         IO.println("Como devemos te chamar?\n");
@@ -55,24 +61,35 @@ public class App {
         String rand = scanner.nextLine();
         IO.println("\n");
         
-        for (int i = 1; i <= maxLevel; i++)
-            startLevel(player);
+        for (int i = 1; i <= maxLevel; i++) {
+            if (level > 1) { // Os próximos níveis serão implementados futuramente
+                IO.println("¨_ .'´o)=-\n" + //
+                                    " \\\\/.-.'     Agradecemos por jogar!\n" + //
+                                    "  //  |\\     Os próximos níveis ainda estão em desenvolvimento, aguarde :)\n" + //
+                                    "  ||  |' \n" + //
+                                    "_,:(_/_ \n");
+                break;
+            } 
+            startLevel(player, inimigos);
+        }
 
         scanner.close();
     }
 
-    public static void startLevel(Heroi player) {
+    public static void startLevel(Heroi player, Inimigo inimigos[]) {
+        Scanner scanner = new Scanner(System.in);
+
         IO.println("Nível " + level + "\n");
-        IO.println(player.getName() + " acaba de encontrar [Nome do inimigo]\n");
-        IO.println("     .'´o)=-      -=(o`'.\n" + //
-                        "     /.-.'          '.-.\\\n" + //
-                        "    //  |\\    VS    /|  \\\\\n" + //
-                        "    ||  |'          '|  ||\n" + //
-                        "  _,:(_/_            _\\_):,_\n");
+        IO.println(player.getName() + " acaba de encontrar " + inimigos[level - 1].getName() + "\n");
+        IO.println(inimigos[level - 1].getC());
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 Sim!");
         IO.println("2 Não...\n"); 
+
+        int ans = scanner.nextInt();
+        IO.println("\n");
         level++;
+        scanner.close();
     }
 
     public static int getLevel() {
