@@ -28,14 +28,15 @@ public class App {
 
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
         CartaEscudo escudos[] = criaCartasEscudo();
-        startGame(inimigos);
+        CartaDano danos[] = criaCartasDano()
+        startGame(inimigos, danos, escudos);
         scanner.close();
     }
 
     public static Inimigo[] criaInimigos() {
         // Nessa "função" serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 40, 2, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Gary", 40, 2, 3, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
@@ -45,7 +46,13 @@ public class App {
     }
 
     public static CartaDano[] criaCartasDano() {
-
+        CartaDano danos[] = new CartaDano[5];
+        danos[0] = new CartaDano("a cotovelada improvisada", 10, 2);
+        danos[1] = new CartaDano("o soco voador", 20, 5);
+        danos[2] = new CartaDano("o chute periculoso", 40, 10);
+        danos[3] = new CartaDano("a joelhada triunfal", 70, 20);
+        danos[4] = new CartaDano("a imobilização fatal", 90, 30);
+        return danos;
     }
 
     public static CartaEscudo[] criaCartasEscudo() {
@@ -58,7 +65,7 @@ public class App {
         return escudos;
     }
 
-    public static void startGame(Inimigo inimigos[]) { 
+    public static void startGame(Inimigo inimigos[], CartaDano danos[], CartaEscudo escudos[]) { 
         Scanner scanner = new Scanner(System.in);
 
         IO.println("Como devemos te chamar?\n");
@@ -85,14 +92,33 @@ public class App {
                                     "_,:(_/_ \n");
                 break;
             } 
-            startLevel(player, inimigos);
+            startLevel(player, inimigos, danos, escudos);
         }
 
         scanner.close();
     }
 
-    public static void startLevel(Heroi player, Inimigo inimigos[]) {
+    public static void startLevel(Heroi player, Inimigo inimigos[], CartaDano danos[], CartaEscudo escudos[]) {
         Scanner scanner = new Scanner(System.in);
+
+        int cartas[]; // Vetor com os índices das cartas (as duas primeiras são de dano e as duas últimas de escudo)
+        int last = -1;
+        int j = -1;
+        for(int i = 0; i < 1; i++) {
+            while(j == last)
+                j = (int)(Math.random() * 5);
+            cartas[i] = j;
+            last = j;
+        }
+
+        last = -1;
+        j = -1;
+        for(int i = 2; i < 4; i++) {
+            while(j == last)
+                j = (int)(Math.random() * 5);
+            cartas[i] = j;
+            last = j;
+        }
 
         IO.println("Nível " + level + "\n");
         IO.println(player.getName() + " acaba de encontrar " + inimigos[level - 1].getName() + "\n");
@@ -100,8 +126,19 @@ public class App {
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 Sim!");
         IO.println("2 Não...\n"); 
-
         int ans = scanner.nextInt();
+
+        while (ans != 5) {
+            IO.println(inimigos[level - 1].getName() + "(Vida = " + inimigos[level - 1].getVida() + ")");
+            IO.println("Como quer se preparar?\n");
+            IO.println("1 - Carta de dano: " + danos[cartas[0]].getName() + " (Dano = " + danos[cartas[0]].getDano() + " / Custo = " + danos[cartas[0]].getCusto());
+            IO.println("2 - Carta de dano: " + danos[cartas[1]].getName() + " (Dano = " + danos[cartas[1]].getDano() + " / Custo = " + danos[cartas[1]].getCusto());
+            IO.println("3 - Carta de defesa: " + escudos[cartas[2]].getName() + " (Defesa = " + escudos[cartas[2]].getEscudo() + " / Custo = " + escudos[cartas[2]].getCusto());
+            IO.println("4 - Carta de defesa: " + escudos[cartas[3]].getName() + " (Defesa = " + escudos[cartas[3]].getEscudo() + " / Custo = " + escudos[cartas[3]].getCusto());
+            IO.println("5 - Finalizar turno\n");
+            ans = scanner.nextInt();
+            // Fazer o switch
+        }
         IO.println("\n");
         level++;
         scanner.close();
