@@ -35,7 +35,7 @@ public class Heroi {
         this.escudo = escudo;
     }
 
-    public boolean estarVivo() {
+    public boolean estaVivo() {
         if (this.vida > 0) 
             return true;
         return false;
