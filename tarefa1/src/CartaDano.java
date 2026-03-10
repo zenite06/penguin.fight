@@ -11,7 +11,7 @@ public class CartaDano {
 
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.custo) {
-            IO.println(heroi.getName() + " usou " + this.nome + "(" + this.dano + " de dano) em " + inimigo.getName() + "!");
+            IO.println(heroi.getName() + " usou " + this.nome + " em " + inimigo.getName() + "!");
             inimigo.receberDano(this.dano);
             heroi.setEnergia(this.custo);
         }

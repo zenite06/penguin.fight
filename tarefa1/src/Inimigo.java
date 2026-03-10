@@ -5,7 +5,7 @@ public class Inimigo {
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
 
-    public Inimigo(String nome, int vida, int escudo, String capa) { // Setup do inimigo
+    public Inimigo(String nome, int vida, int escudo, int dano, String capa) { // Setup do inimigo
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
@@ -27,10 +27,18 @@ public class Inimigo {
             this.vida -= dano_efetivo;
         else
             dano_efetivo = 0;
-        if (this.escudo > 0) {
-            IO.println(this.nome + " defendeu (" + dano_efetivo + " de dano efetivo)");
-        }
+        if (this.escudo > 0)
+            IO.println(this.nome + " defendeu (- " + dano_efetivo + " de vida)");
+        else 
+            IO.println(this.nome + " não defendeu (- " + dano_efetivo + " de vida)");
     }
 
-    // Implementar os métodos faltantes!
+    public void atacar(Heroi heroi) {
+        IO.println(this.nome + " atacou!");
+        heroi.receberDano(this.dano);
+    }
+
+    public boolean estaVivo() {
+        return this.vida > 0;
+    }
 }

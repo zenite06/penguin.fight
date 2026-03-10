@@ -23,6 +23,12 @@ public class Heroi {
         int dano_efetivo = dano - this.escudo;
         if (dano_efetivo > 0) 
             this.vida -= dano_efetivo;
+        else
+            dano_efetivo = 0;
+        if (this.escudo > 0)
+            IO.println(this.nome + " defendeu (- " + dano_efetivo + " de vida)");
+        else 
+            IO.println(this.nome + " não defendeu (- " + dano_efetivo + " de vida)");
     }
 
     public void ganharEscudo(int escudo) {
