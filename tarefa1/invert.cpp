@@ -3,7 +3,7 @@
 # include <string>
 # include <algorithm>
 
-/* Esse código é um auxiliar para resolver questões com a arte em ASCII*/
+/* Esse código é um auxiliar para resolver questões com a arte em ASCII */
 
 int main() {
     std::vector<std::string> text;

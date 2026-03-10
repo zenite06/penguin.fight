@@ -38,4 +38,16 @@ public class Heroi {
     public String getName() {
         return this.nome;
     }
+
+    public int getEnergia() {
+        return this.energia;
+    }
+
+    public void setEnergia(int valor) {
+        this.energia -= valor;
+    }
+
+    public void setVida() {
+        
+    }
 }

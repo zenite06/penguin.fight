@@ -27,6 +27,7 @@ public class App {
                                 "     _\\_):,_\n");
 
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
+        CartaEscudo escudos[] = criaCartasEscudo();
         startGame(inimigos);
         scanner.close();
     }
@@ -41,6 +42,20 @@ public class App {
                         "  _,:(_/_            _\\ _):,_\n"); 
         // Inimigo da primeira fase
         return inimigos;
+    }
+
+    public static CartaDano[] criaCartasDano() {
+
+    }
+
+    public static CartaEscudo[] criaCartasEscudo() {
+        CartaEscudo escudos[] = new CartaEscudo[5];
+        escudos[0] = new CartaEscudo("a esquiva desajeitada", 2, 10);
+        escudos[1] = new CartaEscudo("a esquiva normal", 4, 30);
+        escudos[2] = new CartaEscudo("a esquiva perfeita", 8, 50);
+        escudos[3] = new CartaEscudo("o bloqueio brutal", 6, 70);
+        escudos[4] = new CartaEscudo("o bloqueio milenar", 10, 90);
+        return escudos;
     }
 
     public static void startGame(Inimigo inimigos[]) { 
