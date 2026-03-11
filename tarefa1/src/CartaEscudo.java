@@ -15,4 +15,16 @@ public class CartaEscudo {
         } else 
             IO.println("Energia insuficiente!\n");
     }
+
+    public String getName() {
+        return this.nome;
+    }
+
+    public int getCusto() {
+        return this.custo;
+    }
+
+    public int getEscudo() {
+        return this.escudo;
+    }
 }

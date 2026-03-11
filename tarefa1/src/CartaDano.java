@@ -18,4 +18,16 @@ public class CartaDano {
         else
             IO.println("Energia insuficiente!");
     }
+
+    public String getName() {
+        return this.nome;
+    }
+
+    public int getCusto() {
+        return this.custo;
+    }
+
+    public int getDano() {
+        return this.dano;
+    }
 }

@@ -21,6 +21,10 @@ public class Inimigo {
         return this.capa;
     }
 
+    public int getVida() {
+        return this.vida;
+    }
+
     public void receberDano(int dano) {
         int dano_efetivo = dano - this.escudo;
         if (dano_efetivo > 0) 
