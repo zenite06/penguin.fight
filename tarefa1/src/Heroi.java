@@ -60,4 +60,20 @@ public class Heroi {
     public void setVida(int valor) {
         this.vida = valor;
     }
+
+    public void resetRound() {
+        this.escudo = 0;
+    }
+
+    public void resetLevel() {
+        if (App.getLevel() < 3) 
+            this.vida = 40;
+        else if (App.getLevel() == 10) 
+            this.vida = 100;
+        else
+            this.vida = 60;
+
+        this.escudo = 0;
+        this.energia = 100; // Energia máxima
+    }
 }

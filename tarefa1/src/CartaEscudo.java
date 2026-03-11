@@ -11,7 +11,8 @@ public class CartaEscudo {
 
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.custo) {
-            IO.println(heroi.getName() + "se preparou para usar " + this.nome + "(+ " + this.escudo + " de defesa)\n");
+            IO.println(heroi.getName() + " se preparou para usar " + this.nome + " (+ " + this.escudo + " de defesa)\n");
+            heroi.ganharEscudo(this.escudo);
         } else 
             IO.println("Energia insuficiente!\n");
     }

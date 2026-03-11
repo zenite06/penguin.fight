@@ -41,7 +41,19 @@ public class App {
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
-                        "  _,:(_/_            _\\ _):,_\n"); 
+                        "  _,:(_/_            _\\ _):,_\n", "    Consegui! \n" + //
+                                                            "       V\n" + //
+                                                            "     .'´o)=-      -=(X¬'.\n" + //
+                                                            "     /.-.'           '._.\\\n" + //
+                                                            "    //  |\\    VS    /| V \\\\\n" + //
+                                                            "    ||  |'          '|   ||\n" + //
+                                                            "  _,:(_/_            _\\ _):,_\n", "            Mais sorte na próxima!\n" + //
+                                                                                                "                      V\n" + //
+                                                                                                "     .'´X)=-      -=(O¬'. \n" + //
+                                                                                                "     /.-.'           '._.\\ \n" + //
+                                                                                                "    //  |\\    VS    /| V \\\\\n" + //
+                                                                                                "    ||  |'          '|   ||\n" + //
+                                                                                                "  _,:(_/_            _\\ _):,_"); 
         // Inimigo da primeira fase
         return inimigos;
     }
@@ -131,11 +143,13 @@ public class App {
         IO.println("2 Não...\n"); // Fazer switch para englobar a resposta negativa
         int ans = scanner.nextInt();
 
-        while (ans != 5) {
+        while (ans != 5 && player.estaVivo() == true && inimigos[level - 1].estaVivo() == true) {
             IO.println();
             IO.println(player.getName() + " (Vida = " + player.getVida() + ")");
             IO.println(inimigos[level - 1].getName() + " (Vida = " + inimigos[level - 1].getVida() + ")\n");
             IO.println("Como quer se preparar?\n");
+            IO.println("Energia: " + player.getEnergia());
+            IO.println();
 
             if (cartas[0] >= 0)
                 IO.println("1 - Carta de dano: " + danos[cartas[0]].getName() + " (Dano = " + danos[cartas[0]].getDano() + " / Custo = " + danos[cartas[0]].getCusto() + ")");
@@ -177,12 +191,17 @@ public class App {
 
                 case 5:
                     // Finalização da luta
+                    IO.println(inimigos[level - 1].getC());
+                    IO.println(inimigos[level - 1].getCV());
+                    IO.println(inimigos[level - 1].getCD());
                     break;
 
                 default:
                     IO.println("Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n");
                     break;
             }
+            player.receberDano(inimigos[level-1].getDano());
+            player.resetRound();
         }
 
         IO.println("\n");

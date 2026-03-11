@@ -4,13 +4,17 @@ public class Inimigo {
     private int escudo;
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
+    private String capa_v; // Capa da vitória
+    private String capa_d; // Capa da derrota
 
-    public Inimigo(String nome, int vida, int escudo, int dano, String capa) { // Setup do inimigo
+    public Inimigo(String nome, int vida, int escudo, int dano, String capa, String capa_v, String capa_d) { // Setup do inimigo
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
         this.dano = dano;
         this.capa = capa;
+        this.capa_v = capa_v;
+        this.capa_d = capa_d;
     }
 
     public String getName() {
@@ -21,8 +25,20 @@ public class Inimigo {
         return this.capa;
     }
 
+    public String getCV() {
+        return this.capa_v;
+    }
+
+    public String getCD() {
+        return this.capa_d;
+    }
+
     public int getVida() {
         return this.vida;
+    }
+
+    public int getDano() {
+        return this.dano;
     }
 
     public void receberDano(int dano) {
