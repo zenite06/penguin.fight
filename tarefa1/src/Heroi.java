@@ -49,11 +49,15 @@ public class Heroi {
         return this.energia;
     }
 
+    public int getVida() {
+        return this.vida;
+    }
+
     public void setEnergia(int valor) {
         this.energia -= valor;
     }
 
-    public void setVida() {
-        
+    public void setVida(int valor) {
+        this.vida = valor;
     }
 }

@@ -26,15 +26,22 @@ public class Inimigo {
     }
 
     public void receberDano(int dano) {
-        int dano_efetivo = dano - this.escudo;
-        if (dano_efetivo > 0) 
-            this.vida -= dano_efetivo;
-        else
-            dano_efetivo = 0;
-        if (this.escudo > 0)
-            IO.println(this.nome + " defendeu (- " + dano_efetivo + " de vida)");
-        else 
-            IO.println(this.nome + " não defendeu (- " + dano_efetivo + " de vida)");
+        int p = (int)(Math.random() * 2); // Define aleatoriamente se o inimigo conseguiu se defender
+
+        if (p == 1) {
+            int dano_efetivo = dano - this.escudo;
+            if (dano_efetivo > 0) 
+                this.vida -= dano_efetivo;
+            else
+                dano_efetivo = 0;
+            if (this.escudo > 0)
+                IO.println(this.nome + " defendeu (- " + dano_efetivo + " de vida)");
+            else 
+                IO.println(this.nome + " não defendeu (- " + dano_efetivo + " de vida)");
+        } else {
+            this.vida -= dano;
+            IO.println(this.nome + " não defendeu (- " + dano + " de vida)");
+        }
     }
 
     public void atacar(Heroi heroi) {

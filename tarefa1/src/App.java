@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -28,7 +29,7 @@ public class App {
 
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
         CartaEscudo escudos[] = criaCartasEscudo();
-        CartaDano danos[] = criaCartasDano()
+        CartaDano danos[] = criaCartasDano();
         startGame(inimigos, danos, escudos);
         scanner.close();
     }
@@ -101,12 +102,14 @@ public class App {
     public static void startLevel(Heroi player, Inimigo inimigos[], CartaDano danos[], CartaEscudo escudos[]) {
         Scanner scanner = new Scanner(System.in);
 
-        int cartas[]; // Vetor com os índices das cartas (as duas primeiras são de dano e as duas últimas de escudo)
+        int[] cartas = new int[4]; // Vetor com os índices das cartas (as duas primeiras são de dano e as duas últimas de escudo)
+
+        /* O processo abaixo aleatoriza as cartas a cada nível */
         int last = -1;
         int j = -1;
         for(int i = 0; i < 1; i++) {
             while(j == last)
-                j = (int)(Math.random() * 5);
+                j = (int)(Math.random() * 4);
             cartas[i] = j;
             last = j;
         }
@@ -115,7 +118,7 @@ public class App {
         j = -1;
         for(int i = 2; i < 4; i++) {
             while(j == last)
-                j = (int)(Math.random() * 5);
+                j = (int)(Math.random() * 4);
             cartas[i] = j;
             last = j;
         }
@@ -125,20 +128,63 @@ public class App {
         IO.println(inimigos[level - 1].getC());
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 Sim!");
-        IO.println("2 Não...\n"); 
+        IO.println("2 Não...\n"); // Fazer switch para englobar a resposta negativa
         int ans = scanner.nextInt();
 
         while (ans != 5) {
-            IO.println(inimigos[level - 1].getName() + "(Vida = " + inimigos[level - 1].getVida() + ")");
+            IO.println();
+            IO.println(player.getName() + " (Vida = " + player.getVida() + ")");
+            IO.println(inimigos[level - 1].getName() + " (Vida = " + inimigos[level - 1].getVida() + ")\n");
             IO.println("Como quer se preparar?\n");
-            IO.println("1 - Carta de dano: " + danos[cartas[0]].getName() + " (Dano = " + danos[cartas[0]].getDano() + " / Custo = " + danos[cartas[0]].getCusto());
-            IO.println("2 - Carta de dano: " + danos[cartas[1]].getName() + " (Dano = " + danos[cartas[1]].getDano() + " / Custo = " + danos[cartas[1]].getCusto());
-            IO.println("3 - Carta de defesa: " + escudos[cartas[2]].getName() + " (Defesa = " + escudos[cartas[2]].getEscudo() + " / Custo = " + escudos[cartas[2]].getCusto());
-            IO.println("4 - Carta de defesa: " + escudos[cartas[3]].getName() + " (Defesa = " + escudos[cartas[3]].getEscudo() + " / Custo = " + escudos[cartas[3]].getCusto());
+
+            if (cartas[0] >= 0)
+                IO.println("1 - Carta de dano: " + danos[cartas[0]].getName() + " (Dano = " + danos[cartas[0]].getDano() + " / Custo = " + danos[cartas[0]].getCusto() + ")");
+            if (cartas[1] >= 0)
+                IO.println("2 - Carta de dano: " + danos[cartas[1]].getName() + " (Dano = " + danos[cartas[1]].getDano() + " / Custo = " + danos[cartas[1]].getCusto() + ")");
+            if (cartas[2] >= 0)
+                IO.println("3 - Carta de defesa: " + escudos[cartas[2]].getName() + " (Defesa = " + escudos[cartas[2]].getEscudo() + " / Custo = " + escudos[cartas[2]].getCusto() + ")");
+            if (cartas[3] >= 0)
+                IO.println("4 - Carta de defesa: " + escudos[cartas[3]].getName() + " (Defesa = " + escudos[cartas[3]].getEscudo() + " / Custo = " + escudos[cartas[3]].getCusto() + ")");
             IO.println("5 - Finalizar turno\n");
-            ans = scanner.nextInt();
-            // Fazer o switch
+
+            try { // Isso não está funcionando como deveria!
+                ans = scanner.nextInt();
+                IO.println();
+            } catch (InputMismatchException e) {
+                ans = 6;
+            }
+
+            switch(ans) {
+                case 1:
+                    danos[cartas[0]].usar(player, inimigos[level - 1]);
+                    cartas[0] = -1;
+                    break;
+
+                case 2:
+                    danos[cartas[1]].usar(player, inimigos[level - 1]);
+                    cartas[1] = -1;
+                    break;
+
+                case 3:
+                    escudos[cartas[2]].usar(player, inimigos[level - 1]);
+                    cartas[2] = -1;
+                    break;
+
+                case 4:
+                    escudos[cartas[3]].usar(player, inimigos[level - 1]);
+                    cartas[3] = -1;
+                    break;
+
+                case 5:
+                    // Finalização da luta
+                    break;
+
+                default:
+                    IO.println("Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n");
+                    break;
+            }
         }
+
         IO.println("\n");
         level++;
         scanner.close();
