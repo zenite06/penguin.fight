@@ -12,9 +12,9 @@ public class Inimigo {
         this.vida = vida;
         this.escudo = escudo;
         this.dano = dano;
-        this.capa = capa;
-        this.capa_v = capa_v;
-        this.capa_d = capa_d;
+        this.capa = capa;     // Capa (player x inimigo)
+        this.capa_v = capa_v; // Capa da vitória
+        this.capa_d = capa_d; // Capa da derrota
     }
 
     public String getName() {
@@ -51,12 +51,12 @@ public class Inimigo {
             else
                 dano_efetivo = 0;
             if (this.escudo > 0)
-                IO.println(this.nome + " defendeu (- " + dano_efetivo + " de vida)");
+                IO.println(this.nome + " defendeu" + App.ANSI_GREEN + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
             else 
-                IO.println(this.nome + " não defendeu (- " + dano_efetivo + " de vida)");
+                IO.println(this.nome + " não defendeu" + App.ANSI_GREEN + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
         } else {
             this.vida -= dano;
-            IO.println(this.nome + " não defendeu (- " + dano + " de vida)");
+            IO.println(this.nome + " não defendeu" + App.ANSI_GREEN + " (- " + dano + " de vida)" + App.ANSI_RESET);
         }
     }
 

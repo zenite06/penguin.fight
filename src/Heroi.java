@@ -7,7 +7,7 @@ public class Heroi {
     public Heroi(String nome) { // Setup do herói
         this.nome = nome;
 
-    // A quantidade de vida do herói depende do nível em que ele está
+    // A quantidade de vida do herói depende do nível em que ele está (para implementação futura)
         if (App.getLevel() < 3) 
             this.vida = 40;
         else if (App.getLevel() == 10) 
@@ -26,13 +26,13 @@ public class Heroi {
         else
             dano_efetivo = 0;
         if (this.escudo > 0)
-            IO.println(this.nome + " defendeu (- " + dano_efetivo + " de vida)");
+            IO.println(this.nome + " defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
         else 
-            IO.println(this.nome + " não defendeu (- " + dano_efetivo + " de vida)");
+            IO.println(this.nome + " não defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
     }
 
     public void ganharEscudo(int escudo) {
-        this.escudo = escudo;
+        this.escudo += escudo;
     }
 
     public boolean estaVivo() {

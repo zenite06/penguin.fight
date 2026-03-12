@@ -11,12 +11,13 @@ public class CartaDano {
 
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.custo) {
+            IO.println("\n");
             IO.println(heroi.getName() + " usou " + this.nome + " em " + inimigo.getName() + "!");
             inimigo.receberDano(this.dano);
             heroi.setEnergia(this.custo);
         }
         else
-            IO.println("Energia insuficiente!");
+            IO.println(App.ANSI_RED + "Energia insuficiente!" + App.ANSI_RESET);
     }
 
     public String getName() {
