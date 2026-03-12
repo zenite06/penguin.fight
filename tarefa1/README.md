@@ -4,11 +4,16 @@ Saudações, pinguim! Este projeto foi desenvolvido como parte dos laboratórios
 
 Lute com as cartas!    
       V
-  -=(o`'. _¬
-    '.-.\// 
-    /|  \\
-    '|===||  
-     _\_):,_
+  -=(o`'. _¬  
+  
+    '.-.\//   
+    
+    /|  \\  
+    
+    '|===||    
+    
+     _\_):,_  
+     
 
 # Estrutura do Projeto
 
@@ -87,4 +92,5 @@ Projeto desenvolvido por:
  \\/.-.'     Obrigado por jogar!
   //  |\     
   ||  |' 
+
 _,:(_/_ 
