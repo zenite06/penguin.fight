@@ -61,6 +61,8 @@ Isso iniciará o programa e o sistema de combate será executado no terminal.
 
 # Como Jogar
 
+![alt text](image.png)
+
 O jogo foi inspirado pelo minigame *Desafio Ninja*, do antigo jogo online *Club Penguin*. A dinâmica foi modificada, mas consiste em escolher cartas de dano (golpes) e de defesa (bloqueios) a cada turno, com o objetivo de derrotar o inimigo (assim como no jogo *Slay the Spire*).
 
 Durante o combate:

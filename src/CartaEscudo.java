@@ -12,7 +12,7 @@ public class CartaEscudo {
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.custo) {
             IO.println("\n");
-            IO.println(heroi.getName() + " se preparou para usar " + this.nome + App.ANSI_GREEN + " (+ " + this.escudo + " de defesa)\n" + App.ANSI_RESET);
+            IO.println(heroi.getName() + " se preparou para usar "  + App.ANSI_PURPLE +  this.nome + App.ANSI_GREEN + " (+ " + this.escudo + " de defesa)\n" + App.ANSI_RESET);
             heroi.ganharEscudo(this.escudo);
             heroi.setEnergia(this.custo);
         } else 
