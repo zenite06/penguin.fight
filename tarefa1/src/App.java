@@ -161,8 +161,9 @@ public class App {
         round:
         while (player.estaVivo()) {
             IO.println();
-            IO.println(player.getName() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")");
-            IO.println(inimigo.getName() + " (Vida = " + inimigo.getVida() + ")\n");
+            IO.println("                  " + inimigo.getName() + " (Vida = " + inimigo.getVida() + ")\n");
+            IO.println(inimigo.getC());
+            IO.println("  " + player.getName() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n");
             IO.println("Como quer se preparar?\n");
             IO.println("Energia: " + player.getEnergia());
             IO.println();
