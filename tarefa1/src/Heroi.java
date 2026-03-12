@@ -53,6 +53,10 @@ public class Heroi {
         return this.vida;
     }
 
+    public int getEscudo() {
+        return this.escudo;
+    }
+
     public void setEnergia(int valor) {
         this.energia -= valor;
     }
@@ -63,6 +67,7 @@ public class Heroi {
 
     public void resetRound() {
         this.escudo = 0;
+        this.energia = 100;
     }
 
     public void resetLevel() {
