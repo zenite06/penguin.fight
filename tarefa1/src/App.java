@@ -1,11 +1,10 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
     private static int level = 1; // O nível define alguns atributos da gameplay
     private static int maxLevel = 10; // Quantos níveis (e inimigos) o jogo terá
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
         IO.println("  ____                        _          __ _       _     _    __             __\n" + //
                         " |  _ \\ ___ _ __   __ _ _   _(_)_ __    / _(_) __ _| |__ | |_ / /  -=(o`'.    \\ \\ \n" + //
                         " | |_) / _ \\ '_ \\ / _` | | | | | '_ \\  | |_| |/ _` | '_ \\| __| |     '.-.\\     | |\n" + //
@@ -18,6 +17,7 @@ public class App {
         IO.println("2 Não...\n");
 
         int answer = scanner.nextInt();
+        scanner.nextLine();
         IO.println("\n");
 
         if (answer != 1)  
@@ -79,7 +79,6 @@ public class App {
     }
 
     public static void startGame(Inimigo inimigos[], CartaDano danos[], CartaEscudo escudos[]) { 
-        Scanner scanner = new Scanner(System.in);
 
         IO.println("Como devemos te chamar?\n");
         String name = scanner.nextLine();
@@ -108,11 +107,9 @@ public class App {
             startLevel(player, inimigos, danos, escudos);
         }
 
-        scanner.close();
     }
 
     public static void startLevel(Heroi player, Inimigo inimigos[], CartaDano danos[], CartaEscudo escudos[]) {
-        Scanner scanner = new Scanner(System.in);
 
         Inimigo inimigo = inimigos[level - 1];
 
@@ -123,6 +120,7 @@ public class App {
         IO.println("1 Sim!");
         IO.println("2 Não...\n");
         int ans = scanner.nextInt();
+        scanner.nextLine();
         if (ans == 2)
             IO.println("..."); // Escrever depois
         while (inimigo.estaVivo() && player.estaVivo())
@@ -135,11 +133,9 @@ public class App {
             level ++;
         }
         player.resetLevel();
-        scanner.close();
     }
 
     public static void startRound(Heroi player, Inimigo inimigo, CartaDano danos[], CartaEscudo escudos[]) {
-        Scanner scanner = new Scanner(System.in);
 
         int[] cartas = new int[4]; // Vetor com os índices das cartas (as duas primeiras são de dano e as duas últimas de escudo)
 
@@ -182,7 +178,12 @@ public class App {
             IO.println("5 - Finalizar turno\n");
 
             int ans = scanner.nextInt();
-            if (!(ans < 1 || ans > 4) && cartas[ans - 1] < 0)
+            scanner.nextLine();
+            if (ans == 5)
+                break;
+            if ((ans < 1 || ans > 4) && ans != 5)
+                ans = 6;
+            else if (ans != 5 && cartas[ans - 1] < 0)
                 ans = 6;
 
             switch(ans) {
@@ -222,7 +223,6 @@ public class App {
         player.receberDano(inimigo.getDano());
         player.resetRound();
         IO.println("\n");
-        scanner.close();
     }
 
     public static int getLevel() {
