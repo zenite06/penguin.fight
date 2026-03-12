@@ -207,6 +207,7 @@ public class App {
         IO.println("\n");
         level++;
         scanner.close();
+        player.resetLevel();
     }
 
     public static int getLevel() {
