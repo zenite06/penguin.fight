@@ -95,7 +95,7 @@ public class App {
         IO.println("\n");
         Heroi player = new Heroi(name);
 
-        IO.println("    Boa sorte, " + player.getName() + "!\n" + //
+        IO.println("    Boa sorte, " + ANSI_YELLOW + player.getName() + ANSI_RESET + "!\n" + //
                                                         "                                    -=(o`'. _¬\r\n" + //
                                                         "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
                                                         "    as cartas ao seu favor            /|  \\\\ \r\n" + //
@@ -184,7 +184,7 @@ public class App {
         int j = -1;
         for(int i = 0; i < 1; i++) {
             while(j == last)
-                j = (int)(Math.random() * 4);
+                j = (int)(Math.random() * 5);
             cartas[i] = j;
             last = j;
         }
@@ -193,7 +193,7 @@ public class App {
         j = -1;
         for(int i = 2; i < 4; i++) {
             while(j == last)
-                j = (int)(Math.random() * 4);
+                j = (int)(Math.random() * 5);
             cartas[i] = j;
             last = j;
         }
@@ -261,6 +261,7 @@ public class App {
                     break round;
 
                 default:
+                    limparTela();
                     IO.println(ANSI_YELLOW + "Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n" + ANSI_RESET);
                     break;
             }
