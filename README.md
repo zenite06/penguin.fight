@@ -1,7 +1,8 @@
 # Projeto MC322 - Penguin.fight()
 
+<img src="image-3.png" alt="Alt text" align="left" width="100" height="auto">
+
 Saudações, pinguim! Este projeto foi desenvolvido como parte dos laboratórios da disciplina **MC322 - Programação Orientada a Objetos**, com o objetivo de implementar um jogo inspirado em *Slay the Spire*, no qual o jogador utiliza um **baralho de cartas** para derrotar inimigos em batalhas por turno. O projeto desenvolvido aqui foi inspirado pelo antigo jogo online *Club Penguin*, utilizando a linguagem **Java** e sendo executado via terminal.
-![alt text](image-3.png)
 
 # Estrutura do Projeto
 
@@ -55,6 +56,7 @@ Isso iniciará o programa e o sistema de combate será executado no terminal.
 O jogo foi inspirado pelo minigame *Desafio Ninja*, do antigo jogo online *Club Penguin*. A dinâmica foi modificada, mas consiste em escolher cartas de dano (golpes) e de defesa (bloqueios) a cada turno, com o objetivo de derrotar o inimigo (assim como no jogo *Slay the Spire*).
 
 No início, digite seu nome para jogar:
+
 ![alt text](image-1.png)
 
 Durante o combate:
@@ -64,6 +66,7 @@ Durante o combate:
 - Cada carta possui um **custo de energia**
 - O jogador pode usar cartas enquanto tiver energia disponível
 - Ao final do turno do jogador, os **inimigos realizam suas ações**
+
 ![alt text](<Captura de tela de 2026-03-12 20-42-45.png>)
 
 
@@ -71,6 +74,7 @@ O combate termina quando:
 
 - o **herói é derrotado**, ou
 - todos os **inimigos são derrotados**
+
 ![alt text](image-2.png)
 
 # Tecnologias Utilizadas
@@ -85,4 +89,5 @@ Projeto desenvolvido por:
 
 - Primeiro Manuela Daros Misurelli, RA123456
 - Segundo Tereza Figueiredo Diniz Zeni, RA278914
+
 
