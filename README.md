@@ -64,7 +64,7 @@ Durante o combate:
 - Cada carta possui um **custo de energia**
 - O jogador pode usar cartas enquanto tiver energia disponível
 - Ao final do turno do jogador, os **inimigos realizam suas ações**
-<video controls src="git_game.mp4" title="GIF"></video>
+![alt text](<Captura de tela de 2026-03-12 20-42-45.png>)
 
 
 O combate termina quando:
