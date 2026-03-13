@@ -87,7 +87,8 @@ O combate termina quando:
 
 Projeto desenvolvido por:
 
-- Primeiro Manuela Daros Misurelli, RA123456
+- Primeiro Manuela Daros Misurelli, RA278223
 - Segundo Tereza Figueiredo Diniz Zeni, RA278914
+
 
 
