@@ -49,7 +49,7 @@ public class App {
     public static Inimigo[] criaInimigos() {
         // Nesse método serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 40, 5, 15, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Gary", 40, 15, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
