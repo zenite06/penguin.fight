@@ -65,7 +65,7 @@ public class App {
                                                                                                 "    //  |\\    VS    /| V \\\\\n" + //
                                                                                                 "    ||  |'          '|   ||\n" + //
                                                                                                 "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 15)); 
-        // Inimigo da primeira fase
+        
         inimigos[1] = new Inimigo("Rookie", 50, 13, "                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
                         "     /.-.'           '.-.\\\n" + //
@@ -105,6 +105,7 @@ public class App {
     }
 
     public static List <Carta> criaCartas() {
+        // Nesse método serão instanciados todas as cartas do baralho
         List<Carta> cartas = new ArrayList<>();
         cartas.add(new CartaDano("A COTOVELADA IMPROVISADA", "Carta de Ataque", 10, 2));
         cartas.add(new CartaDano("O SOCO VOADOR", "Carta de Ataque", 20, 5));
@@ -120,12 +121,12 @@ public class App {
     }
 
     public static void startGame(Inimigo inimigos[]) { 
-
         limparTela();
         IO.println();
         IO.println("Como devemos te chamar?\n");
         String name = scanner.nextLine();
         Heroi player = new Heroi(name);
+
         limparTela();
         IO.println();
         IO.println("    Boa sorte, " + ANSI_YELLOW + player.getNome() + ANSI_RESET + "!\n" + //
@@ -156,11 +157,9 @@ public class App {
     }
 
     public static void startLevel(Heroi player, Inimigo inimigos[]) {
-
         limparTela();
         IO.println();
         Inimigo inimigo = inimigos[level - 1];
-
         IO.println("Nível " + level + "\n");
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC() + "\n");
@@ -169,6 +168,7 @@ public class App {
         IO.println("2 - Não...\n");
         int ans = scanner.nextInt();
         scanner.nextLine();
+
         if (ans == 2) {
             limparTela();
             IO.println();
@@ -187,11 +187,14 @@ public class App {
         while (!pilha_descarte.isEmpty())
             pilha_compra.push(pilha_descarte.remove(0)); 
         limparTela();
+
         while (inimigo.estaVivo() && player.estaVivo()) {
             startRound(player, inimigo, pilha_descarte, pilha_compra);
         }
         limparTela();
-        if (inimigo.estaVivo()) { // Você perdeu
+
+        // O nível foi finalizado
+        if (inimigo.estaVivo()) { // O jogador perdeu
             IO.println("\n");
             IO.println(ANSI_YELLOW + "Você perdeu...\n" + ANSI_RESET);
             IO.println();
@@ -212,7 +215,7 @@ public class App {
                 level = 10;
             }
         }
-        else { // Você ganhou
+        else { // O jogador ganhou
             IO.println("\n");
             IO.println(ANSI_YELLOW + "Você ganhou!\n" + ANSI_RESET);
             IO.println();
@@ -241,12 +244,12 @@ public class App {
         List<Carta> nadadeira = new ArrayList<>();
         
         for (int i = 0; i < 6; i++) {
-            if (pilha_compra.isEmpty()) {
+            if (pilha_compra.isEmpty()) { // Se a pilha de compra estiver vazia, as cartas da pilha de descarte são embaralhadas e passam pro topo da pilha de compra
                 Collections.shuffle(pilha_descarte);
                 while (!pilha_descarte.isEmpty())
                     pilha_compra.push(pilha_descarte.remove(0)); 
             } 
-            nadadeira.add(pilha_compra.pop());
+            nadadeira.add(pilha_compra.pop()); // São compradas cinco cartas da pilha de compra para a mão do jogador (nadadeira)
         }
 
         int ataque = (int)(Math.random() * 2); // Define o ataque do inimigo
@@ -272,12 +275,12 @@ public class App {
             int ans = scanner.nextInt();
             scanner.nextLine();
 
-            if (ans > i || ans < 0) {
+            if (ans > i || ans < 0) { // O jogador escolheu uma opção inválida
                 limparTela();
                 IO.println(ANSI_YELLOW + "Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n" + ANSI_RESET);
                 continue;
             }
-            if (ans == i) {
+            if (ans == i) { // O jogador escolheu a opção "Finalizar turno"
                 while (!nadadeira.isEmpty())
                     pilha_descarte.add(nadadeira.remove(0)); 
                 limparTela();
@@ -286,7 +289,7 @@ public class App {
                 break;
             }
             limparTela();
-            nadadeira.get(ans).usar(player, inimigo);
+            nadadeira.get(ans).usar(player, inimigo); // O jogador escolheu uma carta
             pilha_descarte.add(nadadeira.remove(ans)); 
             if (!inimigo.estaVivo())
                 break;
