@@ -30,6 +30,7 @@ public class App {
         IO.println("\n");
 
         if (answer != 1) {
+            limparTela();
             IO.println("  -=(o`'. ?!\r\n" + //
                                 "    '.-.\\ \r\n" + //
                                 "    /|  \\\\     Tarde demais para desistir agora. Aguente firme!\r\n" + //
@@ -66,6 +67,41 @@ public class App {
                                                                                                 "    ||  |'          '|   ||\n" + //
                                                                                                 "  _,:(_/_            _\\ _):,_"); 
         // Inimigo da primeira fase
+        inimigos[1] = new Inimigo("Rookie", 50, 13, "     .'´o)=-      -=(O¬'.\n" + //
+                        "     /.-.'           '._.\\\n" + //
+                        "    //  |\\    VS    /| V \\\\\n" + //
+                        "    ||  |'          '|   ||\n" + //
+                        "  _,:(_/_            _\\ _):,_\n", "    Consegui! \n" + //
+                                                            "       V\n" + //
+                                                            "     .'´o)=-      -=(X¬'.\n" + //
+                                                            "     /.-.'           '._.\\\n" + //
+                                                            "    //  |\\    VS    /| V \\\\\n" + //
+                                                            "    ||  |'          '|   ||\n" + //
+                                                            "  _,:(_/_            _\\ _):,_\n", "            Mais sorte na próxima!\n" + //
+                                                                                                "                      V\n" + //
+                                                                                                "     .'´X)=-      -=(O¬'. \n" + //
+                                                                                                "     /.-.'           '._.\\ \n" + //
+                                                                                                "    //  |\\    VS    /| V \\\\\n" + //
+                                                                                                "    ||  |'          '|   ||\n" + //
+                                                                                                "  _,:(_/_            _\\ _):,_"); 
+        
+        inimigos[2] = new Inimigo("Klutzy", 45, 20, "     .'´o)=-      -=(O¬'.\n" + //
+                        "     /.-.'           '._.\\\n" + //
+                        "    //  |\\    VS    /| V \\\\\n" + //
+                        "    ||  |'          '|   ||\n" + //
+                        "  _,:(_/_            _\\ _):,_\n", "    Consegui! \n" + //
+                                                            "       V\n" + //
+                                                            "     .'´o)=-      -=(X¬'.\n" + //
+                                                            "     /.-.'           '._.\\\n" + //
+                                                            "    //  |\\    VS    /| V \\\\\n" + //
+                                                            "    ||  |'          '|   ||\n" + //
+                                                            "  _,:(_/_            _\\ _):,_\n", "            Mais sorte na próxima!\n" + //
+                                                                                                "                      V\n" + //
+                                                                                                "     .'´X)=-      -=(O¬'. \n" + //
+                                                                                                "     /.-.'           '._.\\ \n" + //
+                                                                                                "    //  |\\    VS    /| V \\\\\n" + //
+                                                                                                "    ||  |'          '|   ||\n" + //
+                                                                                                "  _,:(_/_            _\\ _):,_"); 
         return inimigos;
     }
 
@@ -92,6 +128,7 @@ public class App {
         String name = scanner.nextLine();
         IO.println("\n");
         Heroi player = new Heroi(name);
+        limparTela();
 
         IO.println("    Boa sorte, " + ANSI_YELLOW + player.getNome() + ANSI_RESET + "!\n" + //
                                                         "                                    -=(o`'. _¬\r\n" + //
@@ -104,7 +141,7 @@ public class App {
         IO.println("\n");
         
         for (int i = 1; i <= maxLevel; i++) {
-            if (level > 1) { // Os próximos níveis serão implementados futuramente
+            if (level > 2) { // Os próximos níveis serão implementados futuramente
                 IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
                                     " \\\\/.-.'     Agradecemos por jogar!\n" + //
                                     "  //  |\\     Os próximos níveis ainda estão em desenvolvimento, aguarde :)\n" + //
@@ -132,6 +169,7 @@ public class App {
         int ans = scanner.nextInt();
         scanner.nextLine();
         if (ans == 2) {
+            limparTela();
             IO.println("   ! .'´o)=- \n" + //
                                 "     /.-.'   Ainda pensando em desistir?!\n" + //
                                 "    //  |\\   Siga em frente!\n" + //
@@ -163,8 +201,7 @@ public class App {
             IO.println("2 Não...\n");
             IO.println();
             ans = scanner.nextInt();
-            if (ans == 2)
-                level++;
+            level = 3;
         }
         else { // Você ganhou
             IO.println("\n");
@@ -172,7 +209,7 @@ public class App {
             IO.println();
             IO.println(inimigo.getCV());
             IO.println();
-            level ++;
+            level++;
         }
         resetLevel(player);
     }
