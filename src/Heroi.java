@@ -1,84 +1,20 @@
-public class Heroi {
-    private String nome;
-    private int vida;
-    private int escudo; // Obs: O escudo do jogador não é cumulativo ao longo dos turnos
+public class Heroi extends Entidade {
     private int energia;
 
-    public Heroi(String nome) { // Setup do herói
-        this.nome = nome;
-
-    // A quantidade de vida do herói depende do nível em que ele está (para implementação futura)
-        if (App.getLevel() < 3) 
-            this.vida = 40;
-        else if (App.getLevel() == 10) 
-            this.vida = 100;
-        else
-            this.vida = 60;
-
-        this.escudo = 0;
-        this.energia = 100; // Energia máxima
-    }
-
-    public void receberDano(int dano) {
-        int dano_efetivo = dano - this.escudo;
-        if (dano_efetivo > 0) 
-            this.vida -= dano_efetivo;
-        else
-            dano_efetivo = 0;
-        if (this.escudo > 0)
-            IO.println(this.nome + " defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
-        else 
-            IO.println(this.nome + " não defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
-    }
-
-    public void ganharEscudo(int escudo) {
-        this.escudo += escudo;
-    }
-
-    public boolean estaVivo() {
-        if (this.vida > 0) 
-            return true;
-        return false;
-    }
-
-    public String getName() {
-        return this.nome;
+    public Heroi(String nome) {
+        super(nome, 40, 0);
+        this.energia = 100;
     }
 
     public int getEnergia() {
         return this.energia;
     }
 
-    public int getVida() {
-        return this.vida;
+    public void setEnergia(int energia) {
+        this.energia = energia;
     }
 
-    public int getEscudo() {
-        return this.escudo;
-    }
-
-    public void setEnergia(int valor) {
-        this.energia -= valor;
-    }
-
-    public void setVida(int valor) {
-        this.vida = valor;
-    }
-
-    public void resetRound() {
-        this.escudo = 0;
-        this.energia = 100;
-    }
-
-    public void resetLevel() {
-        if (App.getLevel() < 3) 
-            this.vida = 40;
-        else if (App.getLevel() == 10) 
-            this.vida = 100;
-        else
-            this.vida = 60;
-
-        this.escudo = 0;
-        this.energia = 100; // Energia máxima
+    public void usarEnergia(int energia) {
+        this.energia -= energia;
     }
 }

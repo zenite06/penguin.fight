@@ -1,24 +1,26 @@
+<<<<<<< HEAD
     public class Inimigo {
     private String nome;
     private int vida;
     private int escudo;
+=======
+public class Inimigo extends Entidade {
+>>>>>>> 48ff5fb35d105a5079ac28ac974a7a961add0e9d
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
     private String capa_v; // Capa da vitória
     private String capa_d; // Capa da derrota
 
-    public Inimigo(String nome, int vida, int escudo, int dano, String capa, String capa_v, String capa_d) { // Setup do inimigo
-        this.nome = nome;
-        this.vida = vida;
-        this.escudo = escudo;
+    public Inimigo(String nome, int vida, int dano, String capa, String capa_v, String capa_d) { // Setup do inimigo
+        super(nome, vida, 0);
         this.dano = dano;
-        this.capa = capa;     // Capa (player x inimigo)
-        this.capa_v = capa_v; // Capa da vitória
-        this.capa_d = capa_d; // Capa da derrota
+        this.capa = capa;     
+        this.capa_v = capa_v; 
+        this.capa_d = capa_d; 
     }
 
-    public String getName() {
-        return this.nome;
+    public int getDano() {
+        return this.dano;
     }
 
     public String getC() {
@@ -33,39 +35,8 @@
         return this.capa_d;
     }
 
-    public int getVida() {
-        return this.vida;
-    }
-
-    public int getDano() {
-        return this.dano;
-    }
-
-    public void receberDano(int dano) {
-        int p = (int)(Math.random() * 2); // Define aleatoriamente se o inimigo conseguiu se defender
-
-        if (p == 1) {
-            int dano_efetivo = dano - this.escudo;
-            if (dano_efetivo > 0) 
-                this.vida -= dano_efetivo;
-            else
-                dano_efetivo = 0;
-            if (this.escudo > 0)
-                IO.println(this.nome + " defendeu" + App.ANSI_GREEN + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
-            else 
-                IO.println(this.nome + " não defendeu" + App.ANSI_GREEN + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
-        } else {
-            this.vida -= dano;
-            IO.println(this.nome + " não defendeu" + App.ANSI_GREEN + " (- " + dano + " de vida)" + App.ANSI_RESET);
-        }
-    }
-
     public void atacar(Heroi heroi) {
-        IO.println(this.nome + " atacou!");
+        IO.println(this.getNome() + " atacou!");
         heroi.receberDano(this.dano);
-    }
-
-    public boolean estaVivo() {
-        return this.vida > 0;
     }
 }
