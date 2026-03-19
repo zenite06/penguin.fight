@@ -1,5 +1,3 @@
 *.class
-
-bin/
-target/
-out/
+**/*.class
+.vscode/
