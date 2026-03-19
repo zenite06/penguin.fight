@@ -72,21 +72,21 @@ public class App {
 
     public static List <CartaDano> criaCartasDano() {
         List<CartaDano> danos = new ArrayList<>();
-        danos.add(0, new CartaDano("A COTOVELADA IMPROVISADA", 10, 2));
-        danos.add(1, new CartaDano("O SOCO VOADOR", 20, 5));
-        danos.add(2, new CartaDano("O CHUTE PERICULOSO", 40, 10));
-        danos.add(3, new CartaDano("A JOELHADA TRIUNFAL", 70, 20));
-        danos.add(4, new CartaDano("A IMOBILIZAÇÃO FATAL", 90, 30));
+        danos.add(0, new CartaDano("A COTOVELADA IMPROVISADA", "Carta de Ataque", 10, 2));
+        danos.add(1, new CartaDano("O SOCO VOADOR", "Carta de Ataque", 20, 5));
+        danos.add(2, new CartaDano("O CHUTE PERICULOSO", "Carta de Ataque", 40, 10));
+        danos.add(3, new CartaDano("A JOELHADA TRIUNFAL", "Carta de Ataque", 70, 20));
+        danos.add(4, new CartaDano("A IMOBILIZAÇÃO FATAL", "Carta de Ataque", 90, 30));
         return danos;
     }
 
     public static List <CartaEscudo> criaCartasEscudo() {
         List <CartaEscudo> escudos = new ArrayList<>();
-        escudos.add(0, new CartaEscudo("A ESQUIVA DESAJEITADA", 2, 10));
-        escudos.add(1, new CartaEscudo("A ESQUIVA NORMAL", 4, 30));
-        escudos.add(2, new CartaEscudo("A ESQUIVA PERFEITA", 8, 50));
-        escudos.add(3, new CartaEscudo("O BLOQUEIO BRUTAL", 10, 70));
-        escudos.add(4, new CartaEscudo("O BLOQUEIO MILENAR", 15, 90));
+        escudos.add(0, new CartaEscudo("A ESQUIVA DESAJEITADA", "Carta de Defesa", 2, 10));
+        escudos.add(1, new CartaEscudo("A ESQUIVA NORMAL", "Carta de Defesa", 4, 30));
+        escudos.add(2, new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 8, 50));
+        escudos.add(3, new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 10, 70));
+        escudos.add(4, new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 15, 90));
         return escudos;
     }
 
@@ -99,7 +99,7 @@ public class App {
         IO.println("\n");
         Heroi player = new Heroi(name);
 
-        IO.println("    Boa sorte, " + ANSI_YELLOW + player.getName() + ANSI_RESET + "!\n" + //
+        IO.println("    Boa sorte, " + ANSI_YELLOW + player.getNome() + ANSI_RESET + "!\n" + //
                                                         "                                    -=(o`'. _¬\r\n" + //
                                                         "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
                                                         "    as cartas ao seu favor            /|  \\\\ \r\n" + //
@@ -130,7 +130,7 @@ public class App {
 
         IO.println();
         IO.println("Nível " + level + "\n");
-        IO.println(player.getName() + " acaba de encontrar " + inimigo.getName() + "\n");
+        IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC());
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 Sim!");
@@ -176,7 +176,7 @@ public class App {
             IO.println();
             level ++;
         }
-        player.resetLevel();
+        resetLevel(player);
     }
 
     public static void startRound(Heroi player, Inimigo inimigo, List <CartaDano> danos, List <CartaEscudo> escudos) {
@@ -219,17 +219,17 @@ public class App {
         round:
         while (player.estaVivo()) {
             IO.println();
-            IO.println(ANSI_YELLOW + "                  " + inimigo.getName() + " (Vida = " + inimigo.getVida() + ")\n" + ANSI_RESET);
+            IO.println(ANSI_YELLOW + "                  " + inimigo.getNome() + " (Vida = " + inimigo.getVida() + ")\n" + ANSI_RESET);
             IO.println(inimigo.getC());
-            IO.println(ANSI_YELLOW + "  " + player.getName() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + ANSI_RESET);
+            IO.println(ANSI_YELLOW + "  " + player.getNome() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + ANSI_RESET);
             IO.println("Nas suas nadadeiras existem 4 cartas\nDeseja usá-las?\n");
             IO.println("Energia: " + player.getEnergia());
             IO.println();
 
-            IO.println("1 - Carta de dano: " + ANSI_PURPLE + danos.get(nadadeira[0]).getName() + ANSI_RESET + " (Dano = " + danos.get(nadadeira[0]).getDano() + " / Custo = " + danos.get(nadadeira[0]).getCusto() + ")");
-            IO.println("2 - Carta de dano: " + ANSI_PURPLE + danos.get(nadadeira[1]).getName() + ANSI_RESET + " (Dano = " + danos.get(nadadeira[1]).getDano() + " / Custo = " + danos.get(nadadeira[1]).getCusto() + ")");
-            IO.println("3 - Carta de defesa: " + ANSI_PURPLE + escudos.get(nadadeira[2]).getName() + ANSI_RESET + " (Defesa = " + escudos.get(nadadeira[2]).getEscudo() + " / Custo = " + escudos.get(nadadeira[2]).getCusto() + ")");
-            IO.println("4 - Carta de defesa: " + ANSI_PURPLE + escudos.get(nadadeira[3]).getName() + ANSI_RESET + " (Defesa = " + escudos.get(nadadeira[3]).getEscudo() + " / Custo = " + escudos.get(nadadeira[3]).getCusto() + ")");
+            IO.println("1 - Carta de dano: " + ANSI_PURPLE + danos.get(nadadeira[0]).getNome() + ANSI_RESET + " (Dano = " + danos.get(nadadeira[0]).getDano() + " / Custo = " + danos.get(nadadeira[0]).getCusto() + ")");
+            IO.println("2 - Carta de dano: " + ANSI_PURPLE + danos.get(nadadeira[1]).getNome() + ANSI_RESET + " (Dano = " + danos.get(nadadeira[1]).getDano() + " / Custo = " + danos.get(nadadeira[1]).getCusto() + ")");
+            IO.println("3 - Carta de defesa: " + ANSI_PURPLE + escudos.get(nadadeira[2]).getNome() + ANSI_RESET + " (Defesa = " + escudos.get(nadadeira[2]).getEscudo() + " / Custo = " + escudos.get(nadadeira[2]).getCusto() + ")");
+            IO.println("4 - Carta de defesa: " + ANSI_PURPLE + escudos.get(nadadeira[3]).getNome() + ANSI_RESET + " (Defesa = " + escudos.get(nadadeira[3]).getEscudo() + " / Custo = " + escudos.get(nadadeira[3]).getCusto() + ")");
             IO.println("5 - Finalizar turno\n");
 
             int ans = scanner.nextInt();
@@ -283,8 +283,25 @@ public class App {
         limparTela();
         IO.println("\n");
         player.receberDano(inimigo.getDano());
-        player.resetRound();
+        resetRound(inimigo, player);
         IO.println();
+    }
+
+    public static void resetRound(Inimigo inimigo, Heroi player) {
+        inimigo.setEscudo(0);
+        player.setEscudo(0);
+        player.setEnergia(100);
+    }
+
+    public static void resetLevel(Heroi player) {
+        if (getLevel() < 3) 
+            player.setVida(40);
+        else if (getLevel() == 10) 
+            player.setVida(100);
+        else
+            player.setVida(60);
+        player.setEscudo(0);
+        player.setEnergia(100);
     }
 
     public static void limparTela() {
