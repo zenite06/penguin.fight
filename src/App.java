@@ -14,6 +14,7 @@ public class App {
     public static final String ANSI_PURPLE = "\033[1;35m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static void main(String[] args) throws Exception {
+        limparTela();
         IO.println("  ____                        _          __ _       _     _    __             __\n" + //
                         " |  _ \\ ___ _ __   __ _ _   _(_)_ __    / _(_) __ _| |__ | |_ / /  -=(o`'.    \\ \\ \n" + //
                         " | |_) / _ \\ '_ \\ / _` | | | | | '_ \\  | |_| |/ _` | '_ \\| __| |     '.-.\\     | |\n" + //
@@ -41,15 +42,14 @@ public class App {
             IO.println("\n");
         }
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        List <Carta> cartas = criaCartas();
-        startGame(inimigos, cartas);
+        startGame(inimigos);
         scanner.close();
     }
 
     public static Inimigo[] criaInimigos() {
         // Nesse método serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 40, 15, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Gary", 1, 15, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
@@ -65,43 +65,43 @@ public class App {
                                                                                                 "     /.-.'           '._.\\ \n" + //
                                                                                                 "    //  |\\    VS    /| V \\\\\n" + //
                                                                                                 "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_"); 
+                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("CHUTE QUÂNTICO", "Carta de Ataque", 0, 15)); 
         // Inimigo da primeira fase
-        inimigos[1] = new Inimigo("Rookie", 50, 13, "     .'´o)=-      -=(O¬'.\n" + //
-                        "     /.-.'           '._.\\\n" + //
-                        "    //  |\\    VS    /| V \\\\\n" + //
-                        "    ||  |'          '|   ||\n" + //
-                        "  _,:(_/_            _\\ _):,_\n", "    Consegui! \n" + //
-                                                            "       V\n" + //
-                                                            "     .'´o)=-      -=(X¬'.\n" + //
-                                                            "     /.-.'           '._.\\\n" + //
-                                                            "    //  |\\    VS    /| V \\\\\n" + //
-                                                            "    ||  |'          '|   ||\n" + //
-                                                            "  _,:(_/_            _\\ _):,_\n", "            Mais sorte na próxima!\n" + //
-                                                                                                "                      V\n" + //
-                                                                                                "     .'´X)=-      -=(O¬'. \n" + //
-                                                                                                "     /.-.'           '._.\\ \n" + //
-                                                                                                "    //  |\\    VS    /| V \\\\\n" + //
-                                                                                                "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_"); 
+        inimigos[1] = new Inimigo("Rookie", 50, 13, "                     _T_\n" + //
+                        "     .'´o)=-      -=(V¬'.\n" + //
+                        "     /.-.'           '.-.\\\n" + //
+                        "    //  |\\    VS    /|*V*\\\\\n" + //
+                        "    ||  |'          '|*_*_||\n" + //
+                        "  _,:(_/_            _\\ _):,_", "    Consegui!\n" + //
+                                                        "        V            _T_\n" + //
+                                                        "     .'´o)=-      -=(X¬'.\n" + //
+                                                        "     /.-.'           '.-.\\\n" + //
+                                                        "    //  |\\    VS    /|*V*\\\\\n" + //
+                                                        "    ||  |'          '|*_*_||\n" + //
+                                                        "  _,:(_/_            _\\ _):,_", "            Mais sorte na próxima!   \n" + //
+                                                                                                                        "                      V\n" + //
+                                                                                                                        "                     _T_\n" + //
+                                                                                                                        "     .'´X)=-      -=(V¬'.\n" + //
+                                                                                                                        "     /.-.'           '.-.\\\n" + //
+                                                                                                                        "    //  |\\    VS    /|*V*\\\\\n" + //
+                                                                                                                        "    ||  |'          '|*_*_||\n" + //
+                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A1", "Carta de Ataque", 0, 15), new CartaDano("O SOCO VOADOR", "A2", 0, 16)); 
         
-        inimigos[2] = new Inimigo("Klutzy", 45, 20, "     .'´o)=-      -=(O¬'.\n" + //
-                        "     /.-.'           '._.\\\n" + //
-                        "    //  |\\    VS    /| V \\\\\n" + //
-                        "    ||  |'          '|   ||\n" + //
-                        "  _,:(_/_            _\\ _):,_\n", "    Consegui! \n" + //
-                                                            "       V\n" + //
-                                                            "     .'´o)=-      -=(X¬'.\n" + //
-                                                            "     /.-.'           '._.\\\n" + //
-                                                            "    //  |\\    VS    /| V \\\\\n" + //
-                                                            "    ||  |'          '|   ||\n" + //
-                                                            "  _,:(_/_            _\\ _):,_\n", "            Mais sorte na próxima!\n" + //
-                                                                                                "                      V\n" + //
-                                                                                                "     .'´X)=-      -=(O¬'. \n" + //
-                                                                                                "     /.-.'           '._.\\ \n" + //
-                                                                                                "    //  |\\    VS    /| V \\\\\n" + //
-                                                                                                "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_"); 
+        inimigos[2] = new Inimigo("Klutzy", 45, 20, "     .'´o)=- \n" + //
+                        "     /.-.' \n" + //
+                        "    //  |\\    VS \n" + //
+                        "    ||  |'         (V) O O (V)\n" + //
+                        "  _,:(_/_            `(, ,)´", "   Consegui!\n" + //
+                                                        "       V\n" + //
+                                                        "     .'´o)=- \n" + //
+                                                        "     /.-.' \n" + //
+                                                        "    //  |\\    VS \n" + //
+                                                        "    ||  |'         (V) X X (V)\n" + //
+                                                        "  _,:(_/_            `(, ,)´", "     .'´X)=- \n" + //
+                                                                                                                        "     /.-.'    Mais sorte na próxima!\n" + //
+                                                                                                                        "    //  |\\    VS        V\n" + //
+                                                                                                                        "    ||  |'         (V) O O (V)\n" + //
+                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("A1", "Carta de Ataque", 0, 15), new CartaDano("A2", "Carta de Ataque", 0, 20)); 
         return inimigos;
     }
 
@@ -120,7 +120,7 @@ public class App {
         return cartas;
     }
 
-    public static void startGame(Inimigo inimigos[], List <Carta> cartas) { 
+    public static void startGame(Inimigo inimigos[]) { 
 
         limparTela();
         IO.println();
@@ -141,7 +141,7 @@ public class App {
         IO.println("\n");
         
         for (int i = 1; i <= maxLevel; i++) {
-            if (level > 2) { // Os próximos níveis serão implementados futuramente
+            if (level > 3) { // Os próximos níveis serão implementados futuramente
                 IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
                                     " \\\\/.-.'     Agradecemos por jogar!\n" + //
                                     "  //  |\\     Os próximos níveis ainda estão em desenvolvimento, aguarde :)\n" + //
@@ -149,12 +149,12 @@ public class App {
                                     "_,:(_/_ \n" + ANSI_RESET);
                 break;
             } 
-            startLevel(player, inimigos, cartas);
+            startLevel(player, inimigos);
         }
 
     }
 
-    public static void startLevel(Heroi player, Inimigo inimigos[], List <Carta> pilha_descarte) {
+    public static void startLevel(Heroi player, Inimigo inimigos[]) {
 
         limparTela();
         Inimigo inimigo = inimigos[level - 1];
@@ -162,7 +162,7 @@ public class App {
         IO.println();
         IO.println("Nível " + level + "\n");
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
-        IO.println(inimigo.getC());
+        IO.println(inimigo.getC() + "\n");
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 Sim!");
         IO.println("2 Não...\n");
@@ -180,8 +180,9 @@ public class App {
             IO.println("\n");
         }
 
-        Collections.shuffle(pilha_descarte);
+        List <Carta> pilha_descarte = criaCartas();
         Stack <Carta> pilha_compra = new Stack<>();
+        Collections.shuffle(pilha_descarte);
         while (!pilha_descarte.isEmpty())
             pilha_compra.push(pilha_descarte.remove(0)); 
         limparTela();
@@ -201,7 +202,8 @@ public class App {
             IO.println("2 Não...\n");
             IO.println();
             ans = scanner.nextInt();
-            level = 3;
+            if (ans == 2)
+                level = 4;
         }
         else { // Você ganhou
             IO.println("\n");
@@ -211,7 +213,7 @@ public class App {
             IO.println();
             level++;
         }
-        resetLevel(player);
+        resetLevel(player, pilha_compra, pilha_descarte);
     }
 
     public static void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra) {
@@ -222,14 +224,16 @@ public class App {
                 Collections.shuffle(pilha_descarte);
                 while (!pilha_descarte.isEmpty())
                     pilha_compra.push(pilha_descarte.remove(0)); 
-            }
+            } 
             nadadeira.add(pilha_compra.pop());
         }
 
+        int ataque = (int)(Math.random() * 2); // Define o ataque do inimigo
         while (player.estaVivo()) {
             IO.println();
+            inimigo.declarar(ataque, player);
             IO.println(ANSI_YELLOW + "                  " + inimigo.getNome() + " (Vida = " + inimigo.getVida() + ")\n" + ANSI_RESET);
-            IO.println(inimigo.getC());
+            IO.println(inimigo.getC() + "\n");
             IO.println(ANSI_YELLOW + "  " + player.getNome() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + ANSI_RESET);
             IO.println("Nas suas nadadeiras existem cartas\nDeseja usá-las?\n");
             IO.println("Energia: " + player.getEnergia());
@@ -274,7 +278,7 @@ public class App {
         player.setEnergia(100);
     }
 
-    public static void resetLevel(Heroi player) {
+    public static void resetLevel(Heroi player, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
         if (getLevel() < 3) 
             player.setVida(40);
         else if (getLevel() == 10) 
@@ -283,6 +287,9 @@ public class App {
             player.setVida(60);
         player.setEscudo(0);
         player.setEnergia(100);
+
+        while (!pilha_compra.isEmpty())
+            pilha_descarte.add(pilha_compra.pop());
     }
 
     public static void limparTela() {
