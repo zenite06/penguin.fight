@@ -1,33 +1,22 @@
-public class CartaEscudo {
-    private String nome;
+public class CartaEscudo extends Carta {
     private int escudo;
-    private int custo; 
 
-    public CartaEscudo(String nome, int escudo, int custo) {
-        this.nome = nome;
+    public CartaEscudo(String nome, String descricao, int custo, int escudo) {
+        super(nome, descricao, custo);
         this.escudo = escudo;
-        this.custo = custo;
-    }
-
-    public void usar(Heroi heroi, Inimigo inimigo) {
-        if (heroi.getEnergia() >= this.custo) {
-            IO.println("\n");
-            IO.println(heroi.getName() + " se preparou para usar "  + App.ANSI_PURPLE +  this.nome + App.ANSI_GREEN + " (+ " + this.escudo + " de defesa)\n" + App.ANSI_RESET);
-            heroi.ganharEscudo(this.escudo);
-            heroi.setEnergia(this.custo);
-        } else 
-            IO.println(App.ANSI_RED + "Energia insuficiente!\n" + App.ANSI_RESET);
-    }
-
-    public String getName() {
-        return this.nome;
-    }
-
-    public int getCusto() {
-        return this.custo;
     }
 
     public int getEscudo() {
         return this.escudo;
+    }
+
+    public void usar(Heroi heroi, Inimigo inimigo) {
+        if (heroi.getEnergia() >= this.getCusto()) {
+            IO.println("\n");
+            IO.println(heroi.getNome() + " se preparou para usar "  + App.ANSI_PURPLE +  this.getNome() + App.ANSI_GREEN + " (+ " + this.escudo + " de defesa)\n" + App.ANSI_RESET);
+            heroi.ganharEscudo(this.escudo);
+            heroi.usarEnergia(this.getCusto());
+        } else 
+            IO.println(App.ANSI_RED + "Energia insuficiente!\n" + App.ANSI_RESET);
     }
 }
