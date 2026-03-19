@@ -1,4 +1,15 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public class Inimigo {
+    private String nome;
+    private int vida;
+    private int escudo;
+=======
 public class Inimigo extends Entidade {
+>>>>>>> 48ff5fb35d105a5079ac28ac974a7a961add0e9d
+=======
+public class Inimigo extends Entidade {
+>>>>>>> 649ee76ee360db7b03c7b375b4a8d6cdab651acf
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
     private String capa_v; // Capa da vitória
