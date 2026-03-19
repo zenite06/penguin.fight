@@ -40,9 +40,8 @@ public class App {
             IO.println("\n");
         }
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        List <CartaEscudo> escudos = criaCartasEscudo();
-        List <CartaDano> danos = criaCartasDano();
-        startGame(inimigos, danos, escudos);
+        List <Carta> cartas = criaCartas();
+        startGame(inimigos, cartas);
         scanner.close();
     }
 
@@ -70,27 +69,22 @@ public class App {
         return inimigos;
     }
 
-    public static List <CartaDano> criaCartasDano() {
-        List<CartaDano> danos = new ArrayList<>();
-        danos.add(0, new CartaDano("A COTOVELADA IMPROVISADA", "Carta de Ataque", 10, 2));
-        danos.add(1, new CartaDano("O SOCO VOADOR", "Carta de Ataque", 20, 5));
-        danos.add(2, new CartaDano("O CHUTE PERICULOSO", "Carta de Ataque", 40, 10));
-        danos.add(3, new CartaDano("A JOELHADA TRIUNFAL", "Carta de Ataque", 70, 20));
-        danos.add(4, new CartaDano("A IMOBILIZAÇÃO FATAL", "Carta de Ataque", 90, 30));
-        return danos;
+    public static List <Carta> criaCartas() {
+        List<Carta> cartas = new ArrayList<>();
+        cartas.add(new CartaDano("A COTOVELADA IMPROVISADA", "Carta de Ataque", 10, 2));
+        cartas.add(new CartaDano("O SOCO VOADOR", "Carta de Ataque", 20, 5));
+        cartas.add(new CartaDano("O CHUTE PERICULOSO", "Carta de Ataque", 40, 10));
+        cartas.add(new CartaDano("A JOELHADA TRIUNFAL", "Carta de Ataque", 70, 20));
+        cartas.add(new CartaDano("A IMOBILIZAÇÃO FATAL", "Carta de Ataque", 90, 30));
+        cartas.add(new CartaEscudo("A ESQUIVA DESAJEITADA", "Carta de Defesa", 2, 10));
+        cartas.add(new CartaEscudo("A ESQUIVA NORMAL", "Carta de Defesa", 4, 30));
+        cartas.add(new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 8, 50));
+        cartas.add(new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 10, 70));
+        cartas.add(new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 15, 90));
+        return cartas;
     }
 
-    public static List <CartaEscudo> criaCartasEscudo() {
-        List <CartaEscudo> escudos = new ArrayList<>();
-        escudos.add(0, new CartaEscudo("A ESQUIVA DESAJEITADA", "Carta de Defesa", 2, 10));
-        escudos.add(1, new CartaEscudo("A ESQUIVA NORMAL", "Carta de Defesa", 4, 30));
-        escudos.add(2, new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 8, 50));
-        escudos.add(3, new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 10, 70));
-        escudos.add(4, new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 15, 90));
-        return escudos;
-    }
-
-    public static void startGame(Inimigo inimigos[], List <CartaDano> danos, List <CartaEscudo> escudos) { 
+    public static void startGame(Inimigo inimigos[], List <Carta> cartas) { 
 
         limparTela();
         IO.println();
@@ -118,12 +112,12 @@ public class App {
                                     "_,:(_/_ \n" + ANSI_RESET);
                 break;
             } 
-            startLevel(player, inimigos, danos, escudos);
+            startLevel(player, inimigos, cartas);
         }
 
     }
 
-    public static void startLevel(Heroi player, Inimigo inimigos[], List <CartaDano> danos, List <CartaEscudo> escudos) {
+    public static void startLevel(Heroi player, Inimigo inimigos[], List <Carta> cartas) {
 
         limparTela();
         Inimigo inimigo = inimigos[level - 1];
@@ -148,9 +142,29 @@ public class App {
             IO.println("\n");
         }
 
+        Collections.shuffle(cartas);
+        Stack<Carta> pilha_compra = new Stack<>();
+        
+
+        List<Integer> cartas = new ArrayList<>();
+        int[] nadadeira = new int[4]; // Vetor com os índices das cartas na "mão" do jogador (as duas primeiras são de dano e as duas últimas de escudo)
+        Stack<Integer> pilha_compra = new Stack<>();
+        Stack<Integer> pilha_descarte = new Stack<>();
+
+        for (int i = 0; i < 5; i++) 
+            cartas.add(i, i);
+        Collections.shuffle(cartas);
+
+        for (Integer item : cartas) {
+            pilha_compra.push(item);
+        }
+
+        for (int i = 0; i < 5; i++) 
+            nadadeira[i] = pilha_compra.pop();
+
         limparTela();
         while (inimigo.estaVivo() && player.estaVivo()) {
-            startRound(player, inimigo, danos, escudos);
+            startRound(player, inimigo, cartas);
         }
 
         limparTela();
@@ -179,7 +193,7 @@ public class App {
         resetLevel(player);
     }
 
-    public static void startRound(Heroi player, Inimigo inimigo, List <CartaDano> danos, List <CartaEscudo> escudos) {
+    public static void startRound(Heroi player, Inimigo inimigo, List <CartaDano> danos, List <Carta> cartas) {
 
         List<Integer> cartas = new ArrayList<>();
         int[] nadadeira = new int[4]; // Vetor com os índices das cartas na "mão" do jogador (as duas primeiras são de dano e as duas últimas de escudo)
