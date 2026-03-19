@@ -6,12 +6,14 @@ public class CartaDano extends Carta {
 
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.getCusto()) {
-            IO.println("\n");
+            IO.println();
             IO.println(heroi.getNome() + " usou " + App.ANSI_PURPLE + this.getNome() + App.ANSI_RESET + " em " + inimigo.getNome() + "!");
             inimigo.receberDano(this.getValor());
             heroi.usarEnergia(this.getCusto());
         }
-        else
+        else {
+            IO.println();
             IO.println(App.ANSI_RED + "Energia insuficiente!" + App.ANSI_RESET);
+        }
     }
 }

@@ -13,7 +13,6 @@ public class Inimigo extends Entidade {
         this.capa_d = capa_d; 
         this.ataques[0] = ataque1;
         this.ataques[1] = ataque2;
-
     }
 
     public int getDano() {
@@ -37,10 +36,11 @@ public class Inimigo extends Entidade {
     }
 
     public void declarar(int i, Heroi player) {
-        IO.println(this.getNome() + " usará " + App.ANSI_PURPLE +  this.ataques[i].getNome() + App.ANSI_RED + " (" + this.ataques[i].getValor() + " de dano)\n" + App.ANSI_RESET);
+        IO.println(this.getNome() + " se preparou para usar " + App.ANSI_PURPLE +  this.ataques[i].getNome() + App.ANSI_RED + " (Dano = " + this.ataques[i].getValor() + ")\n" + App.ANSI_RESET);
     } 
 
     public void atacar(Heroi heroi) {
+        IO.println();
         IO.println(this.getNome() + " atacou!");
         heroi.receberDano(this.dano);
     }

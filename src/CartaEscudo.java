@@ -6,11 +6,13 @@ public class CartaEscudo extends Carta {
 
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.getCusto()) {
-            IO.println("\n");
-            IO.println(heroi.getNome() + " se preparou para usar "  + App.ANSI_PURPLE +  this.getNome() + App.ANSI_GREEN + " (+ " + this.getValor() + " de defesa)\n" + App.ANSI_RESET);
+            IO.println();
+            IO.println(heroi.getNome() + " se preparou para usar "  + App.ANSI_PURPLE +  this.getNome() + App.ANSI_GREEN + " (+ " + this.getValor() + " de defesa)" + App.ANSI_RESET);
             heroi.ganharEscudo(this.getValor());
             heroi.usarEnergia(this.getCusto());
-        } else 
+        } else {
+            IO.println();
             IO.println(App.ANSI_RED + "Energia insuficiente!\n" + App.ANSI_RESET);
+        }
     }
 }

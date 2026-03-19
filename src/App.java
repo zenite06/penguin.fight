@@ -23,23 +23,22 @@ public class App {
                         "                  |___/                       |___/           \\_\\     _\\_):,_ /_/ \n");
         
         IO.println("Saudações, pinguim! A ilha está em apuros e precisa da sua ajuda, só lhe resta lutar para encontrar o verdadeiro inimigo. Aceita essa aventura?\n");  
-        IO.println("1 Sim!");
-        IO.println("2 Não...\n");
+        IO.println("1 - Sim!");
+        IO.println("2 - Não...\n");
 
         int answer = scanner.nextInt();
         scanner.nextLine();
-        IO.println("\n");
 
         if (answer != 1) {
             limparTela();
+            IO.println();
             IO.println("  -=(o`'. ?!\r\n" + //
                                 "    '.-.\\ \r\n" + //
                                 "    /|  \\\\     Tarde demais para desistir agora. Aguente firme!\r\n" + //
                                 "    '|  || \r\n" + //
                                 "     _\\_):,_\n");
-            IO.println("Digite qualquer coisa para continuar");
+            IO.println("Digite qualquer coisa para continuar\n");
             String rand = scanner.nextLine();
-            IO.println("\n");
         }
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
         startGame(inimigos);
@@ -49,7 +48,7 @@ public class App {
     public static Inimigo[] criaInimigos() {
         // Nesse método serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 1, 15, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Gary", 40, 15, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
@@ -65,7 +64,7 @@ public class App {
                                                                                                 "     /.-.'           '._.\\ \n" + //
                                                                                                 "    //  |\\    VS    /| V \\\\\n" + //
                                                                                                 "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("CHUTE QUÂNTICO", "Carta de Ataque", 0, 15)); 
+                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 15)); 
         // Inimigo da primeira fase
         inimigos[1] = new Inimigo("Rookie", 50, 13, "                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
@@ -85,9 +84,9 @@ public class App {
                                                                                                                         "     /.-.'           '.-.\\\n" + //
                                                                                                                         "    //  |\\    VS    /|*V*\\\\\n" + //
                                                                                                                         "    ||  |'          '|*_*_||\n" + //
-                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A1", "Carta de Ataque", 0, 15), new CartaDano("O SOCO VOADOR", "A2", 0, 16)); 
+                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 15), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16)); 
         
-        inimigos[2] = new Inimigo("Klutzy", 45, 20, "     .'´o)=- \n" + //
+        inimigos[2] = new Inimigo("Klutzy", 70, 20, "     .'´o)=- \n" + //
                         "     /.-.' \n" + //
                         "    //  |\\    VS \n" + //
                         "    ||  |'         (V) O O (V)\n" + //
@@ -101,7 +100,7 @@ public class App {
                                                                                                                         "     /.-.'    Mais sorte na próxima!\n" + //
                                                                                                                         "    //  |\\    VS        V\n" + //
                                                                                                                         "    ||  |'         (V) O O (V)\n" + //
-                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("A1", "Carta de Ataque", 0, 15), new CartaDano("A2", "Carta de Ataque", 0, 20)); 
+                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 15), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20)); 
         return inimigos;
     }
 
@@ -126,22 +125,22 @@ public class App {
         IO.println();
         IO.println("Como devemos te chamar?\n");
         String name = scanner.nextLine();
-        IO.println("\n");
         Heroi player = new Heroi(name);
         limparTela();
-
+        IO.println();
         IO.println("    Boa sorte, " + ANSI_YELLOW + player.getNome() + ANSI_RESET + "!\n" + //
                                                         "                                    -=(o`'. _¬\r\n" + //
                                                         "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
                                                         "    as cartas ao seu favor            /|  \\\\ \r\n" + //
                                                         "                                      '|  || \r\n" + //
                                                         "                                       _\\_):,_\n");
-        IO.println("Digite qualquer coisa para continuar");
+        IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
-        IO.println("\n");
         
-        for (int i = 1; i <= maxLevel; i++) {
-            if (level > 3) { // Os próximos níveis serão implementados futuramente
+        while (level <= maxLevel) {
+            if (level == 4) { // Os próximos níveis serão implementados futuramente
+                limparTela();
+                IO.println();
                 IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
                                     " \\\\/.-.'     Agradecemos por jogar!\n" + //
                                     "  //  |\\     Os próximos níveis ainda estão em desenvolvimento, aguarde :)\n" + //
@@ -149,35 +148,37 @@ public class App {
                                     "_,:(_/_ \n" + ANSI_RESET);
                 break;
             } 
-            startLevel(player, inimigos);
+            else if (level < 4)
+                startLevel(player, inimigos);
+            else if (level == maxLevel)
+                break;
         }
-
     }
 
     public static void startLevel(Heroi player, Inimigo inimigos[]) {
 
         limparTela();
+        IO.println();
         Inimigo inimigo = inimigos[level - 1];
 
-        IO.println();
         IO.println("Nível " + level + "\n");
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC() + "\n");
         IO.println("Deseja confrontá-lo?\n");
-        IO.println("1 Sim!");
-        IO.println("2 Não...\n");
+        IO.println("1 - Sim!");
+        IO.println("2 - Não...\n");
         int ans = scanner.nextInt();
         scanner.nextLine();
         if (ans == 2) {
             limparTela();
+            IO.println();
             IO.println("   ! .'´o)=- \n" + //
                                 "     /.-.'   Ainda pensando em desistir?!\n" + //
                                 "    //  |\\   Siga em frente!\n" + //
                                 "    ||  |'  \n" + //
                                 "  _,:(_/_   \n"); 
-            IO.println("Digite qualquer coisa para continuar");
+            IO.println("Digite qualquer coisa para continuar\n");
             String rand = scanner.nextLine();
-            IO.println("\n");
         }
 
         List <Carta> pilha_descarte = criaCartas();
@@ -189,7 +190,6 @@ public class App {
         while (inimigo.estaVivo() && player.estaVivo()) {
             startRound(player, inimigo, pilha_descarte, pilha_compra);
         }
-
         limparTela();
         if (inimigo.estaVivo()) { // Você perdeu
             IO.println("\n");
@@ -197,13 +197,20 @@ public class App {
             IO.println();
             IO.println(inimigo.getCD());
             IO.println();
-            IO.println("Deseja tentar de novo?");
-            IO.println("1 Sim!");
-            IO.println("2 Não...\n");
-            IO.println();
+            IO.println("Deseja tentar de novo?\n");
+            IO.println("1 - Sim!");
+            IO.println("2 - Não...\n");
             ans = scanner.nextInt();
-            if (ans == 2)
-                level = 4;
+            if (ans == 2) {
+                limparTela();
+                IO.println();
+                IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
+                                    " \\\\/.-.'\n" + //
+                                    "  //  |\\     Agradecemos por jogar!\n" + //
+                                    "  ||  |' \n" + //
+                                    "_,:(_/_ \n" + ANSI_RESET);
+                level = 10;
+            }
         }
         else { // Você ganhou
             IO.println("\n");
@@ -212,6 +219,20 @@ public class App {
             IO.println(inimigo.getCV());
             IO.println();
             level++;
+            IO.println("Deseja continuar nessa aventura?\n");
+            IO.println("1 - Sim!");
+            IO.println("2 - Não...\n");
+            ans = scanner.nextInt();
+            if (ans == 2) {
+                limparTela();
+                IO.println();
+                IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
+                                    " \\\\/.-.'\n" + //
+                                    "  //  |\\     Agradecemos por jogar!\n" + //
+                                    "  ||  |' \n" + //
+                                    "_,:(_/_ \n" + ANSI_RESET);
+                level = 10;
+            }
         }
         resetLevel(player, pilha_compra, pilha_descarte);
     }

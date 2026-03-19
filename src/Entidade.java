@@ -36,9 +36,9 @@ public abstract class Entidade {
         else
             dano_efetivo = 0;
         if (this.escudo > 0)
-            IO.println(this.nome + " defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
+            IO.println(this.nome + " se defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
         else 
-            IO.println(this.nome + " não defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
+            IO.println(this.nome + " não se defendeu" + App.ANSI_RED + " (- " + dano_efetivo + " de vida)" + App.ANSI_RESET);
     }
 
     public void ganharEscudo(int escudo) {
