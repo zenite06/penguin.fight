@@ -76,11 +76,11 @@ public class App {
         cartas.add(new CartaDano("O CHUTE PERICULOSO", "Carta de Ataque", 40, 10));
         cartas.add(new CartaDano("A JOELHADA TRIUNFAL", "Carta de Ataque", 70, 20));
         cartas.add(new CartaDano("A IMOBILIZAÇÃO FATAL", "Carta de Ataque", 90, 30));
-        cartas.add(new CartaEscudo("A ESQUIVA DESAJEITADA", "Carta de Defesa", 2, 10));
-        cartas.add(new CartaEscudo("A ESQUIVA NORMAL", "Carta de Defesa", 4, 30));
-        cartas.add(new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 8, 50));
-        cartas.add(new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 10, 70));
-        cartas.add(new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 15, 90));
+        cartas.add(new CartaEscudo("A ESQUIVA DESAJEITADA", "Carta de Defesa", 10, 2));
+        cartas.add(new CartaEscudo("A ESQUIVA NORMAL", "Carta de Defesa", 30, 2));
+        cartas.add(new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 50, 8));
+        cartas.add(new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 70, 10));
+        cartas.add(new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 90, 15));
         return cartas;
     }
 
@@ -117,7 +117,7 @@ public class App {
 
     }
 
-    public static void startLevel(Heroi player, Inimigo inimigos[], List <Carta> cartas) {
+    public static void startLevel(Heroi player, Inimigo inimigos[], List <Carta> pilha_descarte) {
 
         limparTela();
         Inimigo inimigo = inimigos[level - 1];
@@ -142,29 +142,13 @@ public class App {
             IO.println("\n");
         }
 
-        Collections.shuffle(cartas);
-        Stack<Carta> pilha_compra = new Stack<>();
-        
-
-        List<Integer> cartas = new ArrayList<>();
-        int[] nadadeira = new int[4]; // Vetor com os índices das cartas na "mão" do jogador (as duas primeiras são de dano e as duas últimas de escudo)
-        Stack<Integer> pilha_compra = new Stack<>();
-        Stack<Integer> pilha_descarte = new Stack<>();
-
-        for (int i = 0; i < 5; i++) 
-            cartas.add(i, i);
-        Collections.shuffle(cartas);
-
-        for (Integer item : cartas) {
-            pilha_compra.push(item);
-        }
-
-        for (int i = 0; i < 5; i++) 
-            nadadeira[i] = pilha_compra.pop();
-
+        Collections.shuffle(pilha_descarte);
+        Stack <Carta> pilha_compra = new Stack<>();
+        while (!pilha_descarte.isEmpty())
+            pilha_compra.push(pilha_descarte.remove(0)); 
         limparTela();
         while (inimigo.estaVivo() && player.estaVivo()) {
-            startRound(player, inimigo, cartas);
+            startRound(player, inimigo, pilha_descarte, pilha_compra);
         }
 
         limparTela();
@@ -193,112 +177,58 @@ public class App {
         resetLevel(player);
     }
 
-    public static void startRound(Heroi player, Inimigo inimigo, List <CartaDano> danos, List <Carta> cartas) {
-
-        List<Integer> cartas = new ArrayList<>();
-        int[] nadadeira = new int[4]; // Vetor com os índices das cartas na "mão" do jogador (as duas primeiras são de dano e as duas últimas de escudo)
-        Stack<Integer> pilha_compra = new Stack<>();
-        Stack<Integer> pilha_descarte = new Stack<>();
-
-        for (int i = 0; i < 5; i++) 
-            cartas.add(i, i);
-        Collections.shuffle(cartas);
-
-        for (Integer item : cartas) {
-            pilha_compra.push(item);
+    public static void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra) {
+        List<Carta> nadadeira = new ArrayList<>();
+        
+        for (int i = 0; i < 6; i++) {
+            if (pilha_compra.isEmpty()) {
+                Collections.shuffle(pilha_descarte);
+                while (!pilha_descarte.isEmpty())
+                    pilha_compra.push(pilha_descarte.remove(0)); 
+            }
+            nadadeira.add(pilha_compra.pop());
         }
 
-        for (int i = 0; i < 5; i++) 
-            nadadeira[i] = pilha_compra.pop();
-
-        /* O processo abaixo aleatoriza as cartas a cada rodada */
-        int last = -1;
-        int j = -1;
-        for(int i = 0; i < 1; i++) {
-            while(j == last)
-                j = (int)(Math.random() * 5);
-            nadadeira[i] = j;
-            last = j;
-        }
-
-        last = -1;
-        j = -1;
-        for(int i = 2; i < 4; i++) {
-            while(j == last)
-                j = (int)(Math.random() * 5);
-            nadadeira[i] = j;
-            last = j;
-        }
-
-        round:
         while (player.estaVivo()) {
             IO.println();
             IO.println(ANSI_YELLOW + "                  " + inimigo.getNome() + " (Vida = " + inimigo.getVida() + ")\n" + ANSI_RESET);
             IO.println(inimigo.getC());
             IO.println(ANSI_YELLOW + "  " + player.getNome() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + ANSI_RESET);
-            IO.println("Nas suas nadadeiras existem 4 cartas\nDeseja usá-las?\n");
+            IO.println("Nas suas nadadeiras existem cartas\nDeseja usá-las?\n");
             IO.println("Energia: " + player.getEnergia());
             IO.println();
 
-            IO.println("1 - Carta de dano: " + ANSI_PURPLE + danos.get(nadadeira[0]).getNome() + ANSI_RESET + " (Dano = " + danos.get(nadadeira[0]).getDano() + " / Custo = " + danos.get(nadadeira[0]).getCusto() + ")");
-            IO.println("2 - Carta de dano: " + ANSI_PURPLE + danos.get(nadadeira[1]).getNome() + ANSI_RESET + " (Dano = " + danos.get(nadadeira[1]).getDano() + " / Custo = " + danos.get(nadadeira[1]).getCusto() + ")");
-            IO.println("3 - Carta de defesa: " + ANSI_PURPLE + escudos.get(nadadeira[2]).getNome() + ANSI_RESET + " (Defesa = " + escudos.get(nadadeira[2]).getEscudo() + " / Custo = " + escudos.get(nadadeira[2]).getCusto() + ")");
-            IO.println("4 - Carta de defesa: " + ANSI_PURPLE + escudos.get(nadadeira[3]).getNome() + ANSI_RESET + " (Defesa = " + escudos.get(nadadeira[3]).getEscudo() + " / Custo = " + escudos.get(nadadeira[3]).getCusto() + ")");
-            IO.println("5 - Finalizar turno\n");
+            int i = 0;
+            for ( ; i < nadadeira.size(); i++) {
+                if (nadadeira.get(i).getDescricao() == "Carta de Ataque")
+                    IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + " (Dano = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
+                else
+                    IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + " (Defesa = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
+            }
+            IO.println(i + " - Finalizar turno\n");
 
             int ans = scanner.nextInt();
             scanner.nextLine();
-            if (ans == 5)
-                break;
-            if ((ans < 1 || ans > 4) && ans != 5)
-                ans = 6;
-            else if (ans != 5 && nadadeira[ans - 1] < 0)
-                ans = 6;
 
-            switch(ans) {
-                case 1:
-                    limparTela();
-                    danos.get(nadadeira[0]).usar(player, inimigo);
-                    if (! inimigo.estaVivo())
-                        break round;
-                    nadadeira[0] = -1;
-                    break;
-
-                case 2:
-                    limparTela();
-                    danos.get(nadadeira[1]).usar(player, inimigo);
-                    if (! inimigo.estaVivo())
-                        break round;
-                    nadadeira[1] = -1;
-                    break;
-
-                case 3:
-                    limparTela();
-                    escudos.get(nadadeira[2]).usar(player, inimigo);
-                    nadadeira[2] = -1;
-                    break;
-
-                case 4:
-                    limparTela();
-                    escudos.get(nadadeira[3]).usar(player, inimigo);
-                    nadadeira[3] = -1;
-                    break;
-
-                case 5:
-                    // Finalização da luta
-                    break round;
-
-                default:
-                    limparTela();
-                    IO.println(ANSI_YELLOW + "Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n" + ANSI_RESET);
-                    break;
+            if (ans > i || ans < 0) {
+                limparTela();
+                IO.println(ANSI_YELLOW + "Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n" + ANSI_RESET);
+                continue;
             }
+            if (ans == i) {
+                while (!nadadeira.isEmpty())
+                    pilha_descarte.add(nadadeira.remove(0)); 
+                limparTela();
+                inimigo.atacar(player);
+                resetRound(inimigo, player);
+                break;
+            }
+            limparTela();
+            nadadeira.get(ans).usar(player, inimigo);
+            pilha_descarte.add(nadadeira.remove(ans)); 
+            if (!inimigo.estaVivo())
+                break;
         }
-        limparTela();
-        IO.println("\n");
-        player.receberDano(inimigo.getDano());
-        resetRound(inimigo, player);
-        IO.println();
     }
 
     public static void resetRound(Inimigo inimigo, Heroi player) {
