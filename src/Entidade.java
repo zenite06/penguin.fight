@@ -1,12 +1,17 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public abstract class Entidade {
     private String nome;
     private int vida;
     private int escudo;
+    private List<Efeito> efeitos;
 
-    public Entidade(String nome, int vida, int escudo) {
+    public Entidade(String nome, int vida, int escudo, List<Efeito> efeitos) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
+        this.efeitos = efeitos;
     }
 
     public String getNome() {
@@ -19,6 +24,13 @@ public abstract class Entidade {
 
     public int getEscudo() {
         return this.escudo;
+    }
+
+    public String getEfeitos() { // O objetivo desse método é fornecer uma saída que possamos usar para mostrar os efeitos na entidade na interface
+        String saida = "Sob o efeito de "; // String com todos os efeitos aplicados na entidade
+        for (int i = 0; i < this.efeitos.size(); i++) 
+            saida += this.efeitos.get(i) + " ";
+        return saida;
     }
 
     public void setVida(int vida) {
@@ -47,5 +59,15 @@ public abstract class Entidade {
 
     public boolean estaVivo() {
         return this.vida > 0;
+    }
+
+    public void aplicarEfeito(Efeito efeito, Entidade rival) {
+        for(int i = 0; i < this.efeitos.size(); i++) {
+            if (this.efeitos.get(i).getNome() == efeito.getNome()) {
+                this.efeitos.get(i).addAcumulos(1);
+                return;
+            }
+        }
+        efeitos.add(efeito); // Caso nenhum efeito desse tipo tenha sido aplicado no rival ainda
     }
 }

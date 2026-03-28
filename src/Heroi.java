@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Heroi extends Entidade {
     private int energia;
 
     public Heroi(String nome) {
-        super(nome, 40, 0);
+        super(nome, 40, 0, new ArrayList<Efeito>());
         this.energia = 100;
     }
 

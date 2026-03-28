@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Inimigo extends Entidade {
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
@@ -6,7 +8,7 @@ public class Inimigo extends Entidade {
     private CartaDano ataques[] = new CartaDano[2];
 
     public Inimigo(String nome, int vida, int dano, String capa, String capa_v, String capa_d, CartaDano ataque1, CartaDano ataque2) { // Setup do inimigo
-        super(nome, vida, 0);
+        super(nome, vida, 0, new ArrayList<Efeito>());
         this.dano = dano;
         this.capa = capa;     
         this.capa_v = capa_v; 
