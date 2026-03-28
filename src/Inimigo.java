@@ -37,6 +37,10 @@ public class Inimigo extends Entidade {
         this.dano = dano;
     }
 
+    public void setCapa(String capa) { // Aplica uma nova capa de batalha no uso de efeitos
+        this.capa = capa;
+    }
+
     public void declarar(int i, Heroi player) {
         IO.println(this.getNome() + " se preparou para usar " + App.ANSI_PURPLE +  this.ataques[i].getNome() + App.ANSI_RED + " (Dano = " + this.ataques[i].getValor() + ")\n" + App.ANSI_RESET);
     } 

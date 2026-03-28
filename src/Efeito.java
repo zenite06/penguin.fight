@@ -1,11 +1,10 @@
-public abstract class Efeito {
+public abstract class Efeito implements Observer{
     private String nome;
-    private String dono;
+    private Entidade dono;
     private int acumulos; // Os acúmulos representam o "valor" do efeito (?)
 
-    public Efeito(String nome, String dono, int acumulos) {
+    public Efeito(String nome, int acumulos) {
         this.nome = nome;
-        this.dono = dono;
         this.acumulos = acumulos;
     }
 
@@ -13,8 +12,12 @@ public abstract class Efeito {
         return this.nome;
     }
 
-    public String getDono() {
+    /*public Entidade getDono() {  // Não sei se será necessário...
         return this.dono;
+    }*/
+
+    public void setDono(Entidade entidade) {
+        this.dono = entidade;
     }
 
     public int getAcumulos() {
@@ -29,5 +32,5 @@ public abstract class Efeito {
         return this.nome + this.acumulos; // Melhorar para uma apresentação mais elegante!
     }
 
-    public abstract void usar(Entidade entidade, Entidade rival);
+    public abstract void usar(Heroi player, Inimigo inimigo);
 }

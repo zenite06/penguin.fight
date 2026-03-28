@@ -26,11 +26,8 @@ public abstract class Entidade {
         return this.escudo;
     }
 
-    public String getEfeitos() { // O objetivo desse método é fornecer uma saída que possamos usar para mostrar os efeitos na entidade na interface
-        String saida = "Sob o efeito de "; // String com todos os efeitos aplicados na entidade
-        for (int i = 0; i < this.efeitos.size(); i++) 
-            saida += this.efeitos.get(i) + " ";
-        return saida;
+    public List<Efeito> getEfeitos() { 
+        return efeitos;
     }
 
     public void setVida(int vida) {
@@ -61,7 +58,8 @@ public abstract class Entidade {
         return this.vida > 0;
     }
 
-    public void aplicarEfeito(Efeito efeito, Entidade rival) {
+    public void aplicarEfeito(Efeito efeito, Entidade dono, Entidade rival) {
+        // efeito.usar(dono, rival);
         for(int i = 0; i < this.efeitos.size(); i++) {
             if (this.efeitos.get(i).getNome() == efeito.getNome()) {
                 this.efeitos.get(i).addAcumulos(1);
