@@ -4,7 +4,7 @@ public class CartaDano extends Carta {
         super(nome, descricao, custo, valor);
     }
 
-    public void usar(Heroi heroi, Inimigo inimigo) {
+    public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();
             IO.println(heroi.getNome() + " usou " + App.ANSI_PURPLE + this.getNome() + App.ANSI_RESET + " em " + inimigo.getNome() + "!");

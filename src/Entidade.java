@@ -7,11 +7,11 @@ public abstract class Entidade {
     private int escudo;
     private List<Efeito> efeitos;
 
-    public Entidade(String nome, int vida, int escudo, List<Efeito> efeitos) {
+    public Entidade(String nome, int vida, int escudo) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
-        this.efeitos = efeitos;
+        this.efeitos = new ArrayList<>();
     }
 
     public String getNome() {
@@ -58,14 +58,18 @@ public abstract class Entidade {
         return this.vida > 0;
     }
 
-    public void aplicarEfeito(Efeito efeito, Entidade dono, Entidade rival) {
-        // efeito.usar(dono, rival);
-        for(int i = 0; i < this.efeitos.size(); i++) {
-            if (this.efeitos.get(i).getNome() == efeito.getNome()) {
-                this.efeitos.get(i).addAcumulos(1);
+    public void aplicarEfeito(Efeito efeito, RoundManager manager) {
+        for (Efeito efeito_ativo : this.efeitos)
+            if (efeito_ativo.getNome().equals(efeito.getNome())) {
+                efeito_ativo.addAcumulos(efeito.getAcumulos());
                 return;
             }
-        }
-        efeitos.add(efeito); // Caso nenhum efeito desse tipo tenha sido aplicado no rival ainda
+        efeito.setDono(this);
+        this.efeitos.add(efeito);
+        manager.inscrever(efeito);
+    }
+
+    public void removerEfeito(Efeito efeito) {
+        this.efeitos.remove(efeito);
     }
 }

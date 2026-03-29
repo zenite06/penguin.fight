@@ -1,4 +1,4 @@
-public abstract class Efeito implements Observer{
+public abstract class Efeito implements Observer {
     private String nome;
     private Entidade dono;
     private int acumulos; // Os acúmulos representam o "valor" do efeito (?)
@@ -12,9 +12,9 @@ public abstract class Efeito implements Observer{
         return this.nome;
     }
 
-    /*public Entidade getDono() {  // Não sei se será necessário...
+    public Entidade getDono() {  // Não sei se será necessário...
         return this.dono;
-    }*/
+    }
 
     public void setDono(Entidade entidade) {
         this.dono = entidade;
@@ -32,5 +32,5 @@ public abstract class Efeito implements Observer{
         return this.nome + this.acumulos; // Melhorar para uma apresentação mais elegante!
     }
 
-    public abstract void usar(Heroi player, Inimigo inimigo);
+    public abstract void serNotificado(String evento, RoundManager manager);
 }

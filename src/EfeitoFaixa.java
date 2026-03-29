@@ -95,10 +95,15 @@ public class EfeitoFaixa extends Efeito {
         }
     }
 
-    public void usar(Heroi player, Inimigo inimigo) {
-        IO.println(player.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa nessa rodada!\n");
+    public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
+        IO.println(player.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa!\n");
         player.setEscudo(player.getEscudo() + (2 * this.getAcumulos()));
         inimigo.setDano(inimigo.getDano() - (2 * this.getAcumulos()));
+    }
+
+    public void serNotificado(String evento, RoundManager manager) {
+        if (evento.equals("FIM DO ROUND"))
+            usar(manager.getPlayer(), manager.getInimigo(), manager);
     }
 }
 

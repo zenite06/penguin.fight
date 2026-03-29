@@ -27,5 +27,5 @@ public abstract class Carta {
         return this.valor;
     }
 
-    public abstract void usar(Heroi heroi, Inimigo inimigo);
+    public abstract void usar(Heroi heroi, Inimigo inimigo, RoundManager manager);
 }
