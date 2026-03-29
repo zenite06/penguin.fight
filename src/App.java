@@ -5,9 +5,8 @@ import java.util.Stack;
 import java.util.Collections;
 
 public class App {
-    private static int level = 1; // O nível define alguns atributos da gameplay
-    private static int maxLevel = 10; // Quantos níveis (e inimigos) o jogo terá
     static Scanner scanner = new Scanner(System.in);
+
     public static final String ANSI_RED = "\u001B[1;31m";
     public static final String ANSI_GREEN = "\u001B[1;32m";
     public static final String ANSI_YELLOW = "\033[1;33m";
@@ -41,7 +40,8 @@ public class App {
             String rand = scanner.nextLine();
         }
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        startGame(inimigos);
+        RoundManager manager = new RoundManager();
+        manager.startGame(inimigos);
         scanner.close();
     }
 
@@ -121,7 +121,7 @@ public class App {
         cartas.add(new CartaEfeito("AUMENTAR FAIXA X 2", "Carta de Efeito", 20, 2, new EfeitoFaixa()));
         cartas.add(new CartaEfeito("SARDINHA", "Aumenta em 20 pontos a energia para a próxima rodada", 20, 20, new EfeitoPeixe(20)));
         cartas.add(new CartaEfeito("ANCHOVA", "Aumenta em 30 pontos a energia para a próxima rodada", 30, 30, new EfeitoPeixe(30)));
-        cartas.add(new CartaEfeito("NEVASCA ", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, 50, new EfeitoNevasca()));
+        cartas.add(new CartaEfeito("NEVASCA", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, 1, new EfeitoNevasca()));
         return cartas;
     }
 
@@ -165,6 +165,8 @@ public class App {
         limparTela();
         IO.println();
         Inimigo inimigo = inimigos[level - 1];
+        RoundManager manager = new RoundManager(player, inimigo);
+
         IO.println("Nível " + level + "\n");
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC() + "\n");
@@ -194,7 +196,8 @@ public class App {
         limparTela();
 
         while (inimigo.estaVivo() && player.estaVivo()) {
-            startRound(player, inimigo, pilha_descarte, pilha_compra);
+            startRound(player, inimigo, pilha_descarte, pilha_compra, manager);
+            manager.notificar("FIM DO ROUND"); // Manager notifica os efeitos de que o round acabou
         }
         limparTela();
 
@@ -245,7 +248,7 @@ public class App {
         resetLevel(player, pilha_compra, pilha_descarte);
     }
 
-    public static void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra) {
+    public static void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra, RoundManager manager) {
         List<Carta> nadadeira = new ArrayList<>();
         
         for (int i = 0; i < 6; i++) {
@@ -270,10 +273,12 @@ public class App {
 
             int i = 0;
             for ( ; i < nadadeira.size(); i++) {
-                if (nadadeira.get(i).getDescricao() == "Carta de Ataque")
+                if (nadadeira.get(i).getDescricao().equals("Carta de Ataque"))
                     IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + " (Dano = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
-                else
+                else if (nadadeira.get(i).getDescricao().equals("Carta de Defesa"))
                     IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + " (Defesa = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
+                else
+                    IO.println(i + " - Carta de efeito: " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + ": " + nadadeira.get(i).getDescricao());
             }
             IO.println(i + " - Finalizar turno\n");
 
@@ -288,13 +293,20 @@ public class App {
             if (ans == i) { // O jogador escolheu a opção "Finalizar turno"
                 while (!nadadeira.isEmpty())
                     pilha_descarte.add(nadadeira.remove(0)); 
+
                 limparTela();
-                inimigo.atacar(player);
+                manager.notificar("INIMIGO VAI ATACAR");
+                inimigo.atacar(player); // Manager notifica os efeitos de que o inimigo vai atacar
                 resetRound(inimigo, player);
                 break;
             }
+
+            // O jogador escolheu uma carta
             limparTela();
-            nadadeira.get(ans).usar(player, inimigo); // O jogador escolheu uma carta
+            if (nadadeira.get(ans).getDescricao() == "Carta de Ataque")
+                manager.notificar("PLAYER VAI ATACAR"); // Manager notifica os efeitos de que o player vai atacar
+
+            nadadeira.get(ans).usar(player, inimigo, manager); 
             pilha_descarte.add(nadadeira.remove(ans)); 
             if (!inimigo.estaVivo())
                 break;
@@ -331,6 +343,10 @@ public class App {
             }
         } catch (Exception e) {
         }
+    }
+
+    public static Scanner getScanner() {
+        return scanner;
     }
 
     public static int getLevel() {

@@ -4,7 +4,7 @@ public class CartaEscudo extends Carta {
         super(nome, descricao, custo, valor);
     }
 
-    public void usar(Heroi heroi, Inimigo inimigo) {
+    public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();
             IO.println(heroi.getNome() + " se preparou para usar "  + App.ANSI_PURPLE +  this.getNome() + App.ANSI_GREEN + " (+ " + this.getValor() + " de defesa)" + App.ANSI_RESET);

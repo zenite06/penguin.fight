@@ -1,3 +1,3 @@
 interface Observer {
-    void serNotificado();
+    void serNotificado(String evento, RoundManager manager);
 }
