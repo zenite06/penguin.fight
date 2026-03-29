@@ -61,6 +61,7 @@ No início, digite seu nome para jogar:
 
 Durante o combate:
 
+- O inimigo declara suas ações no início do turno
 - O jogador possui um **baralho de cartas**
 - No início de cada turno, cartas são compradas para a **mão**
 - Cada carta possui um **custo de energia**
@@ -76,6 +77,16 @@ O combate termina quando:
 - todos os **inimigos são derrotados**
 
 ![alt text](image-2.png)
+
+## Efeitos
+
+Tanto o jogador quanto o inimigo podem aplicar **efeitos** de combate. O inimigo declara os efeitos que pretende usar a cada rodada e o jogador pode aplicá-los com **cartas de efeito**.
+Os efeitos disponíveis no jogo são:
+
+- **FAIXA** (exclusivo do jogador) - Permite que o jogador aumente sua faixa, aumentando em 2 pontos tanto seu ataque quanto seu escudo a cada acúmulo 
+- **PEIXE** (exclusivo do jogador) - Aumenta em X pontos a energia do jogador para o próximo turno
+- **NEVASCA** - Reduz o ataque do rival em 5 pontos (a ideia é que a nevasca atrapalha a visibilidade do golpe!)
+
 
 # Tecnologias Utilizadas
 

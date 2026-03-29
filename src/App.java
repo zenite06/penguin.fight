@@ -117,6 +117,11 @@ public class App {
         cartas.add(new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 50, 8));
         cartas.add(new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 70, 10));
         cartas.add(new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 90, 15));
+        cartas.add(new CartaEfeito("AUMENTAR FAIXA", "Carta de Efeito", 10, 1, new EfeitoFaixa()));
+        cartas.add(new CartaEfeito("AUMENTAR FAIXA X 2", "Carta de Efeito", 20, 2, new EfeitoFaixa()));
+        cartas.add(new CartaEfeito("SARDINHA", "Aumenta em 20 pontos a energia para a próxima rodada", 20, 20, new EfeitoPeixe(20)));
+        cartas.add(new CartaEfeito("ANCHOVA", "Aumenta em 30 pontos a energia para a próxima rodada", 30, 30, new EfeitoPeixe(30)));
+        cartas.add(new CartaEfeito("NEVASCA ", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, 50, new EfeitoNevasca()));
         return cartas;
     }
 

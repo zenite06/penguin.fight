@@ -1,12 +1,17 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public abstract class Entidade {
     private String nome;
     private int vida;
     private int escudo;
+    private List<Efeito> efeitos;
 
-    public Entidade(String nome, int vida, int escudo) {
+    public Entidade(String nome, int vida, int escudo, List<Efeito> efeitos) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
+        this.efeitos = efeitos;
     }
 
     public String getNome() {
@@ -19,6 +24,10 @@ public abstract class Entidade {
 
     public int getEscudo() {
         return this.escudo;
+    }
+
+    public List<Efeito> getEfeitos() { 
+        return efeitos;
     }
 
     public void setVida(int vida) {
@@ -47,5 +56,16 @@ public abstract class Entidade {
 
     public boolean estaVivo() {
         return this.vida > 0;
+    }
+
+    public void aplicarEfeito(Efeito efeito, Entidade dono, Entidade rival) {
+        // efeito.usar(dono, rival);
+        for(int i = 0; i < this.efeitos.size(); i++) {
+            if (this.efeitos.get(i).getNome() == efeito.getNome()) {
+                this.efeitos.get(i).addAcumulos(1);
+                return;
+            }
+        }
+        efeitos.add(efeito); // Caso nenhum efeito desse tipo tenha sido aplicado no rival ainda
     }
 }
