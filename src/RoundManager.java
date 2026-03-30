@@ -57,6 +57,7 @@ public class RoundManager {
         IO.println("Como devemos te chamar?\n");
         String name = scanner.nextLine();
         Heroi player = new Heroi(name);
+        setPlayer(player);
 
         App.limparTela();
         IO.println();
@@ -93,6 +94,7 @@ public class RoundManager {
         App.limparTela();
         IO.println();
         Inimigo inimigo = inimigos[level - 1];
+        setInimigo(inimigo);
 
         IO.println("Nível " + level + "\n");
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");

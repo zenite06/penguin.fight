@@ -12,8 +12,8 @@ public class EfeitoFaixa extends Efeito {
     public static final String ANSI_BLACK = "\u001B[1;32m";
 
 
-    public EfeitoFaixa() {
-        super("FAIXA", 1); // Default
+    public EfeitoFaixa(int acumulos) {
+        super("FAIXA", acumulos); // Default
     }
 
     public void aplicarFaixa(Inimigo inimigo) {
@@ -51,24 +51,24 @@ public class EfeitoFaixa extends Efeito {
         }
 
         if (RoundManager.getLevel() == 1) {
-            inimigo.setCapa("     .'´o)=-      -=(O¬'.\\n\" + //\r\n" + //
-"                        \"     /.-.'           '._.\\\\\\n\" + //\r\n" + //
-"                        \"    //  |\\\\    VS    /| V \\\\\\\\\\n\" + //\r\n" + //
-"                        \"    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\\n\" + //\r\n" + //
-"                        \"  _,:(_/_            _\\\\ _):,_\\n");
+            inimigo.setCapa("     .'´o)=-       -=(O¬'.\n" + //
+                                "     /.-.'            '._.\\\n" + //
+                                "    //   |\\    VS    /| V \\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
         } else if (RoundManager.getLevel() == 2) {
-            inimigo.setCapa("                     _T_\\n\" + //\r\n" + //
-"                        \"     .'´o)=-      -=(V¬'.\\n\" + //\r\n" + //
-"                        \"     /.-.'           '.-.\\\\\\n\" + //\r\n" + //
-"                        \"    //  |\\\\    VS    /|*V*\\\\\\\\\\n\" + //\r\n" + //
-"                        \"    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\\n\" + //\r\n" + //
-"                        \"  _,:(_/_            _\\\\ _):,_");
+            inimigo.setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
         } else if (RoundManager.getLevel() == 3) {
-            inimigo.setCapa("     .'´o)=- \\n\" + //\r\n" + //
-"                        \"     /.-.' \\n\" + //\r\n" + //
-"                        \"    //  |\\\\    VS \\n\" + //\r\n" + //
-"                        \"    ||" + cor + "===" + ANSI_RESET + "|'         (V) O O (V)\\n\" + //\r\n" + //
-"                        \"  _,:(_/_            `(, ,)´");
+            inimigo.setCapa("     .'´o)=- \n" + //
+                                "     /.-.' \n" + //
+                                "    //   |\\    VS \n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'         (V) O O (V)\n" + //
+                                "  _,:(_ /_             `(, ,)´\n");
         }
     }
 
@@ -99,6 +99,7 @@ public class EfeitoFaixa extends Efeito {
         IO.println(player.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa!\n");
         player.setEscudo(player.getEscudo() + (2 * this.getAcumulos()));
         inimigo.setDano(inimigo.getDano() - (2 * this.getAcumulos()));
+        aplicarFaixa(inimigo);
     }
 
     public void serNotificado(String evento, RoundManager manager) {
