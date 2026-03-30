@@ -50,20 +50,20 @@ public class EfeitoFaixa extends Efeito {
                 break;
         }
 
-        if (App.getLevel() == 1) {
+        if (RoundManager.getLevel() == 1) {
             inimigo.setCapa("     .'´o)=-      -=(O¬'.\\n\" + //\r\n" + //
 "                        \"     /.-.'           '._.\\\\\\n\" + //\r\n" + //
 "                        \"    //  |\\\\    VS    /| V \\\\\\\\\\n\" + //\r\n" + //
 "                        \"    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\\n\" + //\r\n" + //
 "                        \"  _,:(_/_            _\\\\ _):,_\\n");
-        } else if (App.getLevel() == 2) {
+        } else if (RoundManager.getLevel() == 2) {
             inimigo.setCapa("                     _T_\\n\" + //\r\n" + //
 "                        \"     .'´o)=-      -=(V¬'.\\n\" + //\r\n" + //
 "                        \"     /.-.'           '.-.\\\\\\n\" + //\r\n" + //
 "                        \"    //  |\\\\    VS    /|*V*\\\\\\\\\\n\" + //\r\n" + //
 "                        \"    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\\n\" + //\r\n" + //
 "                        \"  _,:(_/_            _\\\\ _):,_");
-        } else if (App.getLevel() == 3) {
+        } else if (RoundManager.getLevel() == 3) {
             inimigo.setCapa("     .'´o)=- \\n\" + //\r\n" + //
 "                        \"     /.-.' \\n\" + //\r\n" + //
 "                        \"    //  |\\\\    VS \\n\" + //\r\n" + //
@@ -73,20 +73,20 @@ public class EfeitoFaixa extends Efeito {
     }
 
     public void resetCapa(Inimigo inimigo) {
-        if (App.getLevel() == 1) {
+        if (RoundManager.getLevel() == 1) {
             inimigo.setCapa("     .'´o)=-      -=(O¬'.\\n\" + //\r\n" + //
 "                        \"     /.-.'           '._.\\\\\\n\" + //\r\n" + //
 "                        \"    //  |\\\\    VS    /| V \\\\\\\\\\n\" + //\r\n" + //
 "                        \"    ||  |'          '|   ||\\n\" + //\r\n" + //
 "                        \"  _,:(_/_            _\\\\ _):,_\\n");
-        } else if (App.getLevel() == 2) {
+        } else if (RoundManager.getLevel() == 2) {
             inimigo.setCapa("                     _T_\\n\" + //\r\n" + //
 "                        \"     .'´o)=-      -=(V¬'.\\n\" + //\r\n" + //
 "                        \"     /.-.'           '.-.\\\\\\n\" + //\r\n" + //
 "                        \"    //  |\\\\    VS    /|*V*\\\\\\\\\\n\" + //\r\n" + //
 "                        \"    ||  |'          '|*_*_||\\n\" + //\r\n" + //
 "                        \"  _,:(_/_            _\\\\ _):,_");
-        } else if (App.getLevel() == 3) {
+        } else if (RoundManager.getLevel() == 3) {
             inimigo.setCapa("     .'´o)=- \\n\" + //\r\n" + //
 "                        \"     /.-.' \\n\" + //\r\n" + //
 "                        \"    //  |\\\\    VS \\n\" + //\r\n" + //
