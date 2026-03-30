@@ -8,13 +8,14 @@ public class RoundManager {
     // Nessa classe deverá ser desenvovlvida a lógica de batalha dos métodos do App atuais
 
     private static int level = 1; // O nível define alguns atributos da gameplay
-    private static int maxLevel = 10; // Quantos níveis (e inimigos) o jogo terá
     private Heroi player;
     private Inimigo inimigo;
     private List<Observer> subscribers; // Efeitos serão os subscribers desse publisher!
+    private Rota rota; // Rota (define o final do jogo)
 
-    public RoundManager() {
+    public RoundManager(Rota rota) {
         this.subscribers = new ArrayList<>();
+        this.rota = rota;
     }
 
     public void setPlayer(Heroi player) {
@@ -48,7 +49,7 @@ public class RoundManager {
                 subscriber.serNotificado(evento, this);
     }
 
-/*Gerenciamento de Jogo */
+/* Gerenciamento de Jogo */
     public void startGame(Inimigo inimigos[]) { 
         Scanner scanner = App.getScanner();
         App.limparTela();
@@ -68,7 +69,7 @@ public class RoundManager {
         IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
         
-        while (level <= maxLevel) {
+        while (level <= App.getmaxLevel()) {
             if (level == 4) { // Os próximos níveis serão implementados futuramente
                 App.limparTela();
                 IO.println();
@@ -81,7 +82,7 @@ public class RoundManager {
             } 
             else if (level < 4)
                 startLevel(player, inimigos);
-            else if (level == maxLevel)
+            else if (level == App.getmaxLevel())
                 break;
         }
     } 
@@ -112,7 +113,9 @@ public class RoundManager {
                                 "  _,:(_/_   \n"); 
             IO.println("Digite qualquer coisa para continuar\n");
             String rand = scanner.nextLine();
-        }
+            rota.addEscolha(0);
+        } else
+            rota.addEscolha(1);
 
         List <Carta> pilha_descarte = App.criaCartas();
         Stack <Carta> pilha_compra = new Stack<>();
@@ -122,7 +125,7 @@ public class RoundManager {
         App.limparTela();
 
         while (inimigo.estaVivo() && player.estaVivo()) {
-            startRound(player, inimigo, pilha_descarte, pilha_compra, manager);
+            startRound(player, inimigo, pilha_descarte, pilha_compra);
             notificar("FIM DO ROUND"); // Manager notifica os efeitos de que o round acabou
         }
         App.limparTela();
@@ -138,7 +141,7 @@ public class RoundManager {
             IO.println("1 - Sim!");
             IO.println("2 - Não...\n");
             ans = scanner.nextInt();
-            if (ans == 2) {
+            if (ans == 2) {               
                 App.limparTela();
                 IO.println();
                 IO.println(App.ANSI_YELLOW + "¨_ .'´o)=-\n" + //
@@ -147,7 +150,8 @@ public class RoundManager {
                                     "  ||  |' \n" + //
                                     "_,:(_/_ \n" + App.ANSI_RESET);
                 level = 10;
-            }
+            } 
+
         }
         else { // O jogador ganhou
             IO.println("\n");
@@ -175,9 +179,9 @@ public class RoundManager {
     }
 
     public void resetLevel(Heroi player, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
-        if (App.getLevel() < 3) 
+        if (getLevel() < 3) 
             player.setVida(40);
-        else if (App.getLevel() == 10) 
+        else if (getLevel() == 10) 
             player.setVida(100);
         else
             player.setVida(60);
@@ -189,7 +193,7 @@ public class RoundManager {
     }
 
 /* Gerenciamento de Round */
-    public void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra, RoundManager manager) {
+    public void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra) {
         Scanner scanner = App.getScanner();
         List<Carta> nadadeira = new ArrayList<>();
         
@@ -237,7 +241,7 @@ public class RoundManager {
                     pilha_descarte.add(nadadeira.remove(0)); 
 
                 App.limparTela();
-                manager.notificar("INIMIGO VAI ATACAR");
+                notificar("INIMIGO VAI ATACAR");
                 inimigo.atacar(player); // Manager notifica os efeitos de que o inimigo vai atacar
                 resetRound(inimigo, player);
                 break;
@@ -246,9 +250,9 @@ public class RoundManager {
             // O jogador escolheu uma carta
             App.limparTela();
             if (nadadeira.get(ans).getDescricao() == "Carta de Ataque")
-                manager.notificar("PLAYER VAI ATACAR"); // Manager notifica os efeitos de que o player vai atacar
+                notificar("PLAYER VAI ATACAR"); // Manager notifica os efeitos de que o player vai atacar
 
-            nadadeira.get(ans).usar(player, inimigo, manager); 
+            nadadeira.get(ans).usar(player, inimigo, this); 
             pilha_descarte.add(nadadeira.remove(ans)); 
             if (!inimigo.estaVivo())
                 break;
@@ -259,5 +263,9 @@ public class RoundManager {
         inimigo.setEscudo(0);
         player.setEscudo(0);
         player.setEnergia(100);
+    }
+
+    public static int getLevel() {
+        return level;
     }
 }

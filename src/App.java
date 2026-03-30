@@ -1,12 +1,12 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Stack;
-import java.util.Collections;
 
 public class App {
     static Scanner scanner = new Scanner(System.in);
 
+    public static RoundManager manager;
+    public static final int maxLevel = 10; // Quantos níveis (e inimigos) o jogo terá
     public static final String ANSI_RED = "\u001B[1;31m";
     public static final String ANSI_GREEN = "\u001B[1;32m";
     public static final String ANSI_YELLOW = "\033[1;33m";
@@ -28,6 +28,7 @@ public class App {
         int answer = scanner.nextInt();
         scanner.nextLine();
 
+        Rota rota = new Rota(); // Rota (define o final do jogo)
         if (answer != 1) {
             limparTela();
             IO.println();
@@ -37,10 +38,13 @@ public class App {
                                 "    '|  || \r\n" + //
                                 "     _\\_):,_\n");
             IO.println("Digite qualquer coisa para continuar\n");
+            rota.addEscolha(0);
             String rand = scanner.nextLine();
-        }
+        } else  
+            rota.addEscolha(1);
+
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        RoundManager manager = new RoundManager();
+        manager = new RoundManager(rota);
         manager.startGame(inimigos);
         scanner.close();
     }
@@ -64,7 +68,7 @@ public class App {
                                                                                                 "     /.-.'           '._.\\ \n" + //
                                                                                                 "    //  |\\    VS    /| V \\\\\n" + //
                                                                                                 "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 15)); 
+                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 15), new CartaEfeito("???", "???", 0, 1, new EfeitoAcido(1))); 
         
         inimigos[1] = new Inimigo("Rookie", 50, 13, "                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
@@ -84,7 +88,7 @@ public class App {
                                                                                                                         "     /.-.'           '.-.\\\n" + //
                                                                                                                         "    //  |\\    VS    /|*V*\\\\\n" + //
                                                                                                                         "    ||  |'          '|*_*_||\n" + //
-                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 15), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16)); 
+                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 15), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEfeito("???", "???", 0, 1, new EfeitoAcido(1))); 
         
         inimigos[2] = new Inimigo("Klutzy", 70, 20, "     .'´o)=- \n" + //
                         "     /.-.' \n" + //
@@ -100,7 +104,7 @@ public class App {
                                                                                                                         "     /.-.'    Mais sorte na próxima!\n" + //
                                                                                                                         "    //  |\\    VS        V\n" + //
                                                                                                                         "    ||  |'         (V) O O (V)\n" + //
-                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 15), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20)); 
+                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 15), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEfeito("???", "???", 0, 1, new EfeitoAcido(1))); 
         return inimigos;
     }
 
@@ -125,214 +129,6 @@ public class App {
         return cartas;
     }
 
-    public static void startGame(Inimigo inimigos[]) { 
-        limparTela();
-        IO.println();
-        IO.println("Como devemos te chamar?\n");
-        String name = scanner.nextLine();
-        Heroi player = new Heroi(name);
-
-        limparTela();
-        IO.println();
-        IO.println("    Boa sorte, " + ANSI_YELLOW + player.getNome() + ANSI_RESET + "!\n" + //
-                                                        "                                    -=(o`'. _¬\r\n" + //
-                                                        "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
-                                                        "    as cartas ao seu favor            /|  \\\\ \r\n" + //
-                                                        "                                      '|  || \r\n" + //
-                                                        "                                       _\\_):,_\n");
-        IO.println("Digite qualquer coisa para continuar\n");
-        String rand = scanner.nextLine();
-        
-        while (level <= maxLevel) {
-            if (level == 4) { // Os próximos níveis serão implementados futuramente
-                limparTela();
-                IO.println();
-                IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
-                                    " \\\\/.-.'     Agradecemos por jogar!\n" + //
-                                    "  //  |\\     Os próximos níveis ainda estão em desenvolvimento, aguarde :)\n" + //
-                                    "  ||  |' \n" + //
-                                    "_,:(_/_ \n" + ANSI_RESET);
-                break;
-            } 
-            else if (level < 4)
-                startLevel(player, inimigos);
-            else if (level == maxLevel)
-                break;
-        }
-    }
-
-    public static void startLevel(Heroi player, Inimigo inimigos[]) {
-        limparTela();
-        IO.println();
-        Inimigo inimigo = inimigos[level - 1];
-        RoundManager manager = new RoundManager(player, inimigo);
-
-        IO.println("Nível " + level + "\n");
-        IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
-        IO.println(inimigo.getC() + "\n");
-        IO.println("Deseja confrontá-lo?\n");
-        IO.println("1 - Sim!");
-        IO.println("2 - Não...\n");
-        int ans = scanner.nextInt();
-        scanner.nextLine();
-
-        if (ans == 2) {
-            limparTela();
-            IO.println();
-            IO.println("   ! .'´o)=- \n" + //
-                                "     /.-.'   Ainda pensando em desistir?!\n" + //
-                                "    //  |\\   Siga em frente!\n" + //
-                                "    ||  |'  \n" + //
-                                "  _,:(_/_   \n"); 
-            IO.println("Digite qualquer coisa para continuar\n");
-            String rand = scanner.nextLine();
-        }
-
-        List <Carta> pilha_descarte = criaCartas();
-        Stack <Carta> pilha_compra = new Stack<>();
-        Collections.shuffle(pilha_descarte);
-        while (!pilha_descarte.isEmpty())
-            pilha_compra.push(pilha_descarte.remove(0)); 
-        limparTela();
-
-        while (inimigo.estaVivo() && player.estaVivo()) {
-            startRound(player, inimigo, pilha_descarte, pilha_compra, manager);
-            manager.notificar("FIM DO ROUND"); // Manager notifica os efeitos de que o round acabou
-        }
-        limparTela();
-
-        // O nível foi finalizado
-        if (inimigo.estaVivo()) { // O jogador perdeu
-            IO.println("\n");
-            IO.println(ANSI_YELLOW + "Você perdeu...\n" + ANSI_RESET);
-            IO.println();
-            IO.println(inimigo.getCD());
-            IO.println();
-            IO.println("Deseja tentar de novo?\n");
-            IO.println("1 - Sim!");
-            IO.println("2 - Não...\n");
-            ans = scanner.nextInt();
-            if (ans == 2) {
-                limparTela();
-                IO.println();
-                IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
-                                    " \\\\/.-.'\n" + //
-                                    "  //  |\\     Agradecemos por jogar!\n" + //
-                                    "  ||  |' \n" + //
-                                    "_,:(_/_ \n" + ANSI_RESET);
-                level = 10;
-            }
-        }
-        else { // O jogador ganhou
-            IO.println("\n");
-            IO.println(ANSI_YELLOW + "Você ganhou!\n" + ANSI_RESET);
-            IO.println();
-            IO.println(inimigo.getCV());
-            IO.println();
-            level++;
-            IO.println("Deseja continuar nessa aventura?\n");
-            IO.println("1 - Sim!");
-            IO.println("2 - Não...\n");
-            ans = scanner.nextInt();
-            if (ans == 2) {
-                limparTela();
-                IO.println();
-                IO.println(ANSI_YELLOW + "¨_ .'´o)=-\n" + //
-                                    " \\\\/.-.'\n" + //
-                                    "  //  |\\     Agradecemos por jogar!\n" + //
-                                    "  ||  |' \n" + //
-                                    "_,:(_/_ \n" + ANSI_RESET);
-                level = 10;
-            }
-        }
-        resetLevel(player, pilha_compra, pilha_descarte);
-    }
-
-    public static void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra, RoundManager manager) {
-        List<Carta> nadadeira = new ArrayList<>();
-        
-        for (int i = 0; i < 6; i++) {
-            if (pilha_compra.isEmpty()) { // Se a pilha de compra estiver vazia, as cartas da pilha de descarte são embaralhadas e passam pro topo da pilha de compra
-                Collections.shuffle(pilha_descarte);
-                while (!pilha_descarte.isEmpty())
-                    pilha_compra.push(pilha_descarte.remove(0)); 
-            } 
-            nadadeira.add(pilha_compra.pop()); // São compradas cinco cartas da pilha de compra para a mão do jogador (nadadeira)
-        }
-
-        int ataque = (int)(Math.random() * 2); // Define o ataque do inimigo
-        while (player.estaVivo()) {
-            IO.println();
-            inimigo.declarar(ataque, player);
-            IO.println(ANSI_YELLOW + "                  " + inimigo.getNome() + " (Vida = " + inimigo.getVida() + ")\n" + ANSI_RESET);
-            IO.println(inimigo.getC() + "\n");
-            IO.println(ANSI_YELLOW + "  " + player.getNome() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + ANSI_RESET);
-            IO.println("Nas suas nadadeiras existem cartas\nDeseja usá-las?\n");
-            IO.println("Energia: " + player.getEnergia());
-            IO.println();
-
-            int i = 0;
-            for ( ; i < nadadeira.size(); i++) {
-                if (nadadeira.get(i).getDescricao().equals("Carta de Ataque"))
-                    IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + " (Dano = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
-                else if (nadadeira.get(i).getDescricao().equals("Carta de Defesa"))
-                    IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + " (Defesa = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
-                else
-                    IO.println(i + " - Carta de efeito: " + ANSI_PURPLE + nadadeira.get(i).getNome() + ANSI_RESET + ": " + nadadeira.get(i).getDescricao());
-            }
-            IO.println(i + " - Finalizar turno\n");
-
-            int ans = scanner.nextInt();
-            scanner.nextLine();
-
-            if (ans > i || ans < 0) { // O jogador escolheu uma opção inválida
-                limparTela();
-                IO.println(ANSI_YELLOW + "Ei, não tente fugir dessa! Escolha uma das opções disponíveis\n" + ANSI_RESET);
-                continue;
-            }
-            if (ans == i) { // O jogador escolheu a opção "Finalizar turno"
-                while (!nadadeira.isEmpty())
-                    pilha_descarte.add(nadadeira.remove(0)); 
-
-                limparTela();
-                manager.notificar("INIMIGO VAI ATACAR");
-                inimigo.atacar(player); // Manager notifica os efeitos de que o inimigo vai atacar
-                resetRound(inimigo, player);
-                break;
-            }
-
-            // O jogador escolheu uma carta
-            limparTela();
-            if (nadadeira.get(ans).getDescricao() == "Carta de Ataque")
-                manager.notificar("PLAYER VAI ATACAR"); // Manager notifica os efeitos de que o player vai atacar
-
-            nadadeira.get(ans).usar(player, inimigo, manager); 
-            pilha_descarte.add(nadadeira.remove(ans)); 
-            if (!inimigo.estaVivo())
-                break;
-        }
-    }
-
-    public static void resetRound(Inimigo inimigo, Heroi player) {
-        inimigo.setEscudo(0);
-        player.setEscudo(0);
-        player.setEnergia(100);
-    }
-
-    public static void resetLevel(Heroi player, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
-        if (getLevel() < 3) 
-            player.setVida(40);
-        else if (getLevel() == 10) 
-            player.setVida(100);
-        else
-            player.setVida(60);
-        player.setEscudo(0);
-        player.setEnergia(100);
-
-        while (!pilha_compra.isEmpty())
-            pilha_descarte.add(pilha_compra.pop());
-    }
-
     public static void limparTela() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -349,7 +145,11 @@ public class App {
         return scanner;
     }
 
-    public static int getLevel() {
-        return level;
+    public static int getmaxLevel() {
+        return maxLevel;
+    }
+
+    public static RoundManager getManager() {
+        return manager;
     }
 }
