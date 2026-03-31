@@ -16,7 +16,7 @@ O projeto segue a seguinte estrutura padrão em Java:
 │  ├─ Inimigo.java
 │  ├─ Carta.java
 │  ├─ CartaDano.java
-│  └─ CartaEscudo.java
+│  └─ ...
 ├─ lib/
 ├─ bin/
 ├─ .gitignore
