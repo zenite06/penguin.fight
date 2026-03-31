@@ -1,5 +1,5 @@
 public class EfeitoFaixa extends Efeito {
-    // Cada acúmulo de efeito de faixa aumenta em 2 pontos o escudo e reduz em 2 pontos o dano causado na entidade
+    // Exclusivo do player, o efeito faixa aumenta seu escudo em 2 pontos por acúmulo
     public static final String ANSI_RESET = "\u001B[0m"; 
     public static final String ANSI_WHITE = "\u001B[1;37m";
     public static final String ANSI_YELLOW = "\033[1;33m";
@@ -8,15 +8,15 @@ public class EfeitoFaixa extends Efeito {
     public static final String ANSI_BLUE = "\u001B[1;34m";
     public static final String ANSI_RED = "\u001B[1;31m";
     public static final String ANSI_PURPLE = "\033[1;35m";
-    public static final String ANSI_BROWN = "\u001B[1;33m";
-    public static final String ANSI_BLACK = "\u001B[1;32m";
+    public static final String ANSI_BROWN = "\u001B[38;2;139;69;19m";
+    public static final String ANSI_BLACK = "\u001B[1;30m";
 
 
     public EfeitoFaixa(int acumulos) {
         super("FAIXA", acumulos); // Default
     }
 
-    public void aplicarFaixa(Inimigo inimigo) {
+    public void aplicarFaixa(RoundManager manager) {
         String cor = ANSI_RESET;
         switch (this.getAcumulos()) {
             case 1:
@@ -43,28 +43,26 @@ public class EfeitoFaixa extends Efeito {
             case 8:
                 cor = ANSI_BROWN;
                 break;
-            case 9:
-                cor = ANSI_BLACK;
-                break;
             default:
+                cor = ANSI_BLACK;
                 break;
         }
 
         if (RoundManager.getLevel() == 1) {
-            inimigo.setCapa("     .'´o)=-       -=(O¬'.\n" + //
+            manager.getInimigo().setCapa("     .'´o)=-       -=(O¬'.\n" + //
                                 "     /.-.'            '._.\\\n" + //
                                 "    //   |\\    VS    /| V \\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
         } else if (RoundManager.getLevel() == 2) {
-            inimigo.setCapa("                      _T_\n" + //
+            manager.getInimigo().setCapa("                      _T_\n" + //
                                 "     .'´o)=-       -=(V¬'.\n" + //
                                 "     /.-.'            '.-.\\\n" + //
                                 "    //   |\\    VS    /|*V*\\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
         } else if (RoundManager.getLevel() == 3) {
-            inimigo.setCapa("     .'´o)=- \n" + //
+            manager.getInimigo().setCapa("     .'´o)=- \n" + //
                                 "     /.-.' \n" + //
                                 "    //   |\\    VS \n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'         (V) O O (V)\n" + //
@@ -72,39 +70,17 @@ public class EfeitoFaixa extends Efeito {
         }
     }
 
-    public void resetCapa(Inimigo inimigo) {
-        if (RoundManager.getLevel() == 1) {
-            inimigo.setCapa("     .'´o)=-      -=(O¬'.\\n\" + //\r\n" + //
-"                        \"     /.-.'           '._.\\\\\\n\" + //\r\n" + //
-"                        \"    //  |\\\\    VS    /| V \\\\\\\\\\n\" + //\r\n" + //
-"                        \"    ||  |'          '|   ||\\n\" + //\r\n" + //
-"                        \"  _,:(_/_            _\\\\ _):,_\\n");
-        } else if (RoundManager.getLevel() == 2) {
-            inimigo.setCapa("                     _T_\\n\" + //\r\n" + //
-"                        \"     .'´o)=-      -=(V¬'.\\n\" + //\r\n" + //
-"                        \"     /.-.'           '.-.\\\\\\n\" + //\r\n" + //
-"                        \"    //  |\\\\    VS    /|*V*\\\\\\\\\\n\" + //\r\n" + //
-"                        \"    ||  |'          '|*_*_||\\n\" + //\r\n" + //
-"                        \"  _,:(_/_            _\\\\ _):,_");
-        } else if (RoundManager.getLevel() == 3) {
-            inimigo.setCapa("     .'´o)=- \\n\" + //\r\n" + //
-"                        \"     /.-.' \\n\" + //\r\n" + //
-"                        \"    //  |\\\\    VS \\n\" + //\r\n" + //
-"                        \"    ||  |'         (V) O O (V)\\n\" + //\r\n" + //
-"                        \"  _,:(_/_            `(, ,)´");
-        }
-    }
-
-    public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
-        IO.println(player.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa!\n");
-        player.setEscudo(player.getEscudo() + (2 * this.getAcumulos()));
-        inimigo.setDano(inimigo.getDano() - (2 * this.getAcumulos()));
-        aplicarFaixa(inimigo);
+    public void usar(RoundManager manager) {
+        this.getDono().setEscudo(this.getDono().getEscudo() + (2 * this.getAcumulos()));
     }
 
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("FIM DO ROUND"))
-            usar(manager.getPlayer(), manager.getInimigo(), manager);
+            usar(manager);
+    }
+
+    public Efeito clonar() {
+        return new EfeitoFaixa(this.getAcumulos());
     }
 }
 

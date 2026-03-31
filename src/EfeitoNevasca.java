@@ -1,15 +1,18 @@
 public class EfeitoNevasca extends Efeito {
     // O efeito de nevasca reduz o ataque do rival em 50% (o acúmulo representa essa porcentagem) 
-    public EfeitoNevasca() {
-        super("NEVASCA", 1); // Default
+    public EfeitoNevasca(int acumulos) {
+        super("NEVASCA", acumulos); // Default
     }
     
-    public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
-        IO.println("Uma grande nevasca atrapalhou o ataque de " + inimigo.getNome() + "...\n");
-        inimigo.setDano((int)(inimigo.getDano() * 0.5));
+    public void usar(Inimigo inimigo, RoundManager manager) {
+        IO.println("Uma grande nevasca atrapalhou o ataque de " + inimigo.getNome() + "...");
+        inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 0.5));
         this.addAcumulos(-1);
+    }
 
-        if (this.getAcumulos() == 0) { // O efeito acabou definitivamente
+    public void resetar(Inimigo inimigo, RoundManager manager) {
+        inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 2));
+        if (this.getAcumulos() == 0) { // O efeito acabou!
             this.getDono().removerEfeito(this);
             manager.desinscrever(this);
         }
@@ -17,6 +20,12 @@ public class EfeitoNevasca extends Efeito {
 
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("INIMIGO VAI ATACAR"))
-            usar(manager.getPlayer(), manager.getInimigo(), manager);
+            usar(manager.getInimigo(), manager);
+        else if (evento.equals("INIMIGO ATACOU"))
+            resetar(manager.getInimigo(), manager);
+    }
+
+    public Efeito clonar() {
+        return new EfeitoNevasca(this.getAcumulos());
     }
 }

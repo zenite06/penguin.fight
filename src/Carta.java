@@ -27,5 +27,9 @@ public abstract class Carta {
         return this.valor;
     }
 
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
     public abstract void usar(Heroi heroi, Inimigo inimigo, RoundManager manager);
 }

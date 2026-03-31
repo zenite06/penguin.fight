@@ -52,7 +52,7 @@ public class App {
     public static Inimigo[] criaInimigos() {
         // Nesse método serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 40, 15, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Gary", 1, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
@@ -68,9 +68,9 @@ public class App {
                                                                                                 "     /.-.'           '._.\\ \n" + //
                                                                                                 "    //  |\\    VS    /| V \\\\\n" + //
                                                                                                 "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 15), new CartaEfeito("???", "???", 0, 1, new EfeitoAcido(1))); 
+                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))); 
         
-        inimigos[1] = new Inimigo("Rookie", 50, 13, "                     _T_\n" + //
+        inimigos[1] = new Inimigo("Rookie", 1, "                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
                         "     /.-.'           '.-.\\\n" + //
                         "    //  |\\    VS    /|*V*\\\\\n" + //
@@ -88,9 +88,9 @@ public class App {
                                                                                                                         "     /.-.'           '.-.\\\n" + //
                                                                                                                         "    //  |\\    VS    /|*V*\\\\\n" + //
                                                                                                                         "    ||  |'          '|*_*_||\n" + //
-                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 15), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEfeito("???", "???", 0, 1, new EfeitoAcido(1))); 
+                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 14), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEscudo("O BLOQUEIO DANÇANTE", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))); 
         
-        inimigos[2] = new Inimigo("Klutzy", 70, 20, "     .'´o)=- \n" + //
+        inimigos[2] = new Inimigo("Klutzy", 1, "     .'´o)=- \n" + //
                         "     /.-.' \n" + //
                         "    //  |\\    VS \n" + //
                         "    ||  |'         (V) O O (V)\n" + //
@@ -104,7 +104,7 @@ public class App {
                                                                                                                         "     /.-.'    Mais sorte na próxima!\n" + //
                                                                                                                         "    //  |\\    VS        V\n" + //
                                                                                                                         "    ||  |'         (V) O O (V)\n" + //
-                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 15), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEfeito("???", "???", 0, 1, new EfeitoAcido(1))); 
+                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 14), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 6), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(1))); 
         return inimigos;
     }
 
@@ -121,11 +121,11 @@ public class App {
         cartas.add(new CartaEscudo("A ESQUIVA PERFEITA", "Carta de Defesa", 50, 8));
         cartas.add(new CartaEscudo("O BLOQUEIO BRUTAL", "Carta de Defesa", 70, 10));
         cartas.add(new CartaEscudo("O BLOQUEIO MILENAR", "Carta de Defesa", 90, 15));
-        cartas.add(new CartaEfeito("AUMENTAR FAIXA", "Carta de Efeito", 10, 1, new EfeitoFaixa(1)));
-        cartas.add(new CartaEfeito("AUMENTAR FAIXA X 2", "Carta de Efeito", 20, 2, new EfeitoFaixa(2)));
-        cartas.add(new CartaEfeito("SARDINHA", "Aumenta em 20 pontos a energia para a próxima rodada", 20, 20, new EfeitoPeixe(20)));
-        cartas.add(new CartaEfeito("ANCHOVA", "Aumenta em 30 pontos a energia para a próxima rodada", 30, 30, new EfeitoPeixe(30)));
-        cartas.add(new CartaEfeito("NEVASCA", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, 1, new EfeitoNevasca()));
+        cartas.add(new CartaEfeito("AUMENTAR FAIXA", "Treino moderado para aumentar habilidades (aumenta em 2 pontos sua defesa!)", 10, new EfeitoFaixa(1)));
+        cartas.add(new CartaEfeito("AUMENTAR FAIXA X 2", "Treino SÉRIO para aumentar habilidades (aumenta em 4 pontos sua defesa!)", 20, new EfeitoFaixa(2)));
+        cartas.add(new CartaEfeito("SARDINHA", "Aumenta em 20 pontos a energia para a próxima rodada", 20, new EfeitoPeixe(20)));
+        cartas.add(new CartaEfeito("ANCHOVA", "Aumenta em 30 pontos a energia para a próxima rodada", 30, new EfeitoPeixe(30)));
+        cartas.add(new CartaEfeito("NEVASCA", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1)));
         return cartas;
     }
 
