@@ -5,7 +5,7 @@ public class EfeitoPeixe extends Efeito {
     }
 
     public void usar(Heroi player, RoundManager manager) {
-        IO.println("Delícia! " + player.getNome() + " comeu um peixe e aumentou sua energia para a próxima rodada\n");
+        IO.println("Delícia! " + player.getNome() + " comeu um peixe e aumentou sua energia para essa rodada\n");
         player.setEnergia(player.getEnergia() + this.getAcumulos()); 
         
         this.getDono().removerEfeito(this); // O efeito acabou!

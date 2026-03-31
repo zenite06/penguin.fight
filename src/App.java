@@ -52,7 +52,7 @@ public class App {
     public static Inimigo[] criaInimigos() {
         // Nesse método serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 1, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Gary", 50, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
@@ -70,7 +70,7 @@ public class App {
                                                                                                 "    ||  |'          '|   ||\n" + //
                                                                                                 "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))); 
         
-        inimigos[1] = new Inimigo("Rookie", 1, "                     _T_\n" + //
+        inimigos[1] = new Inimigo("Rookie", 60, "                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
                         "     /.-.'           '.-.\\\n" + //
                         "    //  |\\    VS    /|*V*\\\\\n" + //
@@ -90,7 +90,7 @@ public class App {
                                                                                                                         "    ||  |'          '|*_*_||\n" + //
                                                                                                                         "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 14), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEscudo("O BLOQUEIO DANÇANTE", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))); 
         
-        inimigos[2] = new Inimigo("Klutzy", 1, "     .'´o)=- \n" + //
+        inimigos[2] = new Inimigo("Klutzy", 70, "     .'´o)=- \n" + //
                         "     /.-.' \n" + //
                         "    //  |\\    VS \n" + //
                         "    ||  |'         (V) O O (V)\n" + //
