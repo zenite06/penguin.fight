@@ -73,12 +73,7 @@ public class RoundManager {
         while (level <= App.getmaxLevel()) {
             if (level == 4) { // Os próximos níveis serão implementados futuramente
                 App.limparTela();
-                IO.println();
-                IO.println(App.ANSI_YELLOW + "¨_ .'´o)=-\n" + //
-                                    " \\\\/.-.'     Agradecemos por jogar!\n" + //
-                                    "  //  |\\     Os próximos níveis ainda estão em desenvolvimento, aguarde :)\n" + //
-                                    "  ||  |' \n" + //
-                                    "_,:(_/_ \n" + App.ANSI_RESET);
+                rota.gameOver(player);
                 break;
             } 
             else if (level < 4)
@@ -177,10 +172,10 @@ public class RoundManager {
                 level = 10;
             }
         }
-        resetLevel(player, pilha_compra, pilha_descarte);
+        resetLevel(player, inimigo, pilha_compra, pilha_descarte);
     }
 
-    public void resetLevel(Heroi player, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
+    public void resetLevel(Heroi player, Inimigo inimigo, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
         if (getLevel() < 3) 
             player.setVida(40);
         else if (getLevel() == 10) 
@@ -192,6 +187,37 @@ public class RoundManager {
 
         while (!pilha_compra.isEmpty())
             pilha_descarte.add(pilha_compra.pop());
+
+        for (Efeito efeito : player.getEfeitos())
+            desinscrever(efeito);
+        for (Efeito efeito : inimigo.getEfeitos())
+            desinscrever(efeito);
+        player.getEfeitos().clear();
+        inimigo.getEfeitos().clear();
+        resetCapa(inimigo);
+    }
+
+    public void resetCapa(Inimigo inimigo) {
+        if (getLevel() == 1) {
+            inimigo.setCapa("     .'´o)=-      -=(O¬'.\n" + //
+                        "     /.-.'           '._.\\\n" + //
+                        "    //  |\\    VS    /| V \\\\\n" + //
+                        "    ||  |'          '|   ||\n" + //
+                        "  _,:(_/_            _\\ _):,_\n");
+        } else if (getLevel() == 2) {
+            inimigo.setCapa("                     _T_\n" + //
+                        "     .'´o)=-      -=(V¬'.\n" + //
+                        "     /.-.'           '.-.\\\n" + //
+                        "    //  |\\    VS    /|*V*\\\\\n" + //
+                        "    ||  |'          '|*_*_||\n" + //
+                        "  _,:(_/_            _\\ _):,_");
+        } else if (getLevel() == 3) {
+            inimigo.setCapa("     .'´o)=- \n" + //
+                        "     /.-.' \n" + //
+                        "    //  |\\    VS \n" + //
+                        "    ||  |'         (V) O O (V)\n" + //
+                        "  _,:(_/_            `(, ,)´");
+        }
     }
 
 /* Gerenciamento de Round */
@@ -207,11 +233,11 @@ public class RoundManager {
             } 
             nadadeira.add(pilha_compra.pop()); // São compradas cinco cartas da pilha de compra para a mão do jogador (nadadeira)
         }
-
+        inimigo.decidirAcao();
         int ataque = (int)(Math.random() * 2); // Define o ataque do inimigo
         while (player.estaVivo()) {
             IO.println();
-            inimigo.declarar(ataque, player);
+            inimigo.declarar();
             IO.println(App.ANSI_YELLOW + "                  " + inimigo.getNome() + " (Vida = " + inimigo.getVida() + ")\n" + App.ANSI_RESET);
             IO.println(inimigo.getC() + "\n");
             IO.println(App.ANSI_YELLOW + "  " + player.getNome() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + App.ANSI_RESET);
@@ -226,7 +252,7 @@ public class RoundManager {
                 else if (nadadeira.get(i).getDescricao().equals("Carta de Defesa"))
                     IO.println(i + " - " + nadadeira.get(i).getDescricao() + ": " + App.ANSI_PURPLE + nadadeira.get(i).getNome() + App.ANSI_RESET + " (Defesa = " + nadadeira.get(i).getValor() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
                 else
-                    IO.println(i + " - Carta de efeito: " + App.ANSI_PURPLE + nadadeira.get(i).getNome() + App.ANSI_RESET + ": " + nadadeira.get(i).getDescricao());
+                    IO.println(i + " - Carta de Efeito: " + App.ANSI_PURPLE + nadadeira.get(i).getNome() + App.ANSI_RESET + " (" + nadadeira.get(i).getDescricao() + " / Custo = " + nadadeira.get(i).getCusto() + ")");
             }
             IO.println(i + " - Finalizar turno\n");
 
@@ -245,6 +271,8 @@ public class RoundManager {
                 App.limparTela();
                 notificar("INIMIGO VAI ATACAR");
                 inimigo.atacar(player); // Manager notifica os efeitos de que o inimigo vai atacar
+                inimigo.usarEfeito(this);
+                notificar("INIMIGO ATACOU");
                 resetRound(inimigo, player);
                 break;
             }

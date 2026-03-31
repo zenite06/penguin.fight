@@ -1,23 +1,28 @@
 public class EfeitoAcido extends Efeito {
+    private int dano;
 
-    public EfeitoAcido(int acumulos) {
-        super("ÁCIDO", acumulos); 
+    public EfeitoAcido(int acumulos, int dano) {
+        super("ÁCIDO", acumulos);
+        this.dano = dano;
     }
 
-    public void usar(Inimigo inimigo, RoundManager manager) {
-        IO.println("Inimigo usou ácido (REESCREVER)");
-        manager.getPlayer().receberDano(5);
-        
+    public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
+        IO.println(inimigo.getNome() + " jogou ácido em " + player.getNome() + "!\n");
+        manager.getPlayer().receberDano(this.dano);
         this.addAcumulos(-1);
 
-        if (this.getAcumulos() == 0) { // O efeito acabou definitivamente
-            this.getDono().removerEfeito(this);
+        if (this.getAcumulos() == 0) { // O efeito acabou!
+            inimigo.removerEfeito(this);
             manager.desinscrever(this);
         }
     }
 
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("INIMIGO ATACOU"))
-            usar(manager.getInimigo(), manager);
+            usar(manager.getPlayer(), manager.getInimigo(), manager);
+    }
+
+    public Efeito clonar() {
+        return new EfeitoAcido(this.getAcumulos(), this.dano);
     }
 }
