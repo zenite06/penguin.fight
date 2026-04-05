@@ -16,7 +16,7 @@ O projeto segue a seguinte estrutura padrão em Java:
 │  ├─ Inimigo.java
 │  ├─ Carta.java
 │  ├─ CartaDano.java
-│  └─ CartaEscudo.java
+│  └─ ...
 ├─ lib/
 ├─ bin/
 ├─ .gitignore
@@ -70,7 +70,7 @@ Durante o combate:
 - O jogador pode usar cartas enquanto tiver energia disponível
 - Ao final do turno do jogador, o **inimigo realiza suas ações**
 
-![alt text](<Captura de tela de 2026-03-12 20-42-45.png>)
+![alt text](<image-luta.jpg>)
 
 
 O combate termina quando:
@@ -85,6 +85,8 @@ O combate termina quando:
 Tanto o jogador quanto o inimigo podem aplicar **efeitos** de combate. O inimigo declara os efeitos que pretende usar a cada rodada e o jogador pode aplicá-los com **cartas de efeito**.
 Os efeitos disponíveis para o jogador são:
 
+![alt text](image-faixa-1.jpg)
+
 - **FAIXA** - Permite que o jogador aumente sua faixa de luta, aumentando em 2 pontos seu escudo a cada acúmulo (esse efeito dura todos os rounds até o final de um nível)
 
 - **PEIXE** - Aumenta em X pontos a energia do jogador para o próximo turno
@@ -93,13 +95,13 @@ Os efeitos disponíveis para o jogador são:
 
 Já os efeitos disponíveis para os inimigos são:
 
-- **ÁCIDO** (níveis 1 e 2) - Causa X de dano no player (aplicado no final da jogada)
+- **ÁCIDO** (níveis 1 e 2) - Causa X de dano no player (aplicado no final da rodada por Y rodadas)
 
-- **REGENERAÇÃO** (nível 3) - Aumenta em 5 pontos a vida do inimigo (*spoiler*: caranguejos realmente se regeneram!)
+- **REGENERAÇÃO** (nível 3) - Aumenta em X pontos a vida do inimigo (*spoiler*: caranguejos realmente se regeneram!)
 
 ## Rotas
 
-O jogo te dá algumas escolhas por padrão: na tela de início, você pode aceitar ou não a aventura, e no início dos níveis (ao encontrar os inimigos), você pode aceitar confrontá-los ou não. Nesses casos, escolher *"Não..."* não faz o jogo parar, só apresenta uma mensagem que te manda continuar. Entretanto, negar os conflitos *todas* as vezes te leva a um final com uma mensagem diferente (recomenda-mos testá-lo!). Essa é a rota relutante, que futuramente deve incluir um nível final com todos os inimigos juntos 
+O jogo te dá algumas escolhas por padrão: na tela de início, você pode aceitar ou não a aventura, e no início dos níveis, ao encontrar os inimigos, você pode aceitar confrontá-los ou não. Nesses casos, escolher *"Não..."* não faz o jogo parar, mas apresenta uma mensagem que te manda continuar. Entretanto, negar os conflitos *todas* as vezes te leva a um final com uma mensagem diferente (recomendamos testá-lo!). Essa é a rota relutante, que futuramente deve incluir um nível final com todos os inimigos juntos
 
 Caso o jogador responda *"Sim"* em alguma dessas escolhas críticas, seguirá a rota padrão, com o término normal do jogo 
 
