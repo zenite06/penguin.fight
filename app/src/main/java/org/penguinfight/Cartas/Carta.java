@@ -1,3 +1,9 @@
+package org.penguinfight.Cartas;
+
+import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Inimigo;
+
 public abstract class Carta {
     private String nome;
     private String descricao;

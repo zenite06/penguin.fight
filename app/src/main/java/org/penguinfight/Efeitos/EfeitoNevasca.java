@@ -1,3 +1,8 @@
+package org.penguinfight.Efeitos;
+
+import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Inimigo;
+
 public class EfeitoNevasca extends Efeito {
     // O efeito de nevasca reduz o ataque do rival em 50% (o acúmulo representa essa porcentagem) 
     public EfeitoNevasca(int acumulos) {

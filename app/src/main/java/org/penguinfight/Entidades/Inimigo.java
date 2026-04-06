@@ -1,3 +1,12 @@
+package org.penguinfight.Entidades;
+
+import org.penguinfight.App;
+import org.penguinfight.RoundManager;
+import org.penguinfight.Cartas.CartaDano;
+import org.penguinfight.Cartas.CartaEfeito;
+import org.penguinfight.Cartas.CartaEscudo;
+import org.penguinfight.Efeitos.Efeito;
+
 public class Inimigo extends Entidade {
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)

@@ -1,3 +1,9 @@
+package org.penguinfight.Efeitos;
+
+import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Inimigo;
+
 public class EfeitoAcido extends Efeito {
     private int dano;
 

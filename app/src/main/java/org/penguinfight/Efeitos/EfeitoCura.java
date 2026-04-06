@@ -1,3 +1,9 @@
+package org.penguinfight.Efeitos;
+
+import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Inimigo;
+
 public class EfeitoCura extends Efeito {
 
     public EfeitoCura(int acumulos) {

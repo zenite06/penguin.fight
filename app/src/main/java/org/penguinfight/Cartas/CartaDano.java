@@ -1,3 +1,10 @@
+package org.penguinfight.Cartas;
+
+import org.penguinfight.App;
+import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Inimigo;
+
 public class CartaDano extends Carta {
 
     public CartaDano(String nome, String descricao, int custo, int valor) {

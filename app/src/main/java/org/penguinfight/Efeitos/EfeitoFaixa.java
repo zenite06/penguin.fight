@@ -1,3 +1,7 @@
+package org.penguinfight.Efeitos;
+
+import org.penguinfight.RoundManager;
+
 public class EfeitoFaixa extends Efeito {
     // Exclusivo do player, o efeito faixa aumenta seu escudo em 2 pontos por acúmulo
     public static final String ANSI_RESET = "\u001B[0m"; 
