@@ -1,4 +1,18 @@
+package org.penguinfight;
+
 import java.util.Scanner;
+
+import org.penguinfight.Cartas.Carta;
+import org.penguinfight.Cartas.CartaDano;
+import org.penguinfight.Cartas.CartaEfeito;
+import org.penguinfight.Cartas.CartaEscudo;
+import org.penguinfight.Efeitos.EfeitoAcido;
+import org.penguinfight.Efeitos.EfeitoCura;
+import org.penguinfight.Efeitos.EfeitoFaixa;
+import org.penguinfight.Efeitos.EfeitoNevasca;
+import org.penguinfight.Efeitos.EfeitoPeixe;
+import org.penguinfight.Entidades.Inimigo;
+
 import java.util.List;
 import java.util.ArrayList;
 

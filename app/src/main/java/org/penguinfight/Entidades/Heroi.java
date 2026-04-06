@@ -1,3 +1,5 @@
+package org.penguinfight.Entidades;
+
 public class Heroi extends Entidade {
     private int energia;
 

@@ -1,6 +1,15 @@
+package org.penguinfight;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
+
+import org.penguinfight.Cartas.Carta;
+import org.penguinfight.Efeitos.Efeito;
+import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Entidades.Observer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 

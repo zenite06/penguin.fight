@@ -1,3 +1,12 @@
+package org.penguinfight.Cartas;
+
+import org.penguinfight.App;
+import org.penguinfight.RoundManager;
+import org.penguinfight.Efeitos.Efeito;
+import org.penguinfight.Efeitos.EfeitoFaixa;
+import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Inimigo;
+
 public class CartaEfeito extends Carta {
     private Efeito efeito;
 

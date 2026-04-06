@@ -1,3 +1,9 @@
+package org.penguinfight.Efeitos;
+
+import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Entidade;
+import org.penguinfight.Entidades.Observer;
+
 public abstract class Efeito implements Observer {
     private String nome;
     private Entidade dono;

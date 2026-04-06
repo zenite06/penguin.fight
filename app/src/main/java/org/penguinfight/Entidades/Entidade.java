@@ -1,4 +1,11 @@
+package org.penguinfight.Entidades;
+
 import java.util.List;
+
+import org.penguinfight.App;
+import org.penguinfight.RoundManager;
+import org.penguinfight.Efeitos.Efeito;
+
 import java.util.ArrayList;
 
 public abstract class Entidade {
