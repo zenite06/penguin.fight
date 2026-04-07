@@ -8,6 +8,9 @@ import org.penguinfight.Efeitos.Efeito;
 
 import java.util.ArrayList;
 
+/**
+ * Entidades representam personagens que interagem e tomam decisões no jogo
+ */
 public abstract class Entidade {
     private String nome;
     private int vida;
@@ -45,6 +48,10 @@ public abstract class Entidade {
         this.escudo = escudo;
     }
 
+    /**
+     * Método ???
+     * @param dano
+     */
     public void receberDano(int dano) {
         int dano_efetivo = dano - this.escudo;
         if (dano_efetivo > 0) 

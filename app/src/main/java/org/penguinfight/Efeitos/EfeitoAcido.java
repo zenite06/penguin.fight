@@ -4,6 +4,9 @@ import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Aplica um dano ao ser jogado em um rival
+ */
 public class EfeitoAcido extends Efeito {
     private int dano;
 

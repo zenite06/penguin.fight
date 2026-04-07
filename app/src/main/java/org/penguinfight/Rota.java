@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.penguinfight.Entidades.Heroi;
 
+/**
+ * Classe que registra as escolhas do jogador e define o final do jogo
+ */
 public class Rota {
     private Scanner scanner = App.getScanner();
     private RoundManager manager;

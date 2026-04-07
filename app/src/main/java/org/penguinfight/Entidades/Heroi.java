@@ -1,5 +1,8 @@
 package org.penguinfight.Entidades;
 
+/**
+ * A entidade que representa o jogador
+ */
 public class Heroi extends Entidade {
     private int energia;
 

@@ -12,6 +12,9 @@ import org.penguinfight.Entidades.Inimigo;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Classe que gerencia a dinâmica de combate
+ */
 public class RoundManager {
     // Nessa classe deverá ser desenvovlvida a lógica de batalha dos métodos do App atuais
 

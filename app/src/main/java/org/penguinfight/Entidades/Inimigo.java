@@ -7,6 +7,9 @@ import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Cartas.CartaEscudo;
 import org.penguinfight.Efeitos.Efeito;
 
+/**
+ * A entidade que representa um rivais do jogador
+ */
 public class Inimigo extends Entidade {
     private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
