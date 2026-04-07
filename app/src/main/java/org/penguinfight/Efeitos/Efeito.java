@@ -37,6 +37,10 @@ public abstract class Efeito implements Observer {
         this.dono = entidade;
     }
 
+    /**
+     * Adiciona {@code add} aos acúmulos do round
+     * @param add
+     */
     public void addAcumulos(int add) {
         this.acumulos += add;
     }

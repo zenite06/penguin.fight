@@ -40,5 +40,11 @@ public abstract class Carta {
         this.valor = valor;
     }
 
+/**
+ * Realiza a ação da carta caso o player tenha energia suficiente
+ * @param heroi
+ * @param inimigo
+ * @param manager
+ */
     public abstract void usar(Heroi heroi, Inimigo inimigo, RoundManager manager);
 }

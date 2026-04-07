@@ -49,7 +49,7 @@ public abstract class Entidade {
     }
 
     /**
-     * Método ???
+     * Aplica o {@code dano} na entidade
      * @param dano
      */
     public void receberDano(int dano) {
@@ -72,6 +72,9 @@ public abstract class Entidade {
         return this.vida > 0;
     }
 
+/**
+ * Adiciona um efeito na lista de efeitos da entidade ou aumenta os acúmulos de um efeito já ativo
+ */
     public void aplicarEfeito(Efeito efeito, RoundManager manager) {
         for (Efeito efeito_ativo : this.efeitos)
             if (efeito_ativo.getNome().equals(efeito.getNome())) {
