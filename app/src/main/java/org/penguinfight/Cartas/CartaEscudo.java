@@ -5,6 +5,9 @@ import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Fornece um escudo para a entidade
+ */
 public class CartaEscudo extends Carta {
 
     public CartaEscudo(String nome, String descricao, int custo, int valor) {

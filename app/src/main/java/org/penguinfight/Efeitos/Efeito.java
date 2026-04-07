@@ -4,6 +4,9 @@ import org.penguinfight.Observer;
 import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 
+/**
+ * Efeitos são modificadores de parâmetros de entidades que podem ser ativados em algum momento do combate
+ */
 public abstract class Efeito implements Observer {
     private String nome;
     private Entidade dono;
@@ -34,6 +37,10 @@ public abstract class Efeito implements Observer {
         this.dono = entidade;
     }
 
+    /**
+     * Adiciona {@code add} aos acúmulos do round
+     * @param add
+     */
     public void addAcumulos(int add) {
         this.acumulos += add;
     }

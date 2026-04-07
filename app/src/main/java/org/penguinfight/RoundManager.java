@@ -12,6 +12,9 @@ import org.penguinfight.Entidades.Inimigo;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Classe que gerencia a dinâmica de combate
+ */
 public class RoundManager {
     // Nessa classe deverá ser desenvovlvida a lógica de batalha dos métodos do App atuais
 
@@ -57,7 +60,10 @@ public class RoundManager {
                 subscriber.serNotificado(evento, this);
     }
 
-/* Gerenciamento de Jogo */
+/**
+ * Gerenciamento de jogo
+ * @param inimigos
+ */
     public void startGame(Inimigo inimigos[]) { 
         Scanner scanner = App.getScanner();
         App.limparTela();
@@ -91,7 +97,11 @@ public class RoundManager {
         }
     } 
 
-/* Gerenciamento de Nível */
+/**
+ * Gerenciamento de nível
+ * @param player
+ * @param inimigos
+ */
     public void startLevel(Heroi player, Inimigo inimigos[]) {
         Scanner scanner = App.getScanner();
         App.limparTela();
@@ -183,6 +193,13 @@ public class RoundManager {
         resetLevel(player, inimigo, pilha_compra, pilha_descarte);
     }
 
+    /**
+     * Reinicia os parâmetros do player e do inimigo no fim de um nível 
+     * @param player
+     * @param inimigo
+     * @param pilha_compra
+     * @param pilha_descarte
+     */
     public void resetLevel(Heroi player, Inimigo inimigo, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
         if (getLevel() < 3) 
             player.setVida(40);
@@ -205,6 +222,10 @@ public class RoundManager {
         resetCapa(inimigo);
     }
 
+    /**
+     * Reseta a capa (gráfica) da luta
+     * @param inimigo
+     */
     public void resetCapa(Inimigo inimigo) {
         if (getLevel() == 1) {
             inimigo.setCapa("     .'´o)=-      -=(O¬'.\n" + //
@@ -228,7 +249,13 @@ public class RoundManager {
         }
     }
 
-/* Gerenciamento de Round */
+    /**
+     * Gerenciamento de Round
+     * @param player
+     * @param inimigo
+     * @param pilha_descarte
+     * @param pilha_compra
+     */
     public void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra) {
         Scanner scanner = App.getScanner();
         List<Carta> nadadeira = new ArrayList<>();
@@ -297,6 +324,11 @@ public class RoundManager {
         }
     }
 
+    /**
+     * Reinicia alguns parâmetros do player e do inimigo no fim de um round
+     * @param inimigo
+     * @param player
+     */
     public void resetRound(Inimigo inimigo, Heroi player) {
         inimigo.setEscudo(0);
         player.setEscudo(0);

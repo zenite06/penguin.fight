@@ -8,6 +8,9 @@ import org.penguinfight.Efeitos.Efeito;
 
 import java.util.ArrayList;
 
+/**
+ * Entidades representam personagens que interagem e tomam decisões no jogo
+ */
 public abstract class Entidade {
     private String nome;
     private int vida;
@@ -45,6 +48,10 @@ public abstract class Entidade {
         this.escudo = escudo;
     }
 
+    /**
+     * Aplica o {@code dano} na entidade
+     * @param dano
+     */
     public void receberDano(int dano) {
         int dano_efetivo = dano - this.escudo;
         if (dano_efetivo > 0) 
@@ -65,6 +72,9 @@ public abstract class Entidade {
         return this.vida > 0;
     }
 
+/**
+ * Adiciona um efeito na lista de efeitos da entidade ou aumenta os acúmulos de um efeito já ativo
+ */
     public void aplicarEfeito(Efeito efeito, RoundManager manager) {
         for (Efeito efeito_ativo : this.efeitos)
             if (efeito_ativo.getNome().equals(efeito.getNome())) {

@@ -5,6 +5,9 @@ import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Aplica um dano na entidade rival
+ */
 public class CartaDano extends Carta {
 
     public CartaDano(String nome, String descricao, int custo, int valor) {

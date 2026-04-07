@@ -7,11 +7,21 @@ import java.util.concurrent.TimeUnit;
 
 import org.penguinfight.Entidades.Heroi;
 
+/**
+ * Classe que registra as escolhas do jogador e define o final do jogo
+ */
 public class Rota {
     private Scanner scanner = App.getScanner();
     private RoundManager manager;
-    private List<Integer> escolhas; // As escolhas do jogador definem o final do jogo
-    List<String> frames = new ArrayList<>(); // Cutscenes 
+    /**
+     * Vetor de esolhas do jogador que define o final do jogo
+     */
+    private List<Integer> escolhas; 
+
+    /**
+     * Vetor de frames das cuscenes do final do jogo
+     */
+    List<String> frames = new ArrayList<>(); 
 
     public Rota() {
         this.manager = App.getManager();
@@ -125,11 +135,18 @@ public class Rota {
                         "    \\\\/.-.'\n"); // fim da cutscene do final
     }
 
+    /**
+     * Adiciona uma escolha ao vetor de escolhas 
+     * @param i O valor de i depende se o jogador escolheu lutar/continuar (1) ou não (0)
+     */
     public void addEscolha(int i) {
-        // O valor de i depende se o jogador escolheu lutar/continuar (1) ou não (0)
         this.escolhas.add(i);
     }
 
+    /**
+     * Finaliza o jogo de acordo com a rota escolhida 
+     * @param player 
+     */
     public void gameOver(Heroi player) {
         int rota = 0; // A rota é definida pelo vetor de escolhas do jogador
 
@@ -193,6 +210,10 @@ public class Rota {
         }
     }
 
+    /**
+     * Realiza a luta final com todos os inimigos (em desenvolvimento)
+     * @param player
+     */
     public void lutaFinal(Heroi player) {
 
         App.limparTela();

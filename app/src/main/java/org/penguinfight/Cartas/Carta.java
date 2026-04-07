@@ -4,6 +4,9 @@ import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Cartas são elementos que fornecem valores para modificar algum atributo e podem ser usadas pelas entidades
+ */
 public abstract class Carta {
     private String nome;
     private String descricao;
@@ -37,5 +40,11 @@ public abstract class Carta {
         this.valor = valor;
     }
 
+/**
+ * Realiza a ação da carta caso o player tenha energia suficiente
+ * @param heroi
+ * @param inimigo
+ * @param manager
+ */
     public abstract void usar(Heroi heroi, Inimigo inimigo, RoundManager manager);
 }

@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    java
 }
 
 repositories {
@@ -44,4 +45,18 @@ tasks.named<Test>("test") {
 
 tasks.getByName<JavaExec>("run") {
     standardInput = System.`in`
+}
+
+tasks.javadoc {
+    title = "Documentação - penguin.fight()"
+    destinationDir = file("${layout.buildDirectory.get()}/docs/javadoc")
+
+    // Atributos e métodos privados
+    options.memberLevel = JavadocMemberLevel.PRIVATE
+    setFailOnError(false)
+
+    (options as StandardJavadocDocletOptions).apply {
+            links("https://docs.oracle.com/en/java/javase/17/docs/api/")
+            addStringOption("Xdoclint:all,-missing", "-quiet")
+        }
 }

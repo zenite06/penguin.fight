@@ -3,8 +3,10 @@ package org.penguinfight.Efeitos;
 import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 
+/**
+ * Aumenta a energia do jogador em X (acúmulo) para a próxima rodada
+ */
 public class EfeitoPeixe extends Efeito {
-    // O efeito de peixe aumenta a enregia do jogador em X (acúmulo) para a próxima rodada
     public EfeitoPeixe(int acumulos) {
         super("PEIXE", acumulos); 
     }

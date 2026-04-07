@@ -4,6 +4,9 @@ import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Regenera parte da vida da entidade
+ */
 public class EfeitoCura extends Efeito {
 
     public EfeitoCura(int acumulos) {

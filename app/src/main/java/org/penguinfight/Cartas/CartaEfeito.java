@@ -7,6 +7,9 @@ import org.penguinfight.Efeitos.EfeitoFaixa;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Aplica um efeito na batalha
+ */
 public class CartaEfeito extends Carta {
     private Efeito efeito;
 
