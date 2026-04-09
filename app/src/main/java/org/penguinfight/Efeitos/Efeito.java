@@ -47,5 +47,9 @@ public abstract class Efeito implements Observer {
 
     public abstract void serNotificado(String evento, RoundManager manager);
 
+    public abstract void usar(Entidade entidade, RoundManager manager);
+
+    public void usarImediato(Entidade entidade, RoundManager manager) {};
+
     public abstract Efeito clonar();
 }

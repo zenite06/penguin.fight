@@ -118,7 +118,7 @@ public class App {
                                                                                                                         "     /.-.'    Mais sorte na próxima!\n" + //
                                                                                                                         "    //  |\\    VS        V\n" + //
                                                                                                                         "    ||  |'         (V) O O (V)\n" + //
-                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 14), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 6), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(1))); 
+                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 14), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 6), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))); 
         return inimigos;
     }
 
@@ -140,6 +140,8 @@ public class App {
         cartas.add(new CartaEfeito("SARDINHA", "Aumenta em 20 pontos a energia para a próxima rodada", 20, new EfeitoPeixe(20)));
         cartas.add(new CartaEfeito("ANCHOVA", "Aumenta em 30 pontos a energia para a próxima rodada", 30, new EfeitoPeixe(30)));
         cartas.add(new CartaEfeito("NEVASCA", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1)));
+        cartas.add(new CartaEfeito("KIT MÉDICO", "Que alívio! Aumenta sua vida em 10 pontos", 50, new EfeitoCura(10)));
+        cartas.add(new CartaEfeito("BÁLSAMO MILAGROSO", "*Composição misteriosa* Aumenta sua vida em 20 pontos", 50, new EfeitoCura(20)));
         return cartas;
     }
 

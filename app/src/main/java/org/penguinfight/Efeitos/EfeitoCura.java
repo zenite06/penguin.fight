@@ -1,8 +1,7 @@
 package org.penguinfight.Efeitos;
 
 import org.penguinfight.RoundManager;
-import org.penguinfight.Entidades.Heroi;
-import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Entidades.Entidade;
 
 /**
  * Regenera parte da vida da entidade
@@ -13,20 +12,21 @@ public class EfeitoCura extends Efeito {
         super("REGENERAÇÃO", acumulos);
     }
 
-    public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
-        IO.println(inimigo.getNome() + " se regenerou e aumentou sua vida!");
-        inimigo.setVida(inimigo.getVida() + 5);
-        this.addAcumulos(-1);
+    public void usar(Entidade entidade, RoundManager manager) { 
+        IO.println(entidade.getNome() + " se curou e aumentou sua vida!");
+        entidade.setVida(entidade.getVida() + this.getAcumulos());
+        this.addAcumulos(-this.getAcumulos());
 
         if (this.getAcumulos() == 0) { // O efeito acabou!
-            inimigo.removerEfeito(this);
+            entidade.removerEfeito(this);
             manager.desinscrever(this);
         }
     }
 
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("FIM DO ROUND"))
-            usar(manager.getPlayer(), manager.getInimigo(), manager);
+            if (this.getDono() == manager.getInimigo())
+                usar(this.getDono(), manager);
     }
 
     public Efeito clonar() {

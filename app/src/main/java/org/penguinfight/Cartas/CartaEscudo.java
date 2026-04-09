@@ -6,7 +6,7 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Fornece um escudo para a entidade
+ * Aumenta o escudo do herói
  */
 public class CartaEscudo extends Carta {
 
@@ -14,6 +14,9 @@ public class CartaEscudo extends Carta {
         super(nome, descricao, custo, valor);
     }
 
+    /**
+     * Aumenta o escudo do herói se ele possui energia o suficiente
+     */
     public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();

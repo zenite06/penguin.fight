@@ -43,9 +43,25 @@ public class CartaEfeito extends Carta {
                     }
                 }
             }
+
+            if (this.efeito.getNome().equals("FAIXA")) {
+                IO.println(player.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa!\n");
+                player.setEscudo(player.getEscudo() + (2 * this.efeito.getAcumulos()));
+
+                for (Efeito efeito : player.getEfeitos()) {
+                    if (efeito.getNome().equals("FAIXA")) {
+                        EfeitoFaixa faixa = (EfeitoFaixa) efeito; 
+                        faixa.aplicarFaixa(manager);
+                        break;
+                    }
+                }
+            }
+
+            if (this.efeito.getNome().equals("REGENERAÇÃO")) 
+                this.efeito.usar(this.efeito.getDono(), manager);
+
             player.usarEnergia(this.getCusto());
-        }
-        else {
+        } else {
             IO.println();
             IO.println(App.ANSI_RED + "Energia insuficiente!" + App.ANSI_RESET);
         }

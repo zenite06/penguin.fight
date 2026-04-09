@@ -6,7 +6,7 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Aplica um dano na entidade rival
+ * Aplica dano no inimigo
  */
 public class CartaDano extends Carta {
 
@@ -14,10 +14,13 @@ public class CartaDano extends Carta {
         super(nome, descricao, custo, valor);
     }
 
+    /**
+     * Aplica dano no inimigo se o heroi possui energia o suficiente
+     */
     public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();
-            IO.println(heroi.getNome() + " usou " + App.ANSI_PURPLE + this.getNome() + App.ANSI_RESET + " em " + inimigo.getNome() + "!");
+            IO.println(heroi.getNome() + " usou " + App.ANSI_PURPLE + this.getNome() + App.ANSI_RESET + " em " + inimigo.getNome() + "!\n");
             inimigo.receberDano(this.getValor());
             heroi.usarEnergia(this.getCusto());
         }
