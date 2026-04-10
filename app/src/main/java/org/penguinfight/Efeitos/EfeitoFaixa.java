@@ -1,5 +1,5 @@
 package org.penguinfight.Efeitos;
-
+import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.RoundManager;
 
 /**
@@ -76,14 +76,20 @@ public class EfeitoFaixa extends Efeito {
         }
     }
 
-    public void usar(RoundManager manager) {
+    public void ativar(Entidade entidade, RoundManager manager) { // Não precisa...
         this.getDono().setEscudo(this.getDono().getEscudo() + (2 * this.getAcumulos()));
+    } 
+
+    @Override
+    public void ativarImediato(Entidade entidade, RoundManager manager) {
+        IO.println(entidade.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa!\n");
+        entidade.setEscudo(entidade.getEscudo() + (2 * this.getAcumulos()));
     }
 
     public void serNotificado(String evento, RoundManager manager) {
-        if (evento.equals("FIM DO ROUND"))
-            usar(manager);
-    }
+        if (evento.equals("FIM DO ROUND")) // Não precisa
+            ativar(this.getDono(), manager); 
+    } 
 
     public Efeito clonar() {
         return new EfeitoFaixa(this.getAcumulos());

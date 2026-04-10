@@ -1,7 +1,6 @@
 package org.penguinfight.Efeitos;
-
 import org.penguinfight.RoundManager;
-import org.penguinfight.Entidades.Heroi;
+import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
@@ -18,9 +17,9 @@ public class EfeitoAcido extends Efeito {
     /**
      * Aplica dano na entidade rival ao final do turno por um número de turnos se a entidade possui energia o suficiente
      */
-    public void usar(Heroi player, RoundManager manager) {
+    public void ativar(Entidade entidade, RoundManager manager) {
         Inimigo inimigo = manager.getInimigo();
-        IO.println(inimigo.getNome() + " jogou ácido em " + player.getNome() + "!\n");
+        IO.println(inimigo.getNome() + " jogou ácido em " + entidade.getNome() + "!\n");
         manager.getPlayer().receberDano(this.dano);
         this.addAcumulos(-1);
 
@@ -32,7 +31,7 @@ public class EfeitoAcido extends Efeito {
 
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("INIMIGO ATACOU"))
-            usar(manager.getPlayer(), manager);
+            ativar(manager.getPlayer(), manager);
     }
 
     public Efeito clonar() {

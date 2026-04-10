@@ -1,5 +1,4 @@
 package org.penguinfight.Efeitos;
-
 import org.penguinfight.Observer;
 import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
@@ -47,9 +46,9 @@ public abstract class Efeito implements Observer {
 
     public abstract void serNotificado(String evento, RoundManager manager);
 
-    public abstract void usar(Entidade entidade, RoundManager manager);
+    public abstract void ativar(Entidade entidade, RoundManager manager);
 
-    public void usarImediato(Entidade entidade, RoundManager manager) {};
+    public void ativarImediato(Entidade entidade, RoundManager manager) {}; // Só se aplica às classes que possuem ativação imediata de um efeito
 
     public abstract Efeito clonar();
 }

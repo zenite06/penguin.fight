@@ -1,6 +1,6 @@
 package org.penguinfight.Efeitos;
-
 import org.penguinfight.RoundManager;
+import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Heroi;
 
 /**
@@ -11,7 +11,8 @@ public class EfeitoPeixe extends Efeito {
         super("PEIXE", acumulos); 
     }
 
-    public void usar(Heroi player, RoundManager manager) {
+    public void ativar(Entidade entidade, RoundManager manager) {
+        Heroi player = manager.getPlayer();
         IO.println("Delícia! " + player.getNome() + " comeu um peixe e aumentou sua energia para essa rodada\n");
         player.setEnergia(player.getEnergia() + this.getAcumulos()); 
         
@@ -21,7 +22,7 @@ public class EfeitoPeixe extends Efeito {
 
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("FIM DO ROUND"))
-            usar(manager.getPlayer(), manager);
+            ativar(manager.getPlayer(), manager);
     }
 
     public Efeito clonar() {

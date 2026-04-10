@@ -1,7 +1,5 @@
 package org.penguinfight;
-
 import java.util.Scanner;
-
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
@@ -12,7 +10,6 @@ import org.penguinfight.Efeitos.EfeitoFaixa;
 import org.penguinfight.Efeitos.EfeitoNevasca;
 import org.penguinfight.Efeitos.EfeitoPeixe;
 import org.penguinfight.Entidades.Inimigo;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -141,7 +138,7 @@ public class App {
         cartas.add(new CartaEfeito("ANCHOVA", "Aumenta em 30 pontos a energia para a próxima rodada", 30, new EfeitoPeixe(30)));
         cartas.add(new CartaEfeito("NEVASCA", "Não consigo ver! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1)));
         cartas.add(new CartaEfeito("KIT MÉDICO", "Que alívio! Aumenta sua vida em 10 pontos", 50, new EfeitoCura(10)));
-        cartas.add(new CartaEfeito("BÁLSAMO MILAGROSO", "*Composição misteriosa* Aumenta sua vida em 20 pontos", 50, new EfeitoCura(20)));
+        cartas.add(new CartaEfeito("BÁLSAMO MILAGROSO", "*Composição misteriosa* Aumenta sua vida em 20 pontos", 70, new EfeitoCura(20)));
         return cartas;
     }
 

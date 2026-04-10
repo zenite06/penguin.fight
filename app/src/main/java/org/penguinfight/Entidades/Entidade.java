@@ -1,10 +1,11 @@
 package org.penguinfight.Entidades;
-
 import java.util.List;
-
 import org.penguinfight.App;
 import org.penguinfight.RoundManager;
 import org.penguinfight.Efeitos.Efeito;
+import org.penguinfight.Efeitos.EfeitoFaixa;
+import org.penguinfight.Efeitos.EfeitoNevasca;
+import org.penguinfight.Efeitos.EfeitoCura;
 
 import java.util.ArrayList;
 
@@ -79,11 +80,18 @@ public abstract class Entidade {
         for (Efeito efeito_ativo : this.efeitos)
             if (efeito_ativo.getNome().equals(efeito.getNome())) {
                 efeito_ativo.addAcumulos(efeito.getAcumulos());
+                if (efeito_ativo instanceof EfeitoFaixa)
+                    efeito_ativo.getDono().setEscudo(efeito_ativo.getDono().getEscudo() + (2 * efeito.getAcumulos()));
                 return;
             }
         efeito.setDono(this);
         this.efeitos.add(efeito);
         manager.inscrever(efeito);
+
+        // Efeitos com alguma aplicação imediata
+        if (efeito instanceof EfeitoFaixa || efeito instanceof EfeitoNevasca || efeito instanceof EfeitoCura) {
+            efeito.ativarImediato(efeito.getDono(), manager); 
+        }
     }
 
     public void removerEfeito(Efeito efeito) {
