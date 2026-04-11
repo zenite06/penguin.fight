@@ -66,7 +66,7 @@ Durante o combate:
 - O jogador pode usar cartas enquanto tiver energia disponível;
 - Ao final do turno do jogador, o **inimigo realiza suas ações**.
 
-![alt text](<image-luta.jpg>)
+![alt text](<image-luta-faixa.png>)
 
 O combate termina quando:
 
