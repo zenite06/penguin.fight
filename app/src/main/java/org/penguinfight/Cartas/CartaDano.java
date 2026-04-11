@@ -1,12 +1,11 @@
 package org.penguinfight.Cartas;
-
 import org.penguinfight.App;
 import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Aplica dano no inimigo
+ * Carta focada em subtrair pontos de vida diretamente do oponente.
  */
 public class CartaDano extends Carta {
 
@@ -14,9 +13,7 @@ public class CartaDano extends Carta {
         super(nome, descricao, custo, valor);
     }
 
-    /**
-     * Aplica dano no inimigo se o heroi possui energia o suficiente
-     */
+    @Override
     public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();

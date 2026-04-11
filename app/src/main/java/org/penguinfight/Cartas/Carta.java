@@ -1,11 +1,11 @@
 package org.penguinfight.Cartas;
-
 import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Cartas são elementos que fornecem valores para modificar algum atributo e podem ser usadas pelas entidades
+ * Classe abstrata base para todas as ações do baralho.
+ * Cartas consomem energia do herói para gerar um impacto no combate.
  */
 public abstract class Carta {
     private String nome;
@@ -13,6 +13,9 @@ public abstract class Carta {
     private int custo;
     private int valor;
 
+    /**
+     * Executa a mecânica principal da carta caso o herói possua energia suficiente.
+     */
     public Carta(String nome, String descricao, int custo, int valor) {
         this.nome = nome;
         this.descricao = descricao;
@@ -40,11 +43,8 @@ public abstract class Carta {
         this.valor = valor;
     }
 
-/**
- * Realiza a ação da carta caso o player tenha energia suficiente
- * @param heroi
- * @param inimigo
- * @param manager
- */
+    /**
+     * Executa a mecânica principal da carta caso o herói possua energia suficiente.
+     */
     public abstract void usar(Heroi heroi, Inimigo inimigo, RoundManager manager);
 }

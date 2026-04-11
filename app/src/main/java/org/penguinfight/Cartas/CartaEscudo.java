@@ -6,7 +6,8 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Aumenta o escudo do herói
+ * Carta de defesa que gera uma barreira temporária para mitigar 
+ * ou anular os danos recebidos no turno atual.
  */
 public class CartaEscudo extends Carta {
 
@@ -14,9 +15,7 @@ public class CartaEscudo extends Carta {
         super(nome, descricao, custo, valor);
     }
 
-    /**
-     * Aumenta o escudo do herói se ele possui energia o suficiente
-     */
+    @Override
     public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();

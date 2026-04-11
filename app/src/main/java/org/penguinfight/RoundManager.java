@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Classe que gerencia a dinâmica de combate
+ * Classe central que gerencia a dinâmica de combate, o fluxo de turnos,
+ * a utilização de cartas e atua como o Publisher no padrão Observer.
  */
 public class RoundManager {
-    // Nessa classe deverá ser desenvovlvida a lógica de batalha dos métodos do App atuais
 
     private static int level = 1; // O nível define alguns atributos da gameplay
     private Heroi player;
@@ -45,7 +45,11 @@ public class RoundManager {
         return this.inimigo;
     }
 
-/* Métodos de Publisher */
+    /* Métodos de Publisher */
+
+    /**
+     * Inscreve um novo Observer (geralmente um Efeito) para escutar os eventos do combate.
+     */
     public void inscrever(Observer subscriber) {
         subscribers.add(subscriber);
     }
@@ -54,16 +58,20 @@ public class RoundManager {
         subscribers.remove(subscriber);
     }
 
+    /**
+     * Notifica todos os efeitos inscritos sobre um gatilho ocorrido no combate.
+     * @param evento Identificador do gatilho (ex: "INIMIGO VAI ATACAR").
+     */
     public void notificar(String evento) {
         List<Observer> subscribers_copia = new ArrayList<>(this.subscribers);
             for (Observer subscriber : subscribers_copia) 
                 subscriber.serNotificado(evento, this);
     }
 
-/**
- * Gerenciamento de jogo
- * @param inimigos
- */
+    /**
+     * Loop principal da campanha. Interage com o jogador para criar o herói 
+     * e itera pelas fases do jogo até o fim da rota.
+     */
     public void startGame(Inimigo inimigos[]) { 
         Scanner scanner = App.getScanner();
         App.limparTela();
@@ -97,11 +105,10 @@ public class RoundManager {
         }
     } 
 
-/**
- * Gerenciamento de nível
- * @param player
- * @param inimigos
- */
+    /**
+     * Controla o fluxo de um nível: diálogo de encontro inicial, criação e 
+     * embaralhamento das pilhas de cartas e o laço de repetição dos rounds.
+     */
     public void startLevel(Heroi player, Inimigo inimigos[]) {
         Scanner scanner = App.getScanner();
         App.limparTela();
@@ -194,11 +201,8 @@ public class RoundManager {
     }
 
     /**
-     * Reinicia os parâmetros do player e do inimigo no fim de um nível 
-     * @param player
-     * @param inimigo
-     * @param pilha_compra
-     * @param pilha_descarte
+     * Restaura os atributos base do jogador, do inimigo e do baralho, além de 
+     * limpar todas as inscrições de efeitos ao término de um combate.
      */
     public void resetLevel(Heroi player, Inimigo inimigo, Stack <Carta> pilha_compra, List <Carta> pilha_descarte) {
         if (getLevel() < 3) 
@@ -223,8 +227,7 @@ public class RoundManager {
     }
 
     /**
-     * Reseta a capa (gráfica) da luta
-     * @param inimigo
+     * Restaura a arte ASCII de batalha do inimigo correspondente ao nível atual.
      */
     public void resetCapa(Inimigo inimigo) {
         if (getLevel() == 1) {
@@ -250,11 +253,8 @@ public class RoundManager {
     }
 
     /**
-     * Gerenciamento de Round
-     * @param player
-     * @param inimigo
-     * @param pilha_descarte
-     * @param pilha_compra
+     * Executa a lógica de um round de combate: distribuição de cartas, 
+     * escolhas táticas do jogador e o processamento de ataque/efeito do inimigo.
      */
     public void startRound(Heroi player, Inimigo inimigo, List <Carta> pilha_descarte, Stack <Carta> pilha_compra) {
         Scanner scanner = App.getScanner();
@@ -325,9 +325,8 @@ public class RoundManager {
     }
 
     /**
-     * Reinicia alguns parâmetros do player e do inimigo no fim de um round
-     * @param inimigo
-     * @param player
+     * Zera os escudos temporários e restaura a energia das entidades 
+     * para o próximo turno.
      */
     public void resetRound(Inimigo inimigo, Heroi player) {
         inimigo.setEscudo(0);

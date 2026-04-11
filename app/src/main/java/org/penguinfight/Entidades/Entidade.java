@@ -10,7 +10,8 @@ import org.penguinfight.Efeitos.EfeitoCura;
 import java.util.ArrayList;
 
 /**
- * Entidades representam personagens que interagem e tomam decisões no jogo
+ * Classe base abstrata para todos os combatentes do jogo (Herói e Inimigos).
+ * Gerencia o estado vital (vida, escudo) e a lista de efeitos ativos.
  */
 public abstract class Entidade {
     private String nome;
@@ -50,8 +51,8 @@ public abstract class Entidade {
     }
 
     /**
-     * Aplica o {@code dano} na entidade
-     * @param dano
+     * Processa o recebimento de dano, mitigando o valor com base no escudo atual da entidade.
+     * @param dano O valor bruto de dano recebido.
      */
     public void receberDano(int dano) {
         int dano_efetivo = dano - this.escudo;
@@ -73,9 +74,10 @@ public abstract class Entidade {
         return this.vida > 0;
     }
 
-/**
- * Adiciona um efeito na lista de efeitos da entidade ou aumenta os acúmulos de um efeito já ativo
- */
+    /**
+     * Registra um novo efeito na entidade. Se o efeito já estiver ativo, soma os acúmulos.
+     * Também verifica se o efeito possui uma ação de ativação imediata (ex: Cura instantânea).
+     */
     public void aplicarEfeito(Efeito efeito, RoundManager manager) {
         for (Efeito efeito_ativo : this.efeitos)
             if (efeito_ativo.getNome().equals(efeito.getNome())) {

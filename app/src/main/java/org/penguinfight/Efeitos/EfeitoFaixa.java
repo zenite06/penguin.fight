@@ -3,7 +3,8 @@ import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.RoundManager;
 
 /**
- * Aumenta seu escudo em 2 pontos por acúmulo e fornece uma nova capa gráfica para o combate (exclusivo do player)
+ * Efeito progressivo exclusivo do jogador que representa o treinamento.
+ * Concede bônus de escudo e altera a cor da faixa na arte ASCII do personagem.
  */
 public class EfeitoFaixa extends Efeito {
     public static final String ANSI_RESET = "\u001B[0m"; 
@@ -19,11 +20,16 @@ public class EfeitoFaixa extends Efeito {
 
 
     public EfeitoFaixa(int acumulos) {
-        super("FAIXA", acumulos); // Default
+        super("FAIXA", acumulos);
     }
 
+    /**
+     * Atualiza a arte visual do combate colorindo a faixa do herói baseada 
+     * nos acúmulos (nível da faixa).
+     */
     public void aplicarFaixa(RoundManager manager) {
         String cor = ANSI_RESET;
+        
         switch (this.getAcumulos()) {
             case 1:
                 cor = ANSI_WHITE;
@@ -76,6 +82,7 @@ public class EfeitoFaixa extends Efeito {
         }
     }
 
+    @Override
     public void ativar(Entidade entidade, RoundManager manager) { // Não precisa...
         this.getDono().setEscudo(this.getDono().getEscudo() + (2 * this.getAcumulos()));
     } 
@@ -86,25 +93,14 @@ public class EfeitoFaixa extends Efeito {
         entidade.setEscudo(entidade.getEscudo() + (2 * this.getAcumulos()));
     }
 
+    @Override
     public void serNotificado(String evento, RoundManager manager) {
         if (evento.equals("FIM DO ROUND")) // Não precisa
             ativar(this.getDono(), manager); 
     } 
 
+    @Override
     public Efeito clonar() {
         return new EfeitoFaixa(this.getAcumulos());
     }
 }
-
-/*
-DICIONÁRIO DE FAIXAS PARA ACÚMULOS
-1 - Branca
-2 - Amarela
-3 - Laranja
-4 - Verde
-5 - Azul
-6 - Vermelha
-7 - Roxa
-8 - Marrom
-9 - Preta
-*/

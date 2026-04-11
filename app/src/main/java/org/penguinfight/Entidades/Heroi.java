@@ -1,7 +1,8 @@
 package org.penguinfight.Entidades;
 
 /**
- * A entidade que representa o jogador
+ * Entidade controlada pelo jogador. Possui um recurso de energia que é 
+ * consumido ao utilizar as cartas do baralho.
  */
 public class Heroi extends Entidade {
     private int energia;
@@ -19,6 +20,9 @@ public class Heroi extends Entidade {
         this.energia = energia;
     }
 
+    /**
+     * Deduz o custo da barra do herói após a utilização de uma carta.
+     */
     public void usarEnergia(int energia) {
         this.energia -= energia;
     }

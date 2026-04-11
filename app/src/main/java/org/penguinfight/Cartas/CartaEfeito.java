@@ -7,7 +7,8 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Aplica um efeito na batalha
+ * Carta tática que embute e aplica um status (Efeito) contínuo ou especial 
+ * aos combatentes durante a partida.
  */
 public class CartaEfeito extends Carta {
     private Efeito efeito;
@@ -21,13 +22,15 @@ public class CartaEfeito extends Carta {
         return this.efeito;
     }
 
+    @Override
     public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
         if (player.getEnergia() >= this.getCusto()) {
             Efeito efeito_copia = this.efeito.clonar();
             player.aplicarEfeito(efeito_copia, manager);
             player.usarEnergia(this.getCusto());
 
-            for (Efeito efeito : player.getEfeitos()) { // A cada aplicação é preciso trocar a faixa
+            // A cada aplicação é preciso trocar a arte gráfica da faixa
+            for (Efeito efeito : player.getEfeitos()) {
                 if (efeito.getNome().equals("FAIXA")) {
                     EfeitoFaixa faixa = (EfeitoFaixa) efeito; 
                     faixa.aplicarFaixa(manager);

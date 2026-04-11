@@ -13,6 +13,10 @@ import org.penguinfight.Entidades.Inimigo;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Classe principal responsável pela inicialização do jogo Penguin Fight.
+ * Configura o ambiente, instancia os inimigos, as cartas e gerencia o fluxo inicial.
+ */
 public class App {
     static Scanner scanner = new Scanner(System.in);
 
@@ -23,6 +27,11 @@ public class App {
     public static final String ANSI_YELLOW = "\033[1;33m";
     public static final String ANSI_PURPLE = "\033[1;35m";
     public static final String ANSI_RESET = "\u001B[0m";
+
+    /**
+     * Ponto de entrada do programa. Apresenta o menu inicial e direciona
+     * o jogador para a rota do jogo baseada em sua escolha.
+     */
     public static void main(String[] args) throws Exception {
         limparTela();
         IO.println("  ____                        _          __ _       _     _    __             __\n" + //
@@ -60,8 +69,10 @@ public class App {
         scanner.close();
     }
 
+    /**
+     * Instancia e configura todos os inimigos predefinidos para a campanha.
+     */
     public static Inimigo[] criaInimigos() {
-        // Nesse método serão instanciados todos os inimigos do jogo
         Inimigo inimigos[] = new Inimigo[maxLevel];
         inimigos[0] = new Inimigo("Gary", 50, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
@@ -119,8 +130,10 @@ public class App {
         return inimigos;
     }
 
+    /**
+     * Instancia o baralho base do jogo contendo as cartas de dano, defesa e efeitos 
+     */
     public static List <Carta> criaCartas() {
-        // Nesse método serão instanciados todas as cartas do baralho
         List<Carta> cartas = new ArrayList<>();
         cartas.add(new CartaDano("A COTOVELADA IMPROVISADA", "Carta de Ataque", 10, 2));
         cartas.add(new CartaDano("O SOCO VOADOR", "Carta de Ataque", 20, 5));
@@ -142,6 +155,9 @@ public class App {
         return cartas;
     }
 
+    /**
+     * Utilitário multiplataforma para limpar a tela do console.
+     */
     public static void limparTela() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {

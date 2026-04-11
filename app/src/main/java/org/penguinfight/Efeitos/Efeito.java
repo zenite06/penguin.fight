@@ -4,7 +4,8 @@ import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 
 /**
- * Efeitos são modificadores de parâmetros de entidades que podem ser ativados em algum momento do combate
+ * Modificadores de status atrelados às Entidades.
+ * Reagem ao ciclo de combate via padrão Observer ou aplicam efeitos imediatos.
  */
 public abstract class Efeito implements Observer {
     private String nome;
@@ -37,18 +38,28 @@ public abstract class Efeito implements Observer {
     }
 
     /**
-     * Adiciona {@code add} aos acúmulos do round
-     * @param add
+     * Manipula a contagem do efeito (use valores negativos para reduzir a duração/cargas).
      */
     public void addAcumulos(int add) {
         this.acumulos += add;
     }
 
+    @Override
     public abstract void serNotificado(String evento, RoundManager manager);
 
+    /**
+     * Executa a lógica principal do efeito em resposta a um evento do jogo (Notificação Observer).
+     */
     public abstract void ativar(Entidade entidade, RoundManager manager);
 
+    /**
+     * Método de ativação imediata que é utilizado no exato momento em que o efeito é aplicado na entidade.
+     * Pode ser sobrescrito por efeitos que têm impacto instantâneo (ex: Cura, Faixa).
+     */
     public void ativarImediato(Entidade entidade, RoundManager manager) {}; // Só se aplica às classes que possuem ativação imediata de um efeito
 
+    /**
+     * Desacopla instâncias de efeitos para que não compartilhem a mesma referência de memória.
+     */
     public abstract Efeito clonar();
 }
