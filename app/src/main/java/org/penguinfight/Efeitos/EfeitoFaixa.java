@@ -60,20 +60,20 @@ public class EfeitoFaixa extends Efeito {
                 break;
         }
 
-        if (RoundManager.getLevel() == 1) {
+        if (RoundManager.getLevel() == 0) {
             manager.getInimigo().setCapa("     .'´o)=-       -=(O¬'.\n" + //
                                 "     /.-.'            '._.\\\n" + //
                                 "    //   |\\    VS    /| V \\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
-        } else if (RoundManager.getLevel() == 2) {
+        } else if (RoundManager.getLevel() == 1) {
             manager.getInimigo().setCapa("                      _T_\n" + //
                                 "     .'´o)=-       -=(V¬'.\n" + //
                                 "     /.-.'            '.-.\\\n" + //
                                 "    //   |\\    VS    /|*V*\\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
-        } else if (RoundManager.getLevel() == 3) {
+        } else if (RoundManager.getLevel() == 2) {
             manager.getInimigo().setCapa("     .'´o)=- \n" + //
                                 "     /.-.' \n" + //
                                 "    //   |\\    VS \n" + //

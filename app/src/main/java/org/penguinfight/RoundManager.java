@@ -1,16 +1,14 @@
 package org.penguinfight;
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.tree.DefaultMutableTreeNode;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Classe central que gerencia a dinâmica de combate, o fluxo de turnos,
@@ -18,15 +16,17 @@ import java.util.Collections;
  */
 public class RoundManager {
 
-    private static int level = 1; // O nível define alguns atributos da gameplay
+    private static int level = 0; // Level define o índice do mapa (usado para acessar o inimigo no vetor de inimigos)
     private Heroi player;
     private Inimigo inimigo;
     private List<Observer> subscribers; // Efeitos serão os subscribers desse publisher!
     private Rota rota; // Rota (define o final do jogo)
+    private Mapa mapa;
 
-    public RoundManager(Rota rota) {
+    public RoundManager(Rota rota, Mapa mapa) {
         this.subscribers = new ArrayList<>();
         this.rota = rota;
+        this.mapa = mapa;
     }
 
     public void setPlayer(Heroi player) {
@@ -45,6 +45,8 @@ public class RoundManager {
         return this.inimigo;
     }
 
+/**
+
     /* Métodos de Publisher */
 
     /**
@@ -60,7 +62,9 @@ public class RoundManager {
 
     /**
      * Notifica todos os efeitos inscritos sobre um gatilho ocorrido no combate.
-     * @param evento Identificador do gatilho (ex: "INIMIGO VAI ATACAR").
+     * @param evento Identificador
+/**
+ * do gatilho (ex: "INIMIGO VAI ATACAR").
      */
     public void notificar(String evento) {
         List<Observer> subscribers_copia = new ArrayList<>(this.subscribers);
@@ -91,18 +95,35 @@ public class RoundManager {
                                                         "                                       _\\_):,_\n");
         IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
+
+        DefaultMutableTreeNode fase = mapa.root;
+        startLevel(player, inimigos);
         
-        while (level <= App.getmaxLevel()) {
-            if (level == 4) { // Os próximos níveis serão implementados futuramente
-                App.limparTela();
-                rota.gameOver(player);
-                break;
-            } 
-            else if (level < 4)
-                startLevel(player, inimigos);
-            else if (level == App.getmaxLevel())
-                break;
+        for (int i = 0; i < mapa.root.getDepth(); i++) {
+            App.limparTela();
+            IO.println("O destino é você quem faz. Qual caminho deseja seguir?\n");
+
+            int ans = -1;
+            while (ans < 0 || ans >= fase.getChildCount()) {
+                for (int j = 0; j < fase.getChildCount(); j++) {
+                    DefaultMutableTreeNode filho = (DefaultMutableTreeNode) fase.getChildAt(j);
+                    IO.println((j + 1) + " - " + mapa.lugares.get(filho.getUserObject()));
+                }
+
+                IO.println("\n");
+                ans = scanner.nextInt();
+                if (ans >= fase.getChildCount()) 
+
+                    IO.println("Opção inválida! Escolha um dos caminhos a seguir\n");
+            }
+
+            fase = (DefaultMutableTreeNode)fase.getChildAt(ans); // Atualiza a fase no mapa
+            level = ans; // level agora é o índice do vetor de inimigos para o inimigo atual
+            startLevel(player, inimigos);
         }
+
+        App.limparTela();
+        rota.gameOver(player);
     } 
 
     /**
@@ -113,10 +134,10 @@ public class RoundManager {
         Scanner scanner = App.getScanner();
         App.limparTela();
         IO.println();
-        Inimigo inimigo = inimigos[level - 1];
+        Inimigo inimigo = inimigos[level];
         setInimigo(inimigo);
 
-        IO.println("Nível " + level + "\n");
+        IO.println("Nível " + level + "\n"); // MUDAR ISSO PARA O LOCAL DO MAPA!!!!!!
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC() + "\n");
         IO.println("Deseja confrontá-lo?\n");
@@ -230,20 +251,20 @@ public class RoundManager {
      * Restaura a arte ASCII de batalha do inimigo correspondente ao nível atual.
      */
     public void resetCapa(Inimigo inimigo) {
-        if (getLevel() == 1) {
+        if (getLevel() == 0) {
             inimigo.setCapa("     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
                         "  _,:(_/_            _\\ _):,_\n");
-        } else if (getLevel() == 2) {
+        } else if (getLevel() == 1) {
             inimigo.setCapa("                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
                         "     /.-.'           '.-.\\\n" + //
                         "    //  |\\    VS    /|*V*\\\\\n" + //
                         "    ||  |'          '|*_*_||\n" + //
                         "  _,:(_/_            _\\ _):,_");
-        } else if (getLevel() == 3) {
+        } else if (getLevel() == 2) {
             inimigo.setCapa("     .'´o)=- \n" + //
                         "     /.-.' \n" + //
                         "    //  |\\    VS \n" + //

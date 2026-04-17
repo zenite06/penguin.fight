@@ -48,6 +48,7 @@ public class App {
         int answer = scanner.nextInt();
         scanner.nextLine();
 
+        Mapa mapa = new Mapa();
         Rota rota = new Rota(); // Rota (define o final do jogo)
         if (answer != 1) {
             limparTela();
@@ -64,7 +65,7 @@ public class App {
             rota.addEscolha(1);
 
         Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        manager = new RoundManager(rota);
+        manager = new RoundManager(rota, mapa);
         manager.startGame(inimigos);
         scanner.close();
     }
