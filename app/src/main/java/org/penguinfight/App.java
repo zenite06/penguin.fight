@@ -12,6 +12,10 @@ import org.penguinfight.Efeitos.EfeitoPeixe;
 import org.penguinfight.Entidades.Inimigo;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 /**
  * Classe principal responsável pela inicialização do jogo Penguin Fight.
@@ -75,7 +79,9 @@ public class App {
      */
     public static Inimigo[] criaInimigos() {
         Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Gary", 50, "     .'´o)=-      -=(O¬'.\n" + //
+        inimigos[0] = new Inimigo("Puffle", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5)));
+
+        inimigos[4] = new Inimigo("Gary", 50, "     .'´o)=-      -=(O¬'.\n" + //
                         "     /.-.'           '._.\\\n" + //
                         "    //  |\\    VS    /| V \\\\\n" + //
                         "    ||  |'          '|   ||\n" + //
@@ -93,7 +99,7 @@ public class App {
                                                                                                 "    ||  |'          '|   ||\n" + //
                                                                                                 "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))); 
         
-        inimigos[1] = new Inimigo("Rookie", 60, "                     _T_\n" + //
+        inimigos[5] = new Inimigo("Rookie", 60, "                     _T_\n" + //
                         "     .'´o)=-      -=(V¬'.\n" + //
                         "     /.-.'           '.-.\\\n" + //
                         "    //  |\\    VS    /|*V*\\\\\n" + //
@@ -113,7 +119,7 @@ public class App {
                                                                                                                         "    ||  |'          '|*_*_||\n" + //
                                                                                                                         "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 14), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEscudo("O BLOQUEIO DANÇANTE", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))); 
         
-        inimigos[2] = new Inimigo("Klutzy", 70, "     .'´o)=- \n" + //
+        inimigos[9] = new Inimigo("Klutzy", 70, "     .'´o)=- \n" + //
                         "     /.-.' \n" + //
                         "    //  |\\    VS \n" + //
                         "    ||  |'         (V) O O (V)\n" + //
@@ -181,5 +187,16 @@ public class App {
 
     public static RoundManager getManager() {
         return manager;
+    }
+
+    public static String lerTXT(String s_path) {
+        Path path = Path.of(s_path);
+        try {
+            String content = Files.readString(path);
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

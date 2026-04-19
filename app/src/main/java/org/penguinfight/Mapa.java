@@ -33,15 +33,15 @@ public class Mapa {
         l32.add(l42);
         l33.add(l43);
 
-        this.lugares.put(0, "Iglu");
-        this.lugares.put(1, "Centro");
-        this.lugares.put(2, "Plaza");
-        this.lugares.put(3, "Praia");
-        this.lugares.put(4, "Estação de Esqui");
-        this.lugares.put(5, "Forte Nevado");
-        this.lugares.put(6, "Casinha da Mina");
-        this.lugares.put(7, "Montanha");
-        this.lugares.put(8, "Pátio do Dojo");
-        this.lugares.put(9, "Iceberg");
+        this.lugares.put(0, "Iglu"); // Puffle
+        this.lugares.put(1, "Centro"); // Guitarrista
+        this.lugares.put(2, "Plaza"); // Pizzaiolo
+        this.lugares.put(3, "Praia"); // Surfista
+        this.lugares.put(4, "Estação de Esqui"); // Gary
+        this.lugares.put(5, "Forte Nevado"); // Rookie
+        this.lugares.put(6, "Casinha da Mina"); // Operário
+        this.lugares.put(7, "Montanha"); // Herbert
+        this.lugares.put(8, "Pátio do Dojo"); // Sensei
+        this.lugares.put(9, "Iceberg"); // Klutzy
     }
 }

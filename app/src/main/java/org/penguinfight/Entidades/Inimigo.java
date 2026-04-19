@@ -1,5 +1,4 @@
 package org.penguinfight.Entidades;
-
 import org.penguinfight.App;
 import org.penguinfight.RoundManager;
 import org.penguinfight.Cartas.CartaDano;
