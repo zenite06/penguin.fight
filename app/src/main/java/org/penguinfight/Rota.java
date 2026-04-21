@@ -1,10 +1,8 @@
 package org.penguinfight;
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
 import org.penguinfight.Entidades.Heroi;
 
 /**
@@ -172,7 +170,7 @@ public class Rota {
                 }
             }
 
-            IO.println("Deseja reencontrar seus inimigos?\n");
+            IO.println("Deseja encontrar o causador de tudo isso?\n");
             IO.println("1 - Sim (chance de fazer a coisa certa)");
             IO.println("2 - Não...\n");
             int ans = scanner.nextInt();
@@ -217,15 +215,10 @@ public class Rota {
     public void lutaFinal(Heroi player) {
 
         App.limparTela();
-        IO.println("Nível Final\n");
-        IO.println(player.getNome() + " acaba de encontrar *TODOS* os inimigos!\n");
-        IO.println("                                 _T_\n" + //
-                   "  !  .'´o)=-       -=(O¬'.    -=(V¬'.\n" + //
-                   "     /.-.'            '._.\\      '.-.\\\n" + //
-                   "    //  |\\    VS     /| V \\\\    /|*V*\\\\\n" + //
-                   "    ||  |'           '|   ||    '|*_*_||  (V) O O (V)\n" + //
-                   "  _,:(_/_             _\\ _):,_   _\\ _):,_   `(, ,)´\n\n"); // Capa da luta final
-        IO.println("Deseja confrontá-los?\n");
+        IO.println(player.getNome() + " chegou à sede da empresa misteriosa\n");
+        IO.println(player.getNome() + " acaba de encontrar Mickey Mouse!\n");
+        IO.println(App.lerTXT("src/main/resources/Assets/superboss.txt")); // Capa da luta final
+        IO.println("Deseja escutá-lo?\n");
         IO.println("1 - Sim!");
         IO.println("2 - Não...\n");
         int ans = scanner.nextInt();

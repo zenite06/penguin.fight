@@ -73,7 +73,7 @@ public class RoundManager {
         IO.println();
         IO.println("Como devemos te chamar?\n");
         String name = scanner.nextLine();
-        Heroi player = new Heroi(name);
+        Heroi player = new Heroi(name, 40);
         setPlayer(player);
 
         List <Carta> pilhaDescarte = App.getCartas();

@@ -47,7 +47,12 @@ public abstract class Entidade {
     }
 
     public void setVida(int vida) {
-        this.vida = vida;
+        if (vida < 0)
+            this.vida = 0;
+        else if (vida > maxVida)
+            this.vida = maxVida;
+        else
+            this.vida = vida;
     }
 
     public void setEscudo(int escudo) {
@@ -61,7 +66,7 @@ public abstract class Entidade {
     public void receberDano(int dano) {
         int dano_efetivo = dano - this.escudo;
         if (dano_efetivo > 0) 
-            this.vida -= dano_efetivo;
+            setVida(this.vida - dano_efetivo);
         else
             dano_efetivo = 0;
         if (this.escudo > 0)

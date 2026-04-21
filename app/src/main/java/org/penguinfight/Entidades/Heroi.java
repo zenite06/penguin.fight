@@ -7,8 +7,8 @@ package org.penguinfight.Entidades;
 public class Heroi extends Entidade {
     private int energia;
 
-    public Heroi(String nome) {
-        super(nome, 40, 0);
+    public Heroi(String nome, int vida) {
+        super(nome, vida, 0);
         this.energia = 100;
     }
 
