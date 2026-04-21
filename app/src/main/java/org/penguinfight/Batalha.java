@@ -8,6 +8,11 @@ import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
+/**
+ * Gerencia o motor de combate por turnos do jogo Penguin Fight.
+ * Esta classe controla a interação entre o herói e o inimigo, o gerenciamento
+ * do baralho (compra e descarte) e a progressão dos rounds.
+ */
 public class Batalha {
     private Heroi player;
     private Inimigo inimigo;
@@ -30,6 +35,13 @@ public class Batalha {
         this.player = player;
     }
 
+    /**
+     * Inicia a sequência de combate. Apresenta o inimigo, solicita confirmação do 
+     * jogador e mantém o loop de rounds enquanto ambos estiverem vivos.
+     * * @param pilhaDescarte Lista de cartas já utilizadas.
+     * @param pilhaCompra Pilha de cartas disponíveis para compra.
+     * @return {@code true} se o jogador vencer a batalha, {@code false} se perder.
+     */
     public boolean startBattle(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
         App.limparTela();
         IO.println();
@@ -82,6 +94,16 @@ public class Batalha {
         }
     }
 
+    /**
+     * Gerencia um round individual. Inclui a compra de cartas para a mão (nadadeira), 
+     * a decisão de ataque/defesa/efeito do inimigo () e o processamento das cartas jogadas pelo usuário.
+     * <p>
+     * Se a pilha de compra esvaziar, este método embaralha a pilha de descarte 
+     * e a repõe no topo da compra.
+     * </p>
+     * * @param pilhaDescarte Lista para onde as cartas usadas/descartadas são enviadas.
+     * @param pilhaCompra Pilha de onde o jogador retira novas cartas.
+     */
     public void startRound(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
         List<Carta> nadadeira = new ArrayList<>();
         
