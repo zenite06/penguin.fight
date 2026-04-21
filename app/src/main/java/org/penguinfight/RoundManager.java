@@ -80,26 +80,17 @@ public class RoundManager {
         Stack <Carta> pilhaCompra = new Stack<>();
         Collections.shuffle(pilhaDescarte);
         while (!pilhaDescarte.isEmpty())
-            pilhaCompra.push(pilhaDescarte.remove(0)); // A criacao dos baralhos tem que ser no comeco de tudo
+            pilhaCompra.push(pilhaDescarte.remove(0));
 
         App.limparTela();
         IO.println();
-        IO.println("    Boa sorte, " + App.ANSI_YELLOW + player.getNome() + App.ANSI_RESET + "!\n" + //
-                                                        "                                    -=(o`'. _¬\r\n" + //
-                                                        "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
-                                                        "    as cartas ao seu favor            /|  \\\\ \r\n" + //
-                                                        "                                      '|  || \r\n" + //
-                                                        "                                       _\\_):,_\n");
+        IO.println("    Boa sorte, " + App.ANSI_YELLOW + player.getNome() + App.ANSI_RESET + App.lerTXT("src/main/resources/Assets/boasorte.txt"));
         IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
 
-        DefaultMutableTreeNode battle = App.getMapa(); // Batalha atual do player
-        Batalha actualBattle = (Batalha) battle.getUserObject();
-        actualBattle.setPlayer(player);
-        setBattle(actualBattle);
-        actualBattle.startBattle(pilhaDescarte, pilhaCompra); // Primeira batalha
+        DefaultMutableTreeNode battle = App.getMapa(); 
         
-        for (int i = 0; i < App.getMapa().getDepth(); i++) {
+        while (true) {
             App.limparTela();
             IO.println("O destino é você quem faz. Qual caminho deseja seguir?\n");
 
@@ -108,7 +99,7 @@ public class RoundManager {
                 for (int j = 0; j < battle.getChildCount(); j++) {
                     DefaultMutableTreeNode filho = (DefaultMutableTreeNode) battle.getChildAt(j);
                     Batalha batalha = (Batalha) filho.getUserObject();
-                    IO.println((j + 1) + " - " + batalha.getLocal());
+                    IO.println((j) + " - " + batalha.getLocal());
                 }
 
                 IO.println("\n");
@@ -119,14 +110,43 @@ public class RoundManager {
             }
 
             battle = (DefaultMutableTreeNode)battle.getChildAt(ans); // Atualiza a fase no mapa
-            actualBattle = (Batalha) battle.getUserObject();
+            Batalha actualBattle = (Batalha) battle.getUserObject();
             actualBattle.setPlayer(player);
             setBattle(actualBattle);
-            actualBattle.startBattle(pilhaDescarte, pilhaCompra);
+            if (actualBattle.startBattle(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
+                if (!battle.isLeaf()) {
+                    IO.println("Deseja continuar nessa aventura?\n");
+                    IO.println("1 - Sim!");
+                    IO.println("2 - Não...\n");
+                    ans = scanner.nextInt();
+                    if (ans == 2) {
+                        App.limparTela();
+                        IO.println();
+                        IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
+                        return;
+                    }
+                }
+                else {
+                    App.limparTela();
+                    App.getRota().gameOver(player);
+                    return;
+                }
+            }
+            else { // O player perdeu a batalha
+                IO.println("Deseja tentar de novo?\n");
+                IO.println("1 - Sim!");
+                IO.println("2 - Não...\n");
+                ans = scanner.nextInt();
+                if (ans == 2) {               
+                    App.limparTela();
+                    IO.println();
+                    IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
+                    return;
+                } 
+                player.setVida(player.getMaxVida());
+                battle = (DefaultMutableTreeNode) App.getMapa().getRoot();
+            }
         }
-
-        App.limparTela();
-        App.getRota().gameOver(player);
     } 
 
     /**

@@ -46,12 +46,8 @@ public class Batalha {
         if (ans == 2) {
             App.limparTela();
             IO.println();
-            IO.println("   ! .'´o)=- \n" + //
-                                "     /.-.'   Ainda pensando em desistir?!\n" + //
-                                "    //  |\\   Siga em frente!\n" + //
-                                "    ||  |'  \n" + //
-                                "  _,:(_/_   \n"); 
-            IO.println("Digite qualquer coisa para continuar\n");
+            IO.println(App.lerTXT("src/main/resources/Assets/desistir2.txt")); 
+            IO.println("\nDigite qualquer coisa para continuar\n");
             String rand = App.scanner.nextLine();
             App.getRota().addEscolha(0);
         } else
@@ -142,8 +138,12 @@ public class Batalha {
             App.limparTela();
             nadadeira.get(ans).usar(player, inimigo); 
             pilhaDescarte.add(nadadeira.remove(ans)); 
-            if (!inimigo.estaVivo())
+            if (!inimigo.estaVivo()) {
+                while (!nadadeira.isEmpty())
+                    pilhaDescarte.add(nadadeira.remove(0)); 
+                resetRound();
                 break;
+            }
         }
     }
 
