@@ -1,5 +1,6 @@
 package org.penguinfight;
 import java.util.Scanner;
+import javax.swing.tree.DefaultMutableTreeNode;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
@@ -12,6 +13,8 @@ import org.penguinfight.Efeitos.EfeitoPeixe;
 import org.penguinfight.Entidades.Inimigo;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,15 +25,16 @@ import java.io.IOException;
  * Configura o ambiente, instancia os inimigos, as cartas e gerencia o fluxo inicial.
  */
 public class App {
-    static Scanner scanner = new Scanner(System.in);
-
-    public static RoundManager manager;
-    public static final int maxLevel = 10; // Quantos níveis (e inimigos) o jogo terá
     public static final String ANSI_RED = "\u001B[1;31m";
     public static final String ANSI_GREEN = "\u001B[1;32m";
     public static final String ANSI_YELLOW = "\033[1;33m";
     public static final String ANSI_PURPLE = "\033[1;35m";
     public static final String ANSI_RESET = "\u001B[0m";
+    public static Scanner scanner = new Scanner(System.in);
+    public static RoundManager manager = new RoundManager(); // Gerenciador de batalhas
+    private static DefaultMutableTreeNode mapa; // Mapa de batalhas e inimigos
+    private static List<Carta> cartas; // Lista com todas as cartas do jogo
+    private static Rota rota = new Rota(); // Rota do jogador
 
     /**
      * Ponto de entrada do programa. Apresenta o menu inicial e direciona
@@ -52,8 +56,6 @@ public class App {
         int answer = scanner.nextInt();
         scanner.nextLine();
 
-        Mapa mapa = new Mapa();
-        Rota rota = new Rota(); // Rota (define o final do jogo)
         if (answer != 1) {
             limparTela();
             IO.println();
@@ -68,73 +70,40 @@ public class App {
         } else  
             rota.addEscolha(1);
 
-        Inimigo inimigos[] = criaInimigos(); // Deverão ser passados às funções subsequentes!
-        manager = new RoundManager(rota, mapa);
-        manager.startGame(inimigos);
+        setGame();
+        manager.startGame();
         scanner.close();
     }
 
     /**
-     * Instancia e configura todos os inimigos predefinidos para a campanha.
+     * Instancia e configura todos os elementos do jogo (mapa, lugares, inimigos, cartas)
      */
-    public static Inimigo[] criaInimigos() {
-        Inimigo inimigos[] = new Inimigo[maxLevel];
-        inimigos[0] = new Inimigo("Puffle", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5)));
+    public static void setGame() {
+        mapa = new DefaultMutableTreeNode(new Batalha(new Inimigo("Puffle", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iglu")); // Primeira batalha (início do jogo)
 
-        inimigos[4] = new Inimigo("Gary", 50, "     .'´o)=-      -=(O¬'.\n" + //
-                        "     /.-.'           '._.\\\n" + //
-                        "    //  |\\    VS    /| V \\\\\n" + //
-                        "    ||  |'          '|   ||\n" + //
-                        "  _,:(_/_            _\\ _):,_\n", "    Consegui! \n" + //
-                                                            "       V\n" + //
-                                                            "     .'´o)=-      -=(X¬'.\n" + //
-                                                            "     /.-.'           '._.\\\n" + //
-                                                            "    //  |\\    VS    /| V \\\\\n" + //
-                                                            "    ||  |'          '|   ||\n" + //
-                                                            "  _,:(_/_            _\\ _):,_\n", "            Mais sorte na próxima!\n" + //
-                                                                                                "                      V\n" + //
-                                                                                                "     .'´X)=-      -=(O¬'. \n" + //
-                                                                                                "     /.-.'           '._.\\ \n" + //
-                                                                                                "    //  |\\    VS    /| V \\\\\n" + //
-                                                                                                "    ||  |'          '|   ||\n" + //
-                                                                                                "  _,:(_/_            _\\ _):,_", new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))); 
-        
-        inimigos[5] = new Inimigo("Rookie", 60, "                     _T_\n" + //
-                        "     .'´o)=-      -=(V¬'.\n" + //
-                        "     /.-.'           '.-.\\\n" + //
-                        "    //  |\\    VS    /|*V*\\\\\n" + //
-                        "    ||  |'          '|*_*_||\n" + //
-                        "  _,:(_/_            _\\ _):,_", "    Consegui!\n" + //
-                                                        "        V            _T_\n" + //
-                                                        "     .'´o)=-      -=(X¬'.\n" + //
-                                                        "     /.-.'           '.-.\\\n" + //
-                                                        "    //  |\\    VS    /|*V*\\\\\n" + //
-                                                        "    ||  |'          '|*_*_||\n" + //
-                                                        "  _,:(_/_            _\\ _):,_", "            Mais sorte na próxima!   \n" + //
-                                                                                                                        "                      V\n" + //
-                                                                                                                        "                     _T_\n" + //
-                                                                                                                        "     .'´X)=-      -=(V¬'.\n" + //
-                                                                                                                        "     /.-.'           '.-.\\\n" + //
-                                                                                                                        "    //  |\\    VS    /|*V*\\\\\n" + //
-                                                                                                                        "    ||  |'          '|*_*_||\n" + //
-                                                                                                                        "  _,:(_/_            _\\ _):,_", new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 14), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEscudo("O BLOQUEIO DANÇANTE", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))); 
-        
-        inimigos[9] = new Inimigo("Klutzy", 70, "     .'´o)=- \n" + //
-                        "     /.-.' \n" + //
-                        "    //  |\\    VS \n" + //
-                        "    ||  |'         (V) O O (V)\n" + //
-                        "  _,:(_/_            `(, ,)´", "   Consegui!\n" + //
-                                                        "       V\n" + //
-                                                        "     .'´o)=- \n" + //
-                                                        "     /.-.' \n" + //
-                                                        "    //  |\\    VS \n" + //
-                                                        "    ||  |'         (V) X X (V)\n" + //
-                                                        "  _,:(_/_            `(, ,)´", "     .'´X)=- \n" + //
-                                                                                                                        "     /.-.'    Mais sorte na próxima!\n" + //
-                                                                                                                        "    //  |\\    VS        V\n" + //
-                                                                                                                        "    ||  |'         (V) O O (V)\n" + //
-                                                                                                                        "  _,:(_/_            `(, ,)´", new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 14), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 6), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))); 
-        return inimigos;
+        DefaultMutableTreeNode l21 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Guitarrista", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo1_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo1_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo1_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Centro"));
+        DefaultMutableTreeNode l22 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Pizzaiolo", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo2_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo2_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo2_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Plaza"));
+        DefaultMutableTreeNode l23 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Surfista", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo3_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo3_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo3_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Praia"));
+        DefaultMutableTreeNode l31 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Gary", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo4_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo4_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo4_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Estação de Esqui"));
+        DefaultMutableTreeNode l32 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Rookie", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo5_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo5_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo5_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Forte Nevado"));
+        DefaultMutableTreeNode l33 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Operário", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo6_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo6_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo6_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Casinha da Mina"));
+        DefaultMutableTreeNode l41 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Herbert", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo7_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo7_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo7_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Montanha"));
+        DefaultMutableTreeNode l42 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Sensei", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo8_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo8_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo8_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Pátio do Dojo"));
+        DefaultMutableTreeNode l43 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo9_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo9_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo9_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iceberg"));
+
+        mapa.add(l21);
+        mapa.add(l22);
+        mapa.add(l23);
+        l21.add(l31);
+        l21.add(l32);
+        l22.add(l32);
+        l22.add(l33);
+        l23.add(l33);
+        l31.add(l41);
+        l32.add(l42);
+        l33.add(l43);
+
+        cartas = criaCartas();
     }
 
     /**
@@ -181,22 +150,32 @@ public class App {
         return scanner;
     }
 
-    public static int getmaxLevel() {
-        return maxLevel;
-    }
-
     public static RoundManager getManager() {
         return manager;
+    }
+
+    public static DefaultMutableTreeNode getMapa() {
+        return mapa;
+    }
+
+    public static Rota getRota() {
+        return rota;
+    }
+
+    public static List<Carta> getCartas() {
+        return cartas;
     }
 
     public static String lerTXT(String s_path) {
         Path path = Path.of(s_path);
         try {
-            String content = Files.readString(path);
-            return content;
+            return Files.readString(path, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
-            return "";
+            try {
+                return Files.readString(path, Charset.forName("ISO-8859-1"));
+            } catch (IOException e2) {
+                return "Erro crítico: " + e2.getMessage();
+            }
         }
     }
 }

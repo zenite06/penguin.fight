@@ -1,6 +1,5 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.Observer;
-import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 
 /**
@@ -45,18 +44,18 @@ public abstract class Efeito implements Observer {
     }
 
     @Override
-    public abstract void serNotificado(String evento, RoundManager manager);
+    public abstract void serNotificado(String evento);
 
     /**
      * Executa a lógica principal do efeito em resposta a um evento do jogo (Notificação Observer).
      */
-    public abstract void ativar(Entidade entidade, RoundManager manager);
+    public abstract void ativar(Entidade entidade);
 
     /**
      * Método de ativação imediata que é utilizado no exato momento em que o efeito é aplicado na entidade.
      * Pode ser sobrescrito por efeitos que têm impacto instantâneo (ex: Cura, Faixa).
      */
-    public void ativarImediato(Entidade entidade, RoundManager manager) {}; // Só se aplica às classes que possuem ativação imediata de um efeito
+    public void ativarImediato(Entidade entidade) {}; // Só se aplica às classes que possuem ativação imediata de um efeito
 
     /**
      * Desacopla instâncias de efeitos para que não compartilhem a mesma referência de memória.

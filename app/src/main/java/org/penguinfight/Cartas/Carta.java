@@ -1,5 +1,4 @@
 package org.penguinfight.Cartas;
-import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
@@ -46,5 +45,5 @@ public abstract class Carta {
     /**
      * Executa a mecânica principal da carta caso o herói possua energia suficiente.
      */
-    public abstract void usar(Heroi heroi, Inimigo inimigo, RoundManager manager);
+    public abstract void usar(Heroi heroi, Inimigo inimigo);
 }

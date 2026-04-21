@@ -1,5 +1,5 @@
 package org.penguinfight.Efeitos;
-import org.penguinfight.RoundManager;
+import org.penguinfight.App;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
 
@@ -20,22 +20,22 @@ public class EfeitoAcido extends Efeito {
      * Remove automaticamente o efeito da entidade caso as cargas cheguem a zero.
      */
     @Override
-    public void ativar(Entidade entidade, RoundManager manager) {
-        Inimigo inimigo = manager.getInimigo();
+    public void ativar(Entidade entidade) {
+        Inimigo inimigo = App.manager.getBattle().getInimigo();
         IO.println(inimigo.getNome() + " jogou ácido em " + entidade.getNome() + "!\n");
-        manager.getPlayer().receberDano(this.dano);
+        App.manager.getPlayer().receberDano(this.dano);
         this.addAcumulos(-1);
 
         if (this.getAcumulos() == 0) { // O efeito acabou!
             inimigo.removerEfeito(this);
-            manager.desinscrever(this);
+            App.manager.desinscrever(this);
         }
     }
 
     @Override
-    public void serNotificado(String evento, RoundManager manager) {
+    public void serNotificado(String evento) {
         if (evento.equals("INIMIGO ATACOU"))
-            ativar(manager.getPlayer(), manager);
+            ativar(App.manager.getPlayer());
     }
 
     @Override

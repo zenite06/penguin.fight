@@ -1,6 +1,5 @@
 package org.penguinfight.Entidades;
 import org.penguinfight.App;
-import org.penguinfight.RoundManager;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Cartas.CartaEscudo;
@@ -107,10 +106,10 @@ public class Inimigo extends Entidade {
     /**
      * Aplica o efeito sorteado pelo inimigo durante a fase de decisão.
      */
-    public void usarEfeito(RoundManager manager) {
+    public void usarEfeito() {
         if (decisao[2] == 0) {
             Efeito efeito_copia = this.efeitos[0].getEfeito().clonar();
-            this.aplicarEfeito(efeito_copia, manager);
+            this.aplicarEfeito(efeito_copia);
         }
     }
 

@@ -1,6 +1,5 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
-import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
 
@@ -16,15 +15,15 @@ public class EfeitoNevasca extends Efeito {
      * Aplica a penalidade cortando o dano do ataque planejado pela metade.
      */
     @Override
-    public void ativar(Entidade entidade, RoundManager manager) {
-        Inimigo inimigo = manager.getInimigo();
+    public void ativar(Entidade entidade) {
+        Inimigo inimigo = App.manager.getBattle().getInimigo();
         IO.println("Uma grande nevasca atrapalhou o ataque de " + entidade.getNome() + "...");
         inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 0.5));
         this.addAcumulos(-1);
     }
 
     @Override
-    public void ativarImediato(Entidade entidade, RoundManager manager) {
+    public void ativarImediato(Entidade entidade) {
         IO.println(this.getDono().getNome() + " invocou uma " + App.ANSI_PURPLE + this.getNome() + App.ANSI_RESET + "!");
     }
 
@@ -32,20 +31,20 @@ public class EfeitoNevasca extends Efeito {
      * Restaura o dano original do ataque do inimigo após a resolução do turno
      * e verifica se a nevasca deve ser dissipada.
      */
-    public void resetar(Inimigo inimigo, RoundManager manager) {
+    public void resetar(Inimigo inimigo) {
         inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 2));
         if (this.getAcumulos() == 0) { // O efeito acabou!
             this.getDono().removerEfeito(this);
-            manager.desinscrever(this);
+            App.manager.desinscrever(this);
         }
     }
 
     @Override
-    public void serNotificado(String evento, RoundManager manager) {
+    public void serNotificado(String evento) {
         if (evento.equals("INIMIGO VAI ATACAR"))
-            ativar(manager.getInimigo(), manager);
+            ativar(App.manager.getBattle().getInimigo());
         else if (evento.equals("INIMIGO ATACOU"))
-            resetar(manager.getInimigo(), manager);
+            resetar(App.manager.getBattle().getInimigo());
     }
 
     @Override
