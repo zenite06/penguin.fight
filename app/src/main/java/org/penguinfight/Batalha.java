@@ -46,11 +46,7 @@ public class Batalha {
         if (ans == 2) {
             App.limparTela();
             IO.println();
-            IO.println("   ! .'´o)=- \n" + //
-                                "     /.-.'   Ainda pensando em desistir?!\n" + //
-                                "    //  |\\   Siga em frente!\n" + //
-                                "    ||  |'  \n" + //
-                                "  _,:(_/_   \n"); 
+            IO.println(App.lerTXT("src/main/resources/Assets/desistir2.txt")); 
             IO.println("Digite qualquer coisa para continuar\n");
             String rand = App.scanner.nextLine();
             App.getRota().addEscolha(0);

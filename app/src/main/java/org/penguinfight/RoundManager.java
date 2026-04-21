@@ -84,12 +84,7 @@ public class RoundManager {
 
         App.limparTela();
         IO.println();
-        IO.println("    Boa sorte, " + App.ANSI_YELLOW + player.getNome() + App.ANSI_RESET + "!\n" + //
-                                                        "                                    -=(o`'. _¬\r\n" + //
-                                                        "    Lembre-se: para vencer, use       '.-.\\// \r\n" + //
-                                                        "    as cartas ao seu favor            /|  \\\\ \r\n" + //
-                                                        "                                      '|  || \r\n" + //
-                                                        "                                       _\\_):,_\n");
+        IO.println("    Boa sorte, " + App.ANSI_YELLOW + player.getNome() + App.ANSI_RESET + App.lerTXT("src/main/resources/Assets/boasorte.txt"));
         IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
 
@@ -126,13 +121,10 @@ public class RoundManager {
                 if (ans == 2) {
                     App.limparTela();
                     IO.println();
-                    IO.println(App.ANSI_YELLOW + "¨_ .'´o)=-\n" + //
-                                        " \\\\/.-.'\n" + //
-                                        "  //  |\\     Agradecemos por jogar!\n" + //
-                                        "  ||  |' \n" + //
-                                        "_,:(_/_ \n" + App.ANSI_RESET);
+                    IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
                 return;
                 }
+                player.setEnergia(100); // Reinicia a energia do player para a próxima batalha
             }
             else { // O player perdeu a batalha
                 IO.println("Deseja tentar de novo?\n");
@@ -142,11 +134,7 @@ public class RoundManager {
                 if (ans == 2) {               
                     App.limparTela();
                     IO.println();
-                    IO.println(App.ANSI_YELLOW + "¨_ .'´o)=-\n" + //
-                                        " \\\\/.-.'\n" + //
-                                        "  //  |\\     Agradecemos por jogar!\n" + //
-                                        "  ||  |' \n" + //
-                                        "_,:(_/_ \n" + App.ANSI_RESET);
+                    IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
                     return;
                 } 
                 player.setVida(player.getMaxVida());
