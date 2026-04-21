@@ -60,20 +60,65 @@ public class EfeitoFaixa extends Efeito {
                 break;
         }
 
-        if (App.manager.getBattle().getLocal() == "") {
-            App.manager.getBattle().getInimigo().setCapa("     .'´o)=-       -=(O¬'.\n" + //
-                                "     /.-.'            '._.\\\n" + //
-                                "    //   |\\    VS    /| V \\\\\n" + //
-                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\n" + //
-                                "  _,:(_ /_            _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal() == "") {
+        if (App.manager.getBattle().getLocal().equals("Iglu")) {
+            App.manager.getBattle().getInimigo().setCapa("");
+        } else if (App.manager.getBattle().getLocal().equals("Centro")) {
             App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
                                 "     .'´o)=-       -=(V¬'.\n" + //
                                 "     /.-.'            '.-.\\\n" + //
                                 "    //   |\\    VS    /|*V*\\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal() == "") {
+        } else if (App.manager.getBattle().getLocal().equals("Plaza")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Praia")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Estação de Esqui")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Forte Nevado")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Casinha da Mina")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Montanha")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Pátio do Dojo")) {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+                                "     .'´o)=-       -=(V¬'.\n" + //
+                                "     /.-.'            '.-.\\\n" + //
+                                "    //   |\\    VS    /|*V*\\\\\n" + //
+                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
+                                "  _,:(_ /_            _\\ _):,_");
+        } else if (App.manager.getBattle().getLocal().equals("Iceberg")) {
             App.manager.getBattle().getInimigo().setCapa("     .'´o)=- \n" + //
                                 "     /.-.' \n" + //
                                 "    //   |\\    VS \n" + //
