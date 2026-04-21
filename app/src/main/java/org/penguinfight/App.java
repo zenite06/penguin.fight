@@ -79,8 +79,9 @@ public class App {
      * Instancia e configura todos os elementos do jogo (mapa, lugares, inimigos, cartas)
      */
     public static void setGame() {
-        mapa = new DefaultMutableTreeNode(new Batalha(new Inimigo("Puffle", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo0_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iglu")); // Primeira batalha (início do jogo)
-
+        mapa = new DefaultMutableTreeNode();
+        
+        DefaultMutableTreeNode l11 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Puffle", 20, lerTXT("src/main/java/org/penguinfight/Assets/inimigo0_capa.txt"), lerTXT("src/main/java/org/penguinfight/Assets/inimigo0_capa_v.txt"), lerTXT("src/main/java/org/penguinfight/Assets/inimigo0_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iglu")); // Primeira batalha (início do jogo)
         DefaultMutableTreeNode l21 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Guitarrista", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo1_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo1_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo1_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Centro"));
         DefaultMutableTreeNode l22 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Pizzaiolo", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo2_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo2_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo2_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Plaza"));
         DefaultMutableTreeNode l23 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Surfista", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo3_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo3_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo3_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Praia"));
@@ -91,17 +92,18 @@ public class App {
         DefaultMutableTreeNode l42 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Sensei", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo8_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo8_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo8_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Pátio do Dojo"));
         DefaultMutableTreeNode l43 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 20, lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo9_capa.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo9_capa_v.txt"), lerTXT("app/src/main/java/org/penguinfight/Assets/inimigo9_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iceberg"));
 
-        mapa.add(l21);
-        mapa.add(l22);
-        mapa.add(l23);
-        l21.add(l31);
-        l21.add(l32);
-        l22.add(l32);
-        l22.add(l33);
-        l23.add(l33);
-        l31.add(l41);
-        l32.add(l42);
         l33.add(l43);
+        l32.add(l42);
+        l31.add(l41);
+        l23.add(l33);
+        l22.add((DefaultMutableTreeNode) l33.clone());
+        l22.add(l32);
+        l21.add((DefaultMutableTreeNode) l32.clone());
+        l21.add(l31);
+        l11.add(l23);
+        l11.add(l22);
+        l11.add(l21);
+        mapa.add(l11);
 
         cartas = criaCartas();
     }
@@ -169,7 +171,8 @@ public class App {
     public static String lerTXT(String s_path) {
         Path path = Path.of(s_path);
         try {
-            return Files.readString(path, StandardCharsets.UTF_8);
+            byte[] bytes = Files.readAllBytes(path);
+            return new String(bytes, Charset.defaultCharset());
         } catch (IOException e) {
             try {
                 return Files.readString(path, Charset.forName("ISO-8859-1"));
