@@ -51,7 +51,7 @@ public class Batalha {
             String rand = App.scanner.nextLine();
             App.getRota().addEscolha(0);
         } else
-            App.getRota().addEscolha(0);
+            App.getRota().addEscolha(1);
 
         App.limparTela();
 
