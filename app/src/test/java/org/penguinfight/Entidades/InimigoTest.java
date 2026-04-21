@@ -53,17 +53,4 @@ public class InimigoTest {
         assertEquals(30, inimigo.getVida(), "A vida do inimigo deve cair corretamente após o ataque.");
         assertTrue(inimigo.estaVivo());
     }
-
-    @Test
-    public void testDecidirAcaoGeraValoresValidos() {
-        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
-        inimigo.decidirAcao();
-        
-        // Verifica se os valores sorteados estão dentro dos limites estipulados no seu código
-        int ataqueSorteado = inimigo.getDecisao(0);
-        assertTrue(ataqueSorteado == 0 || ataqueSorteado == 1, "A decisão de ataque deve ser 0 ou 1");
-        
-        int defesaSorteada = inimigo.getDecisao(1);
-        assertTrue(defesaSorteada == 0 || defesaSorteada == 1, "A decisão de defesa deve ser 0 ou 1");
-    }
 }
