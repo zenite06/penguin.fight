@@ -138,8 +138,12 @@ public class Batalha {
             App.limparTela();
             nadadeira.get(ans).usar(player, inimigo); 
             pilhaDescarte.add(nadadeira.remove(ans)); 
-            if (!inimigo.estaVivo())
+            if (!inimigo.estaVivo()) {
+                while (!nadadeira.isEmpty())
+                    pilhaDescarte.add(nadadeira.remove(0)); 
+                resetRound();
                 break;
+            }
         }
     }
 

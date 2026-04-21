@@ -90,7 +90,7 @@ public class RoundManager {
 
         DefaultMutableTreeNode battle = App.getMapa(); 
         
-        while (battle.getFirstChild() != null) {
+        while (true) {
             App.limparTela();
             IO.println("O destino é você quem faz. Qual caminho deseja seguir?\n");
 
@@ -114,17 +114,23 @@ public class RoundManager {
             actualBattle.setPlayer(player);
             setBattle(actualBattle);
             if (actualBattle.startBattle(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
-                IO.println("Deseja continuar nessa aventura?\n");
-                IO.println("1 - Sim!");
-                IO.println("2 - Não...\n");
-                ans = scanner.nextInt();
-                if (ans == 2) {
-                    App.limparTela();
-                    IO.println();
-                    IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
-                return;
+                if (!battle.isLeaf()) {
+                    IO.println("Deseja continuar nessa aventura?\n");
+                    IO.println("1 - Sim!");
+                    IO.println("2 - Não...\n");
+                    ans = scanner.nextInt();
+                    if (ans == 2) {
+                        App.limparTela();
+                        IO.println();
+                        IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
+                        return;
+                    }
                 }
-                player.setEnergia(100); // Reinicia a energia do player para a próxima batalha
+                else {
+                    App.limparTela();
+                    App.getRota().gameOver(player);
+                    return;
+                }
             }
             else { // O player perdeu a batalha
                 IO.println("Deseja tentar de novo?\n");
@@ -141,9 +147,6 @@ public class RoundManager {
                 battle = (DefaultMutableTreeNode) App.getMapa().getRoot();
             }
         }
-
-        App.limparTela();
-        App.getRota().gameOver(player);
     } 
 
     /**

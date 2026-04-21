@@ -84,12 +84,7 @@ public class EfeitoFaixa extends Efeito {
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
         } else if (App.manager.getBattle().getLocal().equals("Estação de Esqui")) {
-            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
-                                "     .'´o)=-       -=(V¬'.\n" + //
-                                "     /.-.'            '.-.\\\n" + //
-                                "    //   |\\    VS    /|*V*\\\\\n" + //
-                                "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
-                                "  _,:(_ /_            _\\ _):,_");
+            App.manager.getBattle().getInimigo().setCapa("");
         } else if (App.manager.getBattle().getLocal().equals("Forte Nevado")) {
             App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
                                 "     .'´o)=-       -=(V¬'.\n" + //
