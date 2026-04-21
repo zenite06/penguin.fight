@@ -10,5 +10,5 @@ public interface Observer {
     /**
      * Método chamado pelo Publisher para alertar a classe sobre um gatilho ocorrido no combate.
      */
-    void serNotificado(String evento, RoundManager manager);
+    void serNotificado(String evento);
 }

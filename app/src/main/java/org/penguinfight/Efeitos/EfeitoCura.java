@@ -1,5 +1,5 @@
 package org.penguinfight.Efeitos;
-import org.penguinfight.RoundManager;
+import org.penguinfight.App;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
 
@@ -13,26 +13,26 @@ public class EfeitoCura extends Efeito {
     }
 
     @Override
-    public void ativar(Entidade entidade, RoundManager manager) { 
-        ativarImediato(entidade, manager);
+    public void ativar(Entidade entidade) { 
+        ativarImediato(entidade);
     }
 
     @Override
-    public void ativarImediato(Entidade entidade, RoundManager manager) {
+    public void ativarImediato(Entidade entidade) {
         IO.println(entidade.getNome() + " se curou e aumentou sua vida!");
         entidade.setVida(entidade.getVida() + this.getAcumulos());
         this.addAcumulos(- this.getAcumulos()); // Consome toda a cura de uma vez
 
         if (this.getAcumulos() == 0) { // O efeito acabou!
             entidade.removerEfeito(this);
-            manager.desinscrever(this);
+            App.manager.desinscrever(this);
         }
     }
 
     @Override
-    public void serNotificado(String evento, RoundManager manager) {
+    public void serNotificado(String evento) {
         if (evento.equals("FIM DO ROUND") && this.getDono() instanceof Inimigo)
-            ativar(this.getDono(), manager);
+            ativar(this.getDono());
     }
 
     @Override

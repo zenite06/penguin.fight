@@ -1,6 +1,6 @@
 package org.penguinfight.Efeitos;
+import org.penguinfight.App;
 import org.penguinfight.Entidades.Entidade;
-import org.penguinfight.RoundManager;
 
 /**
  * Efeito progressivo exclusivo do jogador que representa o treinamento.
@@ -27,7 +27,7 @@ public class EfeitoFaixa extends Efeito {
      * Atualiza a arte visual do combate colorindo a faixa do herói baseada 
      * nos acúmulos (nível da faixa).
      */
-    public void aplicarFaixa(RoundManager manager) {
+    public void aplicarFaixa() {
         String cor = ANSI_RESET;
         
         switch (this.getAcumulos()) {
@@ -60,21 +60,21 @@ public class EfeitoFaixa extends Efeito {
                 break;
         }
 
-        if (RoundManager.getLevel() == 0) {
-            manager.getInimigo().setCapa("     .'´o)=-       -=(O¬'.\n" + //
+        if (App.manager.getBattle().getLocal() == "") {
+            App.manager.getBattle().getInimigo().setCapa("     .'´o)=-       -=(O¬'.\n" + //
                                 "     /.-.'            '._.\\\n" + //
                                 "    //   |\\    VS    /| V \\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|   ||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
-        } else if (RoundManager.getLevel() == 1) {
-            manager.getInimigo().setCapa("                      _T_\n" + //
+        } else if (App.manager.getBattle().getLocal() == "") {
+            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
                                 "     .'´o)=-       -=(V¬'.\n" + //
                                 "     /.-.'            '.-.\\\n" + //
                                 "    //   |\\    VS    /|*V*\\\\\n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
                                 "  _,:(_ /_            _\\ _):,_");
-        } else if (RoundManager.getLevel() == 2) {
-            manager.getInimigo().setCapa("     .'´o)=- \n" + //
+        } else if (App.manager.getBattle().getLocal() == "") {
+            App.manager.getBattle().getInimigo().setCapa("     .'´o)=- \n" + //
                                 "     /.-.' \n" + //
                                 "    //   |\\    VS \n" + //
                                 "    ||" + cor + "===" + ANSI_RESET + "|'         (V) O O (V)\n" + //
@@ -83,20 +83,20 @@ public class EfeitoFaixa extends Efeito {
     }
 
     @Override
-    public void ativar(Entidade entidade, RoundManager manager) { // Não precisa...
+    public void ativar(Entidade entidade) { // Não precisa...
         this.getDono().setEscudo(this.getDono().getEscudo() + (2 * this.getAcumulos()));
     } 
 
     @Override
-    public void ativarImediato(Entidade entidade, RoundManager manager) {
+    public void ativarImediato(Entidade entidade) {
         IO.println(entidade.getNome() + " treinou técnicas mais avançadas e aumentou sua faixa!\n");
         entidade.setEscudo(entidade.getEscudo() + (2 * this.getAcumulos()));
     }
 
     @Override
-    public void serNotificado(String evento, RoundManager manager) {
+    public void serNotificado(String evento) {
         if (evento.equals("FIM DO ROUND")) // Não precisa
-            ativar(this.getDono(), manager); 
+            ativar(this.getDono()); 
     } 
 
     @Override

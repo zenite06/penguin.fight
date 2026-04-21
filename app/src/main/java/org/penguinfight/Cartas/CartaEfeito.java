@@ -1,6 +1,5 @@
 package org.penguinfight.Cartas;
 import org.penguinfight.App;
-import org.penguinfight.RoundManager;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Efeitos.EfeitoFaixa;
 import org.penguinfight.Entidades.Heroi;
@@ -23,17 +22,17 @@ public class CartaEfeito extends Carta {
     }
 
     @Override
-    public void usar(Heroi player, Inimigo inimigo, RoundManager manager) {
+    public void usar(Heroi player, Inimigo inimigo) {
         if (player.getEnergia() >= this.getCusto()) {
             Efeito efeito_copia = this.efeito.clonar();
-            player.aplicarEfeito(efeito_copia, manager);
+            player.aplicarEfeito(efeito_copia);
             player.usarEnergia(this.getCusto());
 
             // A cada aplicação é preciso trocar a arte gráfica da faixa
             for (Efeito efeito : player.getEfeitos()) {
                 if (efeito.getNome().equals("FAIXA")) {
                     EfeitoFaixa faixa = (EfeitoFaixa) efeito; 
-                    faixa.aplicarFaixa(manager);
+                    faixa.aplicarFaixa();
                     break;
                 }
             }

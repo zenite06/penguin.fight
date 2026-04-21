@@ -1,7 +1,5 @@
 package org.penguinfight.Cartas;
-
 import org.penguinfight.App;
-import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
@@ -16,7 +14,7 @@ public class CartaEscudo extends Carta {
     }
 
     @Override
-    public void usar(Heroi heroi, Inimigo inimigo, RoundManager manager) {
+    public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.getCusto()) {
             IO.println();
             IO.println(heroi.getNome() + " se preparou para usar "  + App.ANSI_PURPLE +  this.getNome() + App.ANSI_GREEN + " (+ " + this.getValor() + " de defesa)" + App.ANSI_RESET);
