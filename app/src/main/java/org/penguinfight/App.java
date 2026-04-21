@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * Classe principal responsável pela inicialização do jogo Penguin Fight.
- * Configura o ambiente, instancia os inimigos, as cartas e gerencia o fluxo inicial.
+ * Configura o ambiente, instancia o RoundManager, a árvore de batalhas, as cartas e inimigos.
  */
 public class App {
     public static final String ANSI_RED = "\u001B[1;31m";
@@ -158,6 +158,11 @@ public class App {
         return cartas;
     }
 
+    /***
+     * Método que acessa um arquivo .txt e retorna uma string contendo seu conteúdo com a formatação adequada
+     * @param s_path
+     * @return
+     */
     public static String lerTXT(String s_path) {
         Path path = Path.of(s_path);
         try {
