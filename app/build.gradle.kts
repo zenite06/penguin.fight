@@ -9,6 +9,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     java
+    jacoco
 }
 
 repositories {
@@ -38,11 +39,6 @@ application {
     mainClass = "org.penguinfight.App"
 }
 
-tasks.named<Test>("test") {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-}
-
 tasks.getByName<JavaExec>("run") {
     standardInput = System.`in`
 }
@@ -59,4 +55,16 @@ tasks.javadoc {
             links("https://docs.oracle.com/en/java/javase/17/docs/api/")
             addStringOption("Xdoclint:all,-missing", "-quiet")
         }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        html.required.set(true)
+    }
 }
