@@ -2,6 +2,7 @@ package org.penguinfight.Entidades;
 import org.junit.jupiter.api.Test;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEscudo;
+import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Efeitos.EfeitoAcido;
 import org.penguinfight.Cartas.CartaEfeito;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,60 +11,64 @@ public class InimigoTest {
 
     @Test
     public void criarInimigo() {
-        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "      .'´o)=-      -=(o`'.\n" + //
-    "      /.-.'           '.-.\\\\\n" + //
-    "     //  |\\    VS     /|  \\\\\\\\\n" + //
-    "     ||  |'           '|  ||\n" + //
-    "   _,:(_/_             _\\_):,_", "      .'´o)=-      -=(X`'.\n" + //
-    "      /.-.'           '.-.\\\\\n" + //
-    "     //  |\\    VS     /|  \\\\\\\\\n" + //
-    "     ||  |'           '|  ||\n" + //
-    "   _,:(_/_             _\\_):,_", "      .'´X)=-      -=(o`'.\n" + //
-    "      /.-.'           '.-.\\\\\n" + //
-    "     //  |\\    VS     /|  \\\\\\\\\n" + //
-    "     ||  |'           '|  ||\n" + //
-    "   _,:(_/_             _\\_):,_", new CartaDano("O CHUTE", "Carta de Ataque", 0, 20), new CartaDano("O SOCO", "Carta de Ataque", 0, 10), new CartaEscudo("A ESQUIVA", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5)));
-
+        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", null, null, null, null);
         assertEquals("Pinguim Malvado", inimigo.getNome());
         assertEquals(50, inimigo.getVida());
-        assertEquals("      .'´o)=-      -=(o`'.\n" + //
-    "      /.-.'           '.-.\\\\\n" + //
-    "     //  |\\    VS     /|  \\\\\\\\\n" + //
-    "     ||  |'           '|  ||\n" + //
-    "   _,:(_/_             _\\_):,_", inimigo.getC());
-        assertEquals("      .'´o)=-      -=(X`'.\n" + //
-    "      /.-.'           '.-.\\\\\n" + //
-    "     //  |\\    VS     /|  \\\\\\\\\n" + //
-    "     ||  |'           '|  ||\n" + //
-    "   _,:(_/_             _\\_):,_", inimigo.getCV());
-        assertEquals("      .'´X)=-      -=(o`'.\n" + //
-    "      /.-.'           '.-.\\\\\n" + //
-    "     //  |\\    VS     /|  \\\\\\\\\n" + //
-    "     ||  |'           '|  ||\n" + //
-    "   _,:(_/_             _\\_):,_", inimigo.getCD());
+        assertEquals("Capa", inimigo.getC());
+        assertEquals("Capa Vitória", inimigo.getCV());
+        assertEquals("Capa Derrota", inimigo.getCD());
         assertTrue(inimigo.estaVivo());
-    }  
+    } 
 
     @Test
-    public void testReceberDanoInimigo() {
-        // Passamos 'null' nas cartas pois não são necessárias para testar a vida base
-        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "capa1", "capa2", "capa3", null, null, null, null);
-        
-        inimigo.receberDano(20);
-        assertEquals(30, inimigo.getVida(), "A vida do inimigo deve cair corretamente após o ataque.");
-        assertTrue(inimigo.estaVivo());
+    public void decidirEDeclararAcaoValida() {
+        CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
+        CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
+        CartaEscudo defesa = new CartaEscudo("ESQUIVA", "Carta de Defesa", 0, 2);
+        CartaEfeito efeito = new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(1, 5));
+        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, efeito);
+        inimigo.decidirAcao();
+        inimigo.declarar();
+        assertTrue(inimigo.getDecisao(0) == 0 || inimigo.getDecisao(0) == 1);
+        assertTrue(inimigo.getDecisao(1) == 0 || inimigo.getDecisao(1) == 1);
+        assertTrue(inimigo.getDecisao(2) >= 0 && inimigo.getDecisao(2) < 6);
     }
 
     @Test
-    public void testDecidirAcaoGeraValoresValidos() {
-        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
+    public void atacar() {
+        Heroi player = new Heroi("Pinguim", 40);
+        CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
+        CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
+        CartaEscudo defesa = new CartaEscudo("ESQUIVA", "Carta de Defesa", 0, 2);
+        CartaEfeito efeito = new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(1, 5));
+        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, efeito);
         inimigo.decidirAcao();
-        
-        // Verifica se os valores sorteados estão dentro dos limites estipulados no seu código
-        int ataqueSorteado = inimigo.getDecisao(0);
-        assertTrue(ataqueSorteado == 0 || ataqueSorteado == 1, "A decisão de ataque deve ser 0 ou 1");
-        
-        int defesaSorteada = inimigo.getDecisao(1);
-        assertTrue(defesaSorteada == 0 || defesaSorteada == 1, "A decisão de defesa deve ser 0 ou 1");
+        inimigo.atacar(player);
+        if (inimigo.getDecisao(0) == 0)
+            assertEquals(38, player.getVida());
+        else
+            assertEquals(36, player.getVida());
+    }
+
+    @Test
+    public void usarEfeito() {
+        CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
+        CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
+        CartaEscudo defesa = new CartaEscudo("ESQUIVA", "Carta de Defesa", 0, 2);
+        CartaEfeito efeito = new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(1, 5));
+        Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, efeito);
+        inimigo.decidirAcao();
+        inimigo.usarEfeito();
+        boolean encontrou = false;
+        for (Efeito efeitoAtivo : inimigo.getEfeitos()) {
+            if (efeitoAtivo.getNome().equals(efeito.getEfeito().getNome()) && efeitoAtivo.getAcumulos() == efeito.getEfeito().getAcumulos()) {
+                encontrou = true;
+                break;
+            }
+        }
+        if (inimigo.getDecisao(2) == 0)
+            assertTrue(encontrou);
+        else
+            assertFalse(encontrou);
     }
 }

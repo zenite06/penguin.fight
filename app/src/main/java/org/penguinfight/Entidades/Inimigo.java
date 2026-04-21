@@ -11,7 +11,6 @@ import org.penguinfight.Efeitos.Efeito;
  * suas ações (ataques, defesas e efeitos) a cada turno.
  */
 public class Inimigo extends Entidade {
-    private int dano;
     private String capa; // Capa da luta (Imagem dos personagens)
     private String capa_v; // Capa da vitória
     private String capa_d; // Capa da derrota
@@ -35,10 +34,6 @@ public class Inimigo extends Entidade {
         this.ataques[1] = ataque2;
         this.defesas[0] = defesa;
         this.efeitos[0] = efeito;
-    }
-
-    public int getDano() {
-        return this.dano;
     }
 
     public String getC() {

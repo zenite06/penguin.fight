@@ -64,7 +64,7 @@ public class EfeitoFaixa extends Efeito {
             App.manager.getBattle().getInimigo().setCapa("      .'´o)=- \n" + //
     "      /.-.' \n" + //
     "     //   |\\    VS \n" + //
-    "     ||" + cor + "===" + ANSI_RESET + "|'               WWWWW\n" + //
+    "     ||" + cor + "===" + ANSI_RESET + "|'                WWWWW\n" + //
     "   _,:(_/_                (o-o)");
         } else if (App.manager.getBattle().getLocal().equals("Centro")) {
             App.manager.getBattle().getInimigo().setCapa("      .'´o)=-        -=(o`'. #\n" + //

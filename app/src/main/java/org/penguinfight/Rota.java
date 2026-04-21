@@ -217,7 +217,7 @@ public class Rota {
         App.limparTela();
         IO.println(player.getNome() + " chegou à sede da empresa misteriosa\n");
         IO.println(player.getNome() + " acaba de encontrar Mickey Mouse!\n");
-        IO.println(App.lerTXT("src/main/resources/superboss.txt")); // Capa da luta final
+        IO.println(App.lerTXT("src/main/resources/Assets/superboss.txt")); // Capa da luta final
         IO.println("Deseja escutá-lo?\n");
         IO.println("1 - Sim!");
         IO.println("2 - Não...\n");

@@ -60,7 +60,8 @@ public class App {
         } else  
             rota.addEscolha(1);
 
-        setGame();
+        mapa = criaMapa();
+        cartas = criaCartas();
         manager.startGame();
         scanner.close();
     }
@@ -68,7 +69,7 @@ public class App {
     /**
      * Instancia e configura todos os elementos do jogo (mapa, lugares, inimigos, cartas)
      */
-    public static void setGame() {
+    public static DefaultMutableTreeNode criaMapa() {
         mapa = new DefaultMutableTreeNode();
         
         DefaultMutableTreeNode l11 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Puffle", 1, lerTXT("src/main/resources/Assets/inimigo0_capa.txt"), lerTXT("src/main/resources/Assets/inimigo0_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo0_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iglu")); // Primeira batalha (início do jogo)
@@ -81,7 +82,6 @@ public class App {
         DefaultMutableTreeNode l41 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Herbert", 1, lerTXT("src/main/resources/Assets/inimigo7_capa.txt"), lerTXT("src/main/resources/Assets/inimigo7_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo7_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Montanha"));
         DefaultMutableTreeNode l42 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Sensei", 1, lerTXT("src/main/resources/Assets/inimigo8_capa.txt"), lerTXT("src/main/resources/Assets/inimigo8_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo8_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Pátio do Dojo"));
         DefaultMutableTreeNode l43 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 1, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("A BOLA DE NEVE SUPERSÔNICA", "Carta de Ataque", 0, 10), new CartaDano("O CHUTE QUÂNTICO", "Carta de Ataque", 0, 14), new CartaEscudo("A ESQUIVA ANALÍTICA", "Carta de Defesa", 0, 4), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 5))), "Iceberg"));
-
         l33.add(l43);
         l32.add(l42);
         l31.add(l41);
@@ -94,8 +94,7 @@ public class App {
         l11.add(l22);
         l11.add(l21);
         mapa.add(l11);
-
-        cartas = criaCartas();
+        return mapa;
     }
 
     /**
