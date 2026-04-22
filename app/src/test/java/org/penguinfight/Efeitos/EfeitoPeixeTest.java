@@ -10,30 +10,32 @@ public class EfeitoPeixeTest {
     @Test
     public void criarEfeitoPeixe() {
         EfeitoPeixe efeito = new EfeitoPeixe(20);
+
         assertEquals(20, efeito.getAcumulos());
         assertEquals("PEIXE", efeito.getNome());
     }
 
     @Test
-    public void ativar() {
+    public void ativarEAumentarEnergiaDoPlayer() {
         EfeitoPeixe efeito = new EfeitoPeixe(20);
         Heroi player = new Heroi("Pinguim", 40);
         efeito.setDono(player);
         App.manager.setPlayer(player);
         efeito.ativar(player);
+
         assertEquals(120, player.getEnergia());
         assertEquals(0, player.getEfeitos().size());
     }
 
     @Test
-    public void estaSendoNotificado() { 
+    public void serNotificadoEAumentarEnergiaDoPlayer() { 
         EfeitoPeixe efeito = new EfeitoPeixe(20);
         Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.setDono(player);
         App.manager.setPlayer(player);
-        String evento = "FIM DO ROUND";
-        efeito.serNotificado(evento);
+        efeito.serNotificado("FIM DO ROUND");
+
         assertEquals(120, player.getEnergia());
     }
 
@@ -41,6 +43,8 @@ public class EfeitoPeixeTest {
     public void clonar() {
         EfeitoPeixe efeito = new EfeitoPeixe(20);
         Efeito newEfeito = efeito.clonar();
+
+        assertTrue(newEfeito instanceof EfeitoPeixe);
         assertEquals("PEIXE", newEfeito.getNome());
         assertEquals(20, newEfeito.getAcumulos());
     }

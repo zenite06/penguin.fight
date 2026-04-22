@@ -15,6 +15,10 @@ public class EfeitoAcido extends Efeito {
         this.dano = dano;
     }
 
+    public int getDano() {
+        return this.dano;
+    }
+
     /**
      * Aplica o dano de ácido ao jogador e consome uma carga do efeito.
      * Remove automaticamente o efeito da entidade caso as cargas cheguem a zero.

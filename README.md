@@ -1,6 +1,6 @@
 # Projeto MC322 - Penguin.fight()
 
-<img src="image-3.png" alt="Alt text" align="left" width="100" height="auto">
+<img src="assets/image-3.png" alt="Alt text" align="left" width="100" height="auto">
 
 Saudações, pinguim! Este projeto foi desenvolvido como parte dos laboratórios da disciplina **MC322 - Programação Orientada a Objetos**, com o objetivo de implementar um jogo inspirado em *Slay the Spire*, no qual o jogador utiliza um **baralho de cartas** para derrotar inimigos em batalhas por turno. O projeto desenvolvido aqui foi inspirado pelo antigo jogo online *Club Penguin*, utilizando a linguagem **Java** e sendo executado via terminal.
 
@@ -47,7 +47,7 @@ Graças ao Gradle Wrapper (`gradlew`), você não precisa ter o Gradle instalado
 
 ## Como Jogar
 
-![alt text](image.png)
+![alt text](assets/image.png)
 
 O jogo foi inspirado pelo minigame *Desafio Ninja*, do antigo jogo online *Club Penguin*. A dinâmica foi modificada, mas consiste em escolher cartas de dano (golpes) e de defesa (bloqueios) a cada turno, com o objetivo de derrotar o inimigo (assim como no jogo *Slay the Spire*).
 
@@ -55,7 +55,7 @@ O jogo atualmente possui três níveis, cada um com seu inimigo próprio, e só 
 
 No início, digite seu nome para jogar:
 
-![alt text](image-1.png)
+![alt text](assets/image-1.png)
 
 Durante o combate:
 
@@ -66,14 +66,14 @@ Durante o combate:
 - O jogador pode usar cartas enquanto tiver energia disponível;
 - Ao final do turno do jogador, o **inimigo realiza suas ações**.
 
-![alt text](<image-luta-faixa.png>)
+![alt text](<assets/image-luta-faixa.png>)
 
 O combate termina quando:
 
 - o **herói é derrotado**, ou
 - o **inimigo é derrotado**.
 
-![alt text](image-2.png)
+![alt text](assets/image-2.png)
 
 ## Mapa
 
@@ -82,12 +82,12 @@ A progressão do jogo funciona com base no seguinte mapa:
 ```text
 
     [Montanha]       [Pátio do Dojo]      [Iceberg]
-       |                    |                 |
+       |                   |                  |
 [Estação de Esqui]  _[Forte Nevado]  _[Casinha da Mina]
-       |           |        |       |         |
-    [Centro]_______|     [Plaza]____|     [Praia]
-       |                   |                 |
-       |________________[Iglu] ______________|
+       |           |       |        |         |
+    [Centro]_______|     [Plaza]____|      [Praia]
+       |                   |                  |
+       |________________[Iglu] _______________|
 
 ```
 
@@ -164,6 +164,7 @@ Caso o jogador responda *"Sim"* em alguma dessas escolhas críticas, seguirá a 
 
 - Java 25;
 - Gradle
+- JUnit 5
 - Visual Studio Code;
 - Git e GitHub;
 - Gemini (Auxílio na geração e revisão de documentação).

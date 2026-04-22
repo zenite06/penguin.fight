@@ -14,12 +14,13 @@ public class EfeitoNevascaTest {
     @Test
     public void criarEfeitoNevasca() {
         EfeitoNevasca efeito = new EfeitoNevasca(50);
+
         assertEquals(50, efeito.getAcumulos());
         assertEquals("NEVASCA", efeito.getNome());
     }
 
     @Test
-    public void ativar() { 
+    public void ativarEReduzirAtaqueDoInimigo() { 
         EfeitoNevasca efeito = new EfeitoNevasca(1);
         CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
         CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
@@ -29,14 +30,18 @@ public class EfeitoNevascaTest {
         Heroi player = new Heroi("Pinguim", 40);
         App.manager.setBattle(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
-        int ataqueOriginal = inimigo.getAtaque(inimigo.getDecisao(0)).getValor();
+        inimigo.decidirAcao();
         efeito.ativar(inimigo);
+
         assertEquals(0, efeito.getAcumulos());
-        assertEquals((int) (ataqueOriginal * 0.5), inimigo.getAtaque(inimigo.getDecisao(0)).getValor());
+        if (inimigo.getDecisao(0) == 0)
+            assertEquals(1, inimigo.getAtaque(0).getValor());
+        else
+            assertEquals(2, inimigo.getAtaque(1).getValor());
     }
 
     @Test
-    public void resetar() { 
+    public void resetarEResetarAtaqueDoInimigo() { 
         EfeitoNevasca efeito = new EfeitoNevasca(1);
         CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
         CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
@@ -48,14 +53,19 @@ public class EfeitoNevascaTest {
         efeito.setDono(player);
         App.manager.setBattle(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
-        int ataqueOriginal = inimigo.getAtaque(inimigo.getDecisao(0)).getValor();
+        inimigo.decidirAcao();
         efeito.ativar(inimigo);
         efeito.resetar(inimigo);
-        assertEquals(ataqueOriginal, inimigo.getAtaque(inimigo.getDecisao(0)).getValor());
+
+        assertEquals(0, efeito.getAcumulos());
+        if (inimigo.getDecisao(0) == 0)
+            assertEquals(2, inimigo.getAtaque(0).getValor());
+        else
+            assertEquals(4, inimigo.getAtaque(1).getValor());
     }
 
     @Test
-    public void estaSendoNotificadoEResetando() { 
+    public void serNotificadoEResetar() { 
         EfeitoNevasca efeito = new EfeitoNevasca(1);
         CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
         CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
@@ -67,21 +77,29 @@ public class EfeitoNevascaTest {
         efeito.setDono(player);
         App.manager.setBattle(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
-        int ataqueOriginal = inimigo.getAtaque(inimigo.getDecisao(0)).getValor();
-        String evento1 = "INIMIGO VAI ATACAR";
-        efeito.serNotificado(evento1);
+        inimigo.decidirAcao();
+        efeito.serNotificado("INIMIGO VAI ATACAR");
+
         assertEquals(0, efeito.getAcumulos());
-        assertEquals((int) (ataqueOriginal * 0.5), inimigo.getAtaque(inimigo.getDecisao(0)).getValor());
-        
-        String evento2 = "INIMIGO ATACOU";
-        efeito.serNotificado(evento2);
-        assertEquals(ataqueOriginal, inimigo.getAtaque(inimigo.getDecisao(0)).getValor());
+        if (inimigo.getDecisao(0) == 0)
+            assertEquals(1, inimigo.getAtaque(0).getValor());
+        else
+            assertEquals(2, inimigo.getAtaque(1).getValor());
+       
+        efeito.serNotificado("INIMIGO ATACOU");
+
+        if (inimigo.getDecisao(0) == 0)
+            assertEquals(2, inimigo.getAtaque(0).getValor());
+        else
+            assertEquals(4, inimigo.getAtaque(1).getValor());
     }
 
     @Test
     public void clonar() {
         EfeitoNevasca efeito = new EfeitoNevasca(50);
         Efeito newEfeito = efeito.clonar();
+
+        assertTrue(newEfeito instanceof EfeitoNevasca);
         assertEquals("NEVASCA", newEfeito.getNome());
         assertEquals(50, newEfeito.getAcumulos());
     }

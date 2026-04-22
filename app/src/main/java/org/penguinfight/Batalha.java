@@ -194,6 +194,7 @@ public class Batalha {
         inimigo.getEfeitos().clear();
         App.manager.resetCapa(inimigo);
         inimigo.setVida(inimigo.getMaxVida());
+        player.setEscudo(0);
     }
 }
 

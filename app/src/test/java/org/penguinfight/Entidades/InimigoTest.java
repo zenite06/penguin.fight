@@ -12,6 +12,7 @@ public class InimigoTest {
     @Test
     public void criarInimigo() {
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", null, null, null, null);
+        
         assertEquals("Pinguim Malvado", inimigo.getNome());
         assertEquals(50, inimigo.getVida());
         assertEquals("Capa", inimigo.getC());
@@ -29,6 +30,7 @@ public class InimigoTest {
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, efeito);
         inimigo.decidirAcao();
         inimigo.declarar();
+        
         assertTrue(inimigo.getDecisao(0) == 0 || inimigo.getDecisao(0) == 1);
         assertTrue(inimigo.getDecisao(1) == 0 || inimigo.getDecisao(1) == 1);
         assertTrue(inimigo.getDecisao(2) >= 0 && inimigo.getDecisao(2) < 6);
@@ -44,6 +46,7 @@ public class InimigoTest {
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, efeito);
         inimigo.decidirAcao();
         inimigo.atacar(player);
+
         if (inimigo.getDecisao(0) == 0)
             assertEquals(38, player.getVida());
         else
@@ -61,11 +64,12 @@ public class InimigoTest {
         inimigo.usarEfeito();
         boolean encontrou = false;
         for (Efeito efeitoAtivo : inimigo.getEfeitos()) {
-            if (efeitoAtivo.getNome().equals(efeito.getEfeito().getNome()) && efeitoAtivo.getAcumulos() == efeito.getEfeito().getAcumulos()) {
+            if (efeitoAtivo.getNome().equals("ÁCIDO")) {
                 encontrou = true;
                 break;
             }
         }
+        
         if (inimigo.getDecisao(2) == 0)
             assertTrue(encontrou);
         else

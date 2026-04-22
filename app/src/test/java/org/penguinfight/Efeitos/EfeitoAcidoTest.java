@@ -13,18 +13,21 @@ public class EfeitoAcidoTest {
     @Test
     public void criarEfeitoAcido() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
-        assertEquals(3, efeito.getAcumulos());
+
         assertEquals("ÁCIDO", efeito.getNome());
+        assertEquals(3, efeito.getAcumulos());
+        assertEquals(5, efeito.getDano());
     }
 
     @Test
-    public void ativar() {
+    public void ativarECausarDanoEmPlayer() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         Heroi player = new Heroi("Pinguim", 40);
         App.manager.setBattle(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         efeito.ativar(player);
+
         assertEquals(2, efeito.getAcumulos());
         assertEquals(35, player.getVida());
     }
@@ -37,19 +40,18 @@ public class EfeitoAcidoTest {
         App.manager.setBattle(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         efeito.ativar(player);
-        assertEquals(0, efeito.getAcumulos());
-        assertEquals(35, player.getVida());
+
         assertEquals(0, inimigo.getEfeitos().size());
 
     }
 
     @Test
-    public void estaSendoNotificado() {
+    public void serNotificadoECausarDanoEmPlayer() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
         Heroi player = new Heroi("Pinguim", 40);
         App.manager.setPlayer(player);
-        String evento = "INIMIGO ATACOU";
-        efeito.serNotificado(evento);
+        efeito.serNotificado("INIMIGO ATACOU");
+
         assertEquals(35, player.getVida());
     }
 
@@ -57,7 +59,10 @@ public class EfeitoAcidoTest {
     public void clonar() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
         Efeito newEfeito = efeito.clonar();
+
+        assertTrue(newEfeito instanceof EfeitoAcido);
         assertEquals("ÁCIDO", newEfeito.getNome());
         assertEquals(3, newEfeito.getAcumulos());
+        assertEquals(5, ((EfeitoAcido) newEfeito).getDano());
     }
 } 

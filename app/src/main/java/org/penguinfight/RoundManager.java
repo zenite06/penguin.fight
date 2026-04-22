@@ -105,7 +105,6 @@ public class RoundManager {
                 IO.println("\n");
                 ans = scanner.nextInt();
                 if (ans >= battle.getChildCount()) 
-
                     IO.println("Opção inválida! Escolha um dos caminhos a seguir\n");
             }
 
@@ -154,25 +153,25 @@ public class RoundManager {
      */
     public void resetCapa(Inimigo inimigo) {
         if (getBattle().getLocal() == "Iglu") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo0_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo0_capa.txt"));
         } else if (getBattle().getLocal() == "Centro") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo1_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo1_capa.txt"));
         } else if (getBattle().getLocal() == "Plaza") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo2_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo2_capa.txt"));
         } else if (getBattle().getLocal() == "Praia") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo3_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo3_capa.txt"));
         } else if (getBattle().getLocal() == "Estação de Esqui") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo4_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo4_capa.txt"));
         } else if (getBattle().getLocal() == "Forte Nevado") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo5_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo5_capa.txt"));
         } else if (getBattle().getLocal() == "Casinha da Mina") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo6_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo6_capa.txt"));
         } else if (getBattle().getLocal() == "Montanha") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo7_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo7_capa.txt"));
         } else if (getBattle().getLocal() == "Pátio do Dojo") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo8_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo8_capa.txt"));
         } else if (getBattle().getLocal() == "Iceberg") {
-            inimigo.setCapa("src/main/resources/Assets/inimigo9_capa.txt");
+            inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo9_capa.txt"));
         }
     }
 }

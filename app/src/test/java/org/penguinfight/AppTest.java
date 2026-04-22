@@ -11,6 +11,7 @@ public class AppTest {
     @Test
     public void criarCartas() {
         List<Carta> cartas = App.criaCartas();
+        
         assertNotNull(cartas);
         assertEquals(17, cartas.size());
     }
@@ -18,12 +19,14 @@ public class AppTest {
     @Test
     public void criarMapa() {
         DefaultMutableTreeNode mapa = App.criaMapa();
+
         assertNotNull(mapa);
         assertEquals(1, mapa.getChildCount());
-        DefaultMutableTreeNode batalhaIglu = (DefaultMutableTreeNode) mapa.getChildAt(0);
-        assertEquals(3, batalhaIglu.getChildCount());
+
+        DefaultMutableTreeNode l11 = (DefaultMutableTreeNode) mapa.getChildAt(0);
+
+        assertEquals(3, l11.getChildCount());
         assertEquals(4, mapa.getDepth());
-        Object no = batalhaIglu.getUserObject();
-        assertTrue(no instanceof Batalha);
+        assertTrue(l11.getUserObject() instanceof Batalha);
     }
 }
