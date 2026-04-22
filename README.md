@@ -75,6 +75,37 @@ O combate termina quando:
 
 ![alt text](image-2.png)
 
+## Mapa
+
+A progressão do jogo funciona com base no seguinte mapa:
+
+'''
+    [Montanha]       [Pátio do Dojo]      [Iceberg]
+       |                    |                 |
+[Estação de Esqui]  _[Forte Nevado]  _[Casinha da Mina]
+       |           |        |       |         |
+    [Centro]_______|     [Plaza]____|     [Praia]
+       |                   |                 |
+       |________________[Iglu] ______________|
+'''
+
+Cada local representa uma batalha com um inimigo diferente, de acordo com a tabela abaixo:
+
+| Local | Inimigo |
+| :--- | :---: | 
+| **Iglu** | Puffle | 
+| **Centro** | Guitarrista | 
+| **Plaza** | Pizzaiolo | 
+| **Praia** | Surfista | 
+| **Estação de Esqui** | Gary (cientista) | 
+| **Forte Nevado** | Rookie | 
+| **Casinha da Mina** | Operário | 
+| **Montanha** | Herbert (urso) | 
+| **Pátio do Dojo** | Sensei | 
+| **Iceberg** | Klutzy (caranguejo) | 
+
+Dessa forma, existem 3 finais (com um boss diferente em cada um) possíveis, e qualquer caminho resulta em um jogo com exatamente 4 batalhas.
+
 ## O Baralho
 
 O jogo conta com um sistema balanceado de cartas divididas em três categorias principais. Conhecer seu arsenal é o primeiro passo para a vitória!
@@ -118,12 +149,12 @@ Alteram o estado do combate, gerando buffs (melhorias) para você ou debuffs par
 
 Tanto o jogador quanto o inimigo possuem acesso ao sistema de Efeitos Observer. Os inimigos aplicarão os efeitos abaixo durante a partida:
 
-* **ÁCIDO** *(Níveis 1 e 2)*: Debuff reativo que causa um dano fixo no jogador sempre que o inimigo realiza um ataque por rodadas pré-determinadas.
-* **REGENERAÇÃO** *(Nível 3)*: Efeito passivo que restaura os pontos de vida do inimigo ao final do turno (*spoiler*: caranguejos realmente se regeneram!).
+* **ÁCIDO** : Debuff reativo que causa um dano fixo no jogador sempre que o inimigo realiza um ataque por rodadas pré-determinadas.
+* **REGENERAÇÃO** *(Boss)*: Efeito passivo que restaura os pontos de vida do inimigo ao final do turno (*spoiler*: caranguejos realmente se regeneram!).
 
 ## Rotas
 
-O jogo te dá algumas escolhas por padrão: na tela de início, você pode aceitar ou não a aventura, e no início dos níveis, ao encontrar os inimigos, você pode aceitar confrontá-los ou não. Nesses casos, escolher *"Não..."* não faz o jogo parar, mas apresenta uma mensagem que te manda continuar. Entretanto, negar os conflitos *todas* as vezes te leva a um final com uma mensagem diferente (recomendamos testá-lo!). Essa é a rota relutante, que futuramente deve incluir um nível final com todos os inimigos juntos.
+O jogo te dá algumas escolhas por padrão: na tela de início, você pode aceitar ou não a aventura, e no início dos níveis, ao encontrar os inimigos, você pode aceitar confrontá-los ou não. Nesses casos, escolher *"Não..."* não faz o jogo parar, mas apresenta uma mensagem que te manda continuar. Entretanto, negar os conflitos *todas* as vezes te leva a um final com uma mensagem diferente (recomendamos testá-lo!). Essa é a rota relutante, que pode te direcionar a um inimigo inusitado (ou talvez nem tanto).
 
 Caso o jogador responda *"Sim"* em alguma dessas escolhas críticas, seguirá a rota padrão, com o término normal do jogo.
 

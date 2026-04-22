@@ -10,8 +10,8 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 /**
- * Classe central que gerencia a dinâmica de combate, o fluxo de turnos,
- * a utilização de cartas e atua como o Publisher no padrão Observer.
+ * Classe central que gerencia o percurso de batalhas. Possui a implementação dos métodos de Observer,
+ * criação do player e navegação na árvore de batalhas. 
  */
 public class RoundManager {
 
@@ -65,7 +65,7 @@ public class RoundManager {
 
     /**
      * Loop principal da campanha. Interage com o jogador para criar o herói 
-     * e itera pelas fases do jogo até o fim da rota.
+     * e navega pela árvore de batalhas do jogo até o fim da rota.
      */
     public void startGame() { 
         Scanner scanner = App.getScanner();
@@ -147,31 +147,32 @@ public class RoundManager {
                 battle = (DefaultMutableTreeNode) App.getMapa().getRoot();
             }
         }
-    } 
+    }
 
     /**
-     * Restaura a arte ASCII de batalha do inimigo correspondente ao nível atual.
+     * Restaura a arte ASCII de batalha do inimigo correspondente à batalha atual.
      */
     public void resetCapa(Inimigo inimigo) {
-        if (true) {
-            inimigo.setCapa("     .'´o)=-      -=(O¬'.\n" + //
-                        "     /.-.'           '._.\\\n" + //
-                        "    //  |\\    VS    /| V \\\\\n" + //
-                        "    ||  |'          '|   ||\n" + //
-                        "  _,:(_/_            _\\ _):,_\n");
-        } else if (true) {
-            inimigo.setCapa("                     _T_\n" + //
-                        "     .'´o)=-      -=(V¬'.\n" + //
-                        "     /.-.'           '.-.\\\n" + //
-                        "    //  |\\    VS    /|*V*\\\\\n" + //
-                        "    ||  |'          '|*_*_||\n" + //
-                        "  _,:(_/_            _\\ _):,_");
-        } else if (true) {
-            inimigo.setCapa("     .'´o)=- \n" + //
-                        "     /.-.' \n" + //
-                        "    //  |\\    VS \n" + //
-                        "    ||  |'         (V) O O (V)\n" + //
-                        "  _,:(_/_            `(, ,)´");
+        if (getBattle().getLocal() == "Iglu") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo0_capa.txt");
+        } else if (getBattle().getLocal() == "Centro") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo1_capa.txt");
+        } else if (getBattle().getLocal() == "Plaza") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo2_capa.txt");
+        } else if (getBattle().getLocal() == "Praia") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo3_capa.txt");
+        } else if (getBattle().getLocal() == "Estação de Esqui") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo4_capa.txt");
+        } else if (getBattle().getLocal() == "Forte Nevado") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo5_capa.txt");
+        } else if (getBattle().getLocal() == "Casinha da Mina") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo6_capa.txt");
+        } else if (getBattle().getLocal() == "Montanha") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo7_capa.txt");
+        } else if (getBattle().getLocal() == "Pátio do Dojo") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo8_capa.txt");
+        } else if (getBattle().getLocal() == "Iceberg") {
+            inimigo.setCapa("src/main/resources/Assets/inimigo9_capa.txt");
         }
     }
 }

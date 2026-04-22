@@ -96,7 +96,8 @@ public class Batalha {
 
     /**
      * Gerencia um round individual. Inclui a compra de cartas para a mão (nadadeira), 
-     * a decisão de ataque/defesa/efeito do inimigo () e o processamento das cartas jogadas pelo usuário.
+     * a decisão de ataque/defesa/efeito do inimigo (aleatoriamente) e o processamento 
+     * das cartas jogadas pelo usuário.
      * <p>
      * Se a pilha de compra esvaziar, este método embaralha a pilha de descarte 
      * e a repõe no topo da compra.
@@ -169,12 +170,21 @@ public class Batalha {
         }
     }
 
+    /**
+     * Reseta os atributos temporários de fim de round.
+     * Zera o escudo acumulado de ambos os combatentes e restaura a energia do jogador.
+     */
     public void resetRound() {
         inimigo.setEscudo(0);
         player.setEscudo(0);
         player.setEnergia(100);
     }
 
+    /**
+     * Limpa o estado da batalha após o término (vitória ou derrota).
+     * Remove inscrições de efeitos do Manager, limpa listas de efeitos ativos 
+     * e restaura a vida do inimigo para um estado inicial.
+     */
     public void resetBattle() {
         for (Efeito efeito : player.getEfeitos())
             App.manager.desinscrever(efeito);
