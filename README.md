@@ -79,7 +79,8 @@ O combate termina quando:
 
 A progressão do jogo funciona com base no seguinte mapa:
 
-'''
+```text
+
     [Montanha]       [Pátio do Dojo]      [Iceberg]
        |                    |                 |
 [Estação de Esqui]  _[Forte Nevado]  _[Casinha da Mina]
@@ -87,7 +88,8 @@ A progressão do jogo funciona com base no seguinte mapa:
     [Centro]_______|     [Plaza]____|     [Praia]
        |                   |                 |
        |________________[Iglu] ______________|
-'''
+
+```
 
 Cada local representa uma batalha com um inimigo diferente, de acordo com a tabela abaixo:
 
