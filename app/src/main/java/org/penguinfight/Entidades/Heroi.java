@@ -6,14 +6,20 @@ package org.penguinfight.Entidades;
  */
 public class Heroi extends Entidade {
     private int energia;
+    private int moedas;
 
     public Heroi(String nome, int vida) {
         super(nome, vida, 0);
         this.energia = 100;
+        this.moedas = 0;
     }
 
     public int getEnergia() {
         return this.energia;
+    }
+
+    public int getMoedas() {
+        return this.moedas;
     }
 
     public void setEnergia(int energia) {
@@ -25,5 +31,14 @@ public class Heroi extends Entidade {
      */
     public void usarEnergia(int energia) {
         this.energia -= energia;
+    }
+
+    public void usarMoedas(int moedas) {
+        if (moedas >= this.moedas) 
+            this.moedas -= moedas;
+    }
+
+    public void ganharMoedas(int moedas) {
+        this.moedas += moedas;
     }
 }

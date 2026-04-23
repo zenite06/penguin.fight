@@ -8,6 +8,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Evento;
 
 /**
  * Classe central que gerencia o percurso de batalhas. Possui a implementação dos métodos de Observer,
@@ -16,7 +17,7 @@ import org.penguinfight.Entidades.Inimigo;
 public class RoundManager {
 
     private Heroi player;
-    private Batalha battle;
+    private Evento evento;
     private List<Observer> subscribers; // Efeitos serão os subscribers desse publisher!
 
     public RoundManager() {
@@ -27,16 +28,16 @@ public class RoundManager {
         return this.player;
     }
 
-    public Batalha getBattle() {
-        return this.battle;
+    public Evento getEvento() {
+        return this.evento;
     }
 
     public void setPlayer(Heroi player) {
         this.player = player;
     }
     
-    public void setBattle(Batalha battle) {
-        this.battle = battle;
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     /* Métodos de Publisher */
@@ -88,32 +89,32 @@ public class RoundManager {
         IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
 
-        DefaultMutableTreeNode battle = App.getMapa(); 
+        DefaultMutableTreeNode eventoAtual = App.getMapa(); 
         
         while (true) {
             App.limparTela();
             IO.println("O destino é você quem faz. Qual caminho deseja seguir?\n");
 
             int ans = -1;
-            while (ans < 0 || ans >= battle.getChildCount()) {
-                for (int j = 0; j < battle.getChildCount(); j++) {
-                    DefaultMutableTreeNode filho = (DefaultMutableTreeNode) battle.getChildAt(j);
-                    Batalha batalha = (Batalha) filho.getUserObject();
-                    IO.println((j) + " - " + batalha.getLocal());
+            while (ans < 0 || ans >= eventoAtual.getChildCount()) {
+                for (int j = 0; j < eventoAtual.getChildCount(); j++) {
+                    DefaultMutableTreeNode filho = (DefaultMutableTreeNode) eventoAtual.getChildAt(j);
+                    Evento evento = (Evento) filho.getUserObject();
+                    IO.println((j) + " - " + evento.getLocal());
                 }
 
                 IO.println("\n");
                 ans = scanner.nextInt();
-                if (ans >= battle.getChildCount()) 
+                if (ans >= eventoAtual.getChildCount()) 
                     IO.println("Opção inválida! Escolha um dos caminhos a seguir\n");
             }
 
-            battle = (DefaultMutableTreeNode)battle.getChildAt(ans); // Atualiza a fase no mapa
-            Batalha actualBattle = (Batalha) battle.getUserObject();
+            Evento evento = (Evento) eventoAtual.getChildAt(ans).getUserObject(); // Atualiza a fase no mapa
+            Evento actualBattle = (Evento) eventoAtual.getUserObject();
             actualBattle.setPlayer(player);
             setBattle(actualBattle);
             if (actualBattle.startBattle(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
-                if (!battle.isLeaf()) {
+                if (!eventoAtual.isLeaf()) {
                     IO.println("Deseja continuar nessa aventura?\n");
                     IO.println("1 - Sim!");
                     IO.println("2 - Não...\n");
@@ -143,7 +144,7 @@ public class RoundManager {
                     return;
                 } 
                 player.setVida(player.getMaxVida());
-                battle = (DefaultMutableTreeNode) App.getMapa().getRoot();
+                eventoAtual = (DefaultMutableTreeNode) App.getMapa().getRoot();
             }
         }
     }

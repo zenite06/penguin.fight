@@ -1,8 +1,10 @@
-package org.penguinfight;
+package org.penguinfight.Eventos;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+
+import org.penguinfight.App;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
@@ -13,26 +15,18 @@ import org.penguinfight.Entidades.Inimigo;
  * Esta classe controla a interação entre o herói e o inimigo, o gerenciamento
  * do baralho (compra e descarte) e a progressão dos rounds.
  */
-public class Batalha {
-    private Heroi player;
+public class Batalha extends Evento {
     private Inimigo inimigo;
-    private String local;
+    private int recompensa;
 
-    public Batalha(Inimigo inimigo, String local) {
+    public Batalha(Inimigo inimigo, String local, int recompensa) {
+        super(local);
         this.inimigo = inimigo;
-        this.local = local;
+        this.recompensa = recompensa;
     }
 
     public Inimigo getInimigo() {
         return this.inimigo;
-    }
-
-    public String getLocal() {
-        return this.local;
-    }
-
-    public void setPlayer(Heroi player) {
-        this.player = player;
     }
 
     /**
@@ -42,7 +36,7 @@ public class Batalha {
      * @param pilhaCompra Pilha de cartas disponíveis para compra.
      * @return {@code true} se o jogador vencer a batalha, {@code false} se perder.
      */
-    public boolean startBattle(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
+    public boolean iniciar(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
         App.limparTela();
         IO.println();
 
@@ -80,6 +74,7 @@ public class Batalha {
             IO.println();
             IO.println(inimigo.getCD());
             IO.println();
+            recompensa();
             resetBattle();
             return false;
         }
@@ -195,6 +190,11 @@ public class Batalha {
         App.manager.resetCapa(inimigo);
         inimigo.setVida(inimigo.getMaxVida());
         player.setEscudo(0);
+    }
+
+    public void recompensa() {
+        player.ganharMoedas(this.recompensa);
+        // Mensagem
     }
 }
 

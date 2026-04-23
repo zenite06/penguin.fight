@@ -1,11 +1,11 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
-import org.penguinfight.Batalha;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Cartas.CartaEscudo;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Batalha;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,11 +1,11 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
-import org.penguinfight.Batalha;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Cartas.CartaEscudo;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Batalha;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +24,7 @@ public class EfeitoAcidoTest {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setBattle(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         efeito.ativar(player);
 
@@ -37,7 +37,7 @@ public class EfeitoAcidoTest {
         EfeitoAcido efeito = new EfeitoAcido(1, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", new CartaDano("O CHUTE", "Carta de Ataque", 0, 20), new CartaDano("O SOCO", "Carta de Ataque", 0, 10), new CartaEscudo("A ESQUIVA", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, efeito));
         Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setBattle(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         efeito.ativar(player);
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Batalha;
 
 public class AppTest {
 

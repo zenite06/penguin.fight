@@ -1,12 +1,12 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
-import org.penguinfight.Batalha;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Cartas.CartaEscudo;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Batalha;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +28,7 @@ public class EfeitoNevascaTest {
         CartaEfeito cartaEfeito = new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(1, 5));
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, cartaEfeito);
         Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setBattle(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         inimigo.decidirAcao();
         efeito.ativar(inimigo);
@@ -51,7 +51,7 @@ public class EfeitoNevascaTest {
         Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.setDono(player);
-        App.manager.setBattle(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         inimigo.decidirAcao();
         efeito.ativar(inimigo);
@@ -75,7 +75,7 @@ public class EfeitoNevascaTest {
         Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.setDono(player);
-        App.manager.setBattle(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
         App.manager.setPlayer(player);
         inimigo.decidirAcao();
         efeito.serNotificado("INIMIGO VAI ATACAR");
