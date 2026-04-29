@@ -1,6 +1,7 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
 import org.penguinfight.Entidades.Entidade;
+import org.penguinfight.Eventos.Batalha;
 
 /**
  * Efeito progressivo exclusivo do jogador que representa o treinamento.
@@ -28,6 +29,7 @@ public class EfeitoFaixa extends Efeito {
      * nos acúmulos (nível da faixa).
      */
     public void aplicarFaixa() {
+        Batalha batalha = (Batalha) App.manager.getEvento();
         String cor = ANSI_RESET;
         
         switch (this.getAcumulos()) {
@@ -60,55 +62,55 @@ public class EfeitoFaixa extends Efeito {
                 break;
         }
 
-        if (App.manager.getBattle().getLocal().equals("Iglu")) {
-            App.manager.getBattle().getInimigo().setCapa("      .'´o)=- \n" + //
+        if (batalha.getLocal().equals("Iglu")) {
+            batalha.getInimigo().setCapa("      .'´o)=- \n" + //
     "      /.-.' \n" + //
     "     //   |\\    VS \n" + //
     "     ||" + cor + "===" + ANSI_RESET + "|'                WWWWW\n" + //
     "   _,:(_/_                (o-o)");
-        } else if (App.manager.getBattle().getLocal().equals("Centro")) {
-            App.manager.getBattle().getInimigo().setCapa("      .'´o)=-        -=(o`'. #\n" + //
+        } else if (batalha.getLocal().equals("Centro")) {
+            batalha.getInimigo().setCapa("      .'´o)=-        -=(o`'. #\n" + //
     "      /.-.'             '.-.//\n" + //
     "     //   |\\    VS     /|  /<)\n" + //
     "     ||" + cor + "===" + ANSI_RESET + "|'           '|( O )\n" + //
     "   _,:(_/_              _\\_):,_");
-        } else if (App.manager.getBattle().getLocal().equals("Plaza")) {
-            App.manager.getBattle().getInimigo().setCapa("                      (-¨-)\n" + //
+        } else if (batalha.getLocal().equals("Plaza")) {
+            batalha.getInimigo().setCapa("                      (-¨-)\n" + //
     "                       | |\n" + //
     "     .'´o)=-        -=(o`'.\n" + //
     "     /.-.'             '|-/\\\n" + //
     "    //   |\\    VS     /|  |\\\\\n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'            '|__|||\n" + //
     "  _,:(_ /_              _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal().equals("Praia")) {
-            App.manager.getBattle().getInimigo().setCapa("                                ___\n" + //
+        } else if (batalha.getLocal().equals("Praia")) {
+            batalha.getInimigo().setCapa("                                ___\n" + //
     "     .'´o)=-        -=(o`'.     / * | \n" + //
     "     /.-.'             '.-.\\   /* * | \n" + //
     "    //   |\\    VS     /|    \\_/ * *|\n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'           '|¬¬¬| |* * /\n" + //
     "  _,:(_ /_             _\\ _) |_*__/");
-        } else if (App.manager.getBattle().getLocal().equals("Estação de Esqui")) {
-            App.manager.getBattle().getInimigo().setCapa("      .'´o)=-        -=(O¬'.\n" + //
+        } else if (batalha.getLocal().equals("Estação de Esqui")) {
+            batalha.getInimigo().setCapa("      .'´o)=-        -=(O¬'.\n" + //
     "      /.-.'             '._.\\\n" + //
     "     //   |\\    VS     /| V \\\\\n" + //
     "     ||" + cor + "===" + ANSI_RESET + "|'           '|   ||\n" + //
     "   _,:(_ /_             _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal().equals("Forte Nevado")) {
-            App.manager.getBattle().getInimigo().setCapa("                      _T_\n" + //
+        } else if (batalha.getLocal().equals("Forte Nevado")) {
+            batalha.getInimigo().setCapa("                      _T_\n" + //
     "     .'´o)=-       -=(V¬'.\n" + //
     "     /.-.'            '.-.\\\n" + //
     "    //   |\\    VS    /|*V*\\\\\n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'          '|*_*_||\n" + //
     "  _,:(_ /_            _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal().equals("Casinha da Mina")) {
-            App.manager.getBattle().getInimigo().setCapa("                      _/¨¨\\\n" + //
+        } else if (batalha.getLocal().equals("Casinha da Mina")) {
+            batalha.getInimigo().setCapa("                      _/¨¨\\\n" + //
     "     .'´o)=-        -=(o`¨.\n" + //
     "     /.-.'              '|-/\\\n" + //
     "    //   |\\    VS      /|==|\\\\\n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'            '|==|||\n" + //
     "  _,:(_ /_              _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal().equals("Montanha")) {
-            App.manager.getBattle().getInimigo().setCapa("                   ⠀ ⣤⠶⣤⣤⣤⡴⢦⡄⠀⠀\n" + //
+        } else if (batalha.getLocal().equals("Montanha")) {
+            batalha.getInimigo().setCapa("                   ⠀ ⣤⠶⣤⣤⣤⡴⢦⡄⠀⠀\n" + //
     "                    ⢷⠉⠀⠀⠀⠈⠁⢷⠖⠒⠲⠶⢤⡀⠀\n" + //
     "                    ⢸⠀⠠⠀⠠⠀⢠⠀⢳⠀⠀⠀⠀⠉⢳⡄\n" + //
     "                    ⠈⣧⡀⣶⡆⣠⠏⠀⠀⠀⠀⠀⠀⠀⠀⢹⡄\n" + //
@@ -117,15 +119,15 @@ public class EfeitoFaixa extends Efeito {
     "    //   |\\    VS    ⣷⠀⠉⢻⡀⠀⠀⣾⠤⠤⡄⠀⠀⢸⠁⠀\n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'          ⣸⠄⠀⣼⡇⠀⢠⡇⢀⡼⣻⠀⢀⡟⠀\n" + //
     "  _,:(_/_            ⠛⠒⠚⠙⠷⠶⠞⠉⠉⠀⠓⠒⠚⠁");
-        } else if (App.manager.getBattle().getLocal().equals("Pátio do Dojo")) {
-            App.manager.getBattle().getInimigo().setCapa("                      _.^._\n" + //
+        } else if (batalha.getLocal().equals("Pátio do Dojo")) {
+            batalha.getInimigo().setCapa("                      _.^._\n" + //
     "     .'´o)=-        -=(-¨`.\n" + //
     "     /.-.'            V.-.\\    /\n" + //
     "    //   |\\    VS    /|    \\__/\n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'          '|    || /\n" + //
     "  _,:(_ /_            _\\ _):,_");
-        } else if (App.manager.getBattle().getLocal().equals("Iceberg")) {
-            App.manager.getBattle().getInimigo().setCapa("     .'´o)=- \n" + //
+        } else if (batalha.getLocal().equals("Iceberg")) {
+            batalha.getInimigo().setCapa("     .'´o)=- \n" + //
     "     /.-.' \n" + //
     "    //   |\\    VS \n" + //
     "    ||" + cor + "===" + ANSI_RESET + "|'         (V) O O (V)\n" + //

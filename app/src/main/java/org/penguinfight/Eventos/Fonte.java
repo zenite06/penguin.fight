@@ -32,11 +32,11 @@ public class Fonte extends Evento {
                     IO.println("Recuperando a vida...");
 
                     for (int i = 0; i < player.getVida(); i++) 
-                        IO.print("|||");
+                        IO.print("|");
 
-                    int vidaFaltante = 100 - player.getVida();
+                    int vidaFaltante = player.getMaxVida() - player.getVida();
                     for (int i = 0; i < vidaFaltante; i ++) {
-                        IO.print(App.ANSI_GREEN + "|||" + App.ANSI_RESET);
+                        IO.print(App.ANSI_GREEN + "|" + App.ANSI_RESET);
                         try {
                             TimeUnit.SECONDS.sleep(1);
                         } catch (InterruptedException e) {
@@ -44,7 +44,7 @@ public class Fonte extends Evento {
                         }
                     }
 
-                    player.setVida(100);
+                    player.setVida(player.getMaxVida());
                     IO.println("\nPronto!");
                     IO.println("Digite qualquer coisa para continuar\n");
                     String rand = scanner.nextLine();
@@ -52,12 +52,15 @@ public class Fonte extends Evento {
                     break;
                 case 2:
                     if (result == 0) {
+                        App.limparTela();
                         IO.println("Não quer mesmo aproveitar a fonte?");
                         result++;
                     } else if (result == 1) {
+                        App.limparTela();
                         IO.println("*Águas quentinhas* Quer mesmo perder isso?");
                         result++;
                     } else if (result == 2) {
+                        App.limparTela();
                         IO.println("Tudo bem, eu avisei");
                         IO.println("Digite qualquer coisa para continuar\n");
                         rand = scanner.nextLine();

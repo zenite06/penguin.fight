@@ -89,32 +89,32 @@ public class RoundManager {
         IO.println("Digite qualquer coisa para continuar\n");
         String rand = scanner.nextLine();
 
-        DefaultMutableTreeNode eventoAtual = App.getMapa(); 
+        DefaultMutableTreeNode noAtual = App.getMapa(); 
         
         while (true) {
             App.limparTela();
             IO.println("O destino é você quem faz. Qual caminho deseja seguir?\n");
 
             int ans = -1;
-            while (ans < 0 || ans >= eventoAtual.getChildCount()) {
-                for (int j = 0; j < eventoAtual.getChildCount(); j++) {
-                    DefaultMutableTreeNode filho = (DefaultMutableTreeNode) eventoAtual.getChildAt(j);
-                    Evento evento = (Evento) filho.getUserObject();
+            while (ans < 0 || ans >= noAtual.getChildCount()) {
+                for (int j = 0; j < noAtual.getChildCount(); j++) {
+                    DefaultMutableTreeNode noFilho = (DefaultMutableTreeNode) noAtual.getChildAt(j);
+                    Evento evento = (Evento) noFilho.getUserObject();
                     IO.println((j) + " - " + evento.getLocal());
                 }
 
                 IO.println("\n");
                 ans = scanner.nextInt();
-                if (ans >= eventoAtual.getChildCount()) 
+                if (ans >= noAtual.getChildCount()) 
                     IO.println("Opção inválida! Escolha um dos caminhos a seguir\n");
             }
 
-            Evento evento = (Evento) eventoAtual.getChildAt(ans).getUserObject(); // Atualiza a fase no mapa
-            Evento actualBattle = (Evento) eventoAtual.getUserObject();
-            actualBattle.setPlayer(player);
-            setBattle(actualBattle);
-            if (actualBattle.startBattle(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
-                if (!eventoAtual.isLeaf()) {
+            DefaultMutableTreeNode no = (DefaultMutableTreeNode) noAtual.getChildAt(ans);
+            Evento evento = (Evento) no.getUserObject(); // Atualiza a fase no mapa
+            evento.setPlayer(player);
+            setEvento(evento);
+            if (evento.iniciar(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
+                if (!no.isLeaf()) {
                     IO.println("Deseja continuar nessa aventura?\n");
                     IO.println("1 - Sim!");
                     IO.println("2 - Não...\n");
@@ -129,6 +129,7 @@ public class RoundManager {
                 else {
                     App.limparTela();
                     App.getRota().gameOver(player);
+                    // Provavelmente vai ter que resetar o jogo (para resetar os produtos nas lojas, por exemplo)
                     return;
                 }
             }
@@ -144,7 +145,7 @@ public class RoundManager {
                     return;
                 } 
                 player.setVida(player.getMaxVida());
-                eventoAtual = (DefaultMutableTreeNode) App.getMapa().getRoot();
+                noAtual = App.getMapa();
             }
         }
     }
@@ -153,25 +154,25 @@ public class RoundManager {
      * Restaura a arte ASCII de batalha do inimigo correspondente à batalha atual.
      */
     public void resetCapa(Inimigo inimigo) {
-        if (getBattle().getLocal() == "Iglu") {
+        if (getEvento().getLocal() == "Iglu") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo0_capa.txt"));
-        } else if (getBattle().getLocal() == "Centro") {
+        } else if (getEvento().getLocal() == "Centro") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo1_capa.txt"));
-        } else if (getBattle().getLocal() == "Plaza") {
+        } else if (getEvento().getLocal() == "Plaza") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo2_capa.txt"));
-        } else if (getBattle().getLocal() == "Praia") {
+        } else if (getEvento().getLocal() == "Praia") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo3_capa.txt"));
-        } else if (getBattle().getLocal() == "Estação de Esqui") {
+        } else if (getEvento().getLocal() == "Estação de Esqui") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo4_capa.txt"));
-        } else if (getBattle().getLocal() == "Forte Nevado") {
+        } else if (getEvento().getLocal() == "Forte Nevado") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo5_capa.txt"));
-        } else if (getBattle().getLocal() == "Casinha da Mina") {
+        } else if (getEvento().getLocal() == "Casinha da Mina") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo6_capa.txt"));
-        } else if (getBattle().getLocal() == "Montanha") {
+        } else if (getEvento().getLocal() == "Montanha") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo7_capa.txt"));
-        } else if (getBattle().getLocal() == "Pátio do Dojo") {
+        } else if (getEvento().getLocal() == "Pátio do Dojo") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo8_capa.txt"));
-        } else if (getBattle().getLocal() == "Iceberg") {
+        } else if (getEvento().getLocal() == "Iceberg") {
             inimigo.setCapa(App.lerTXT("src/main/resources/Assets/inimigo9_capa.txt"));
         }
     }

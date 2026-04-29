@@ -2,6 +2,7 @@ package org.penguinfight.Efeitos;
 import org.penguinfight.App;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Batalha;
 
 /**
  * Debuff ambiental que reduz temporariamente o poder do ataque iminente do inimigo em 50%.
@@ -16,7 +17,8 @@ public class EfeitoNevasca extends Efeito {
      */
     @Override
     public void ativar(Entidade entidade) {
-        Inimigo inimigo = App.manager.getBattle().getInimigo();
+        Batalha batalha = (Batalha) App.manager.getEvento();
+        Inimigo inimigo = batalha.getInimigo();
         IO.println("Uma grande nevasca atrapalhou o ataque de " + entidade.getNome() + "...");
         inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 0.5));
         this.addAcumulos(-1);
@@ -41,10 +43,11 @@ public class EfeitoNevasca extends Efeito {
 
     @Override
     public void serNotificado(String evento) {
+        Batalha batalha = (Batalha) App.manager.getEvento();
         if (evento.equals("INIMIGO VAI ATACAR"))
-            ativar(App.manager.getBattle().getInimigo());
+            ativar(batalha.getInimigo());
         else if (evento.equals("INIMIGO ATACOU"))
-            resetar(App.manager.getBattle().getInimigo());
+            resetar(batalha.getInimigo());
     }
 
     @Override

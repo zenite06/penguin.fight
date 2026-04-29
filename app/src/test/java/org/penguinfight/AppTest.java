@@ -22,7 +22,7 @@ public class AppTest {
         DefaultMutableTreeNode mapa = App.criaMapa();
 
         assertNotNull(mapa);
-        assertEquals(1, mapa.getChildCount());
+        assertEquals(3, mapa.getChildCount());
 
         DefaultMutableTreeNode l11 = (DefaultMutableTreeNode) mapa.getChildAt(0);
 
