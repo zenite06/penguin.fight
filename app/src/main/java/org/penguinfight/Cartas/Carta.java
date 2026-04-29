@@ -11,6 +11,7 @@ public abstract class Carta {
     private String descricao;
     private int custo;
     private int valor;
+    private int moedas;
 
     /**
      * Executa a mecânica principal da carta caso o herói possua energia suficiente.
@@ -20,6 +21,14 @@ public abstract class Carta {
         this.descricao = descricao;
         this.custo = custo;
         this.valor = valor;
+    }
+
+    public Carta(String nome, String descricao, int custo, int valor, int moedas) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.custo = custo;
+        this.valor = valor;
+        this.moedas = moedas;
     }
 
     public String getNome() {
@@ -36,6 +45,10 @@ public abstract class Carta {
 
     public int getValor() {
         return this.valor;
+    }
+
+    public int getMoedas() {
+        return this.moedas;
     }
 
     public void setValor(int valor) {

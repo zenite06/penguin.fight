@@ -28,7 +28,7 @@ public class EfeitoNevascaTest {
         CartaEfeito cartaEfeito = new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(1, 5));
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "Capa", "Capa Vitória", "Capa Derrota", ataque1, ataque2, defesa, cartaEfeito);
         Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
         App.manager.setPlayer(player);
         inimigo.decidirAcao();
         efeito.ativar(inimigo);
@@ -51,7 +51,7 @@ public class EfeitoNevascaTest {
         Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.setDono(player);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
         App.manager.setPlayer(player);
         inimigo.decidirAcao();
         efeito.ativar(inimigo);
@@ -75,7 +75,7 @@ public class EfeitoNevascaTest {
         Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.setDono(player);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
         App.manager.setPlayer(player);
         inimigo.decidirAcao();
         efeito.serNotificado("INIMIGO VAI ATACAR");

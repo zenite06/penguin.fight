@@ -13,6 +13,10 @@ public class CartaEscudo extends Carta {
         super(nome, descricao, custo, valor);
     }
 
+    public CartaEscudo(String nome, String descricao, int custo, int valor, int moedas) {
+        super(nome, descricao, custo, valor, moedas);
+    }
+
     @Override
     public void usar(Heroi heroi, Inimigo inimigo) {
         if (heroi.getEnergia() >= this.getCusto()) {

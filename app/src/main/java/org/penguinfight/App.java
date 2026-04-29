@@ -12,6 +12,7 @@ import org.penguinfight.Efeitos.EfeitoNevasca;
 import org.penguinfight.Efeitos.EfeitoPeixe;
 import org.penguinfight.Entidades.Inimigo;
 import org.penguinfight.Eventos.Batalha;
+import org.penguinfight.Eventos.Fonte;
 import org.penguinfight.Eventos.Loja;
 
 import java.util.List;
@@ -89,7 +90,8 @@ public class App {
         DefaultMutableTreeNode l42_2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Sensei", 60, lerTXT("src/main/resources/Assets/inimigo8_capa.txt"), lerTXT("src/main/resources/Assets/inimigo8_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo8_capa_d.txt"), new CartaDano("O ESTRANGULAMENTO MILENAR", "Carta de Ataque", 0, 30), new CartaDano("A CHAVE DE OMBRO ANCESTRAL", "Carta de Ataque", 0, 20), new CartaEscudo("O BLOQUEIO SECULAR", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Pátio do Dojo", 20));
         DefaultMutableTreeNode l43_1 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
         DefaultMutableTreeNode l43_2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
-        DefaultMutableTreeNode loja = new DefaultMutableTreeNode(new Loja("Loja Teste"));
+        DefaultMutableTreeNode loja = new DefaultMutableTreeNode(new Loja("Loja Teste", new ArrayList<>(List.of(new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10)))));
+        DefaultMutableTreeNode fonte = new DefaultMutableTreeNode(new Fonte("Fonte Teste"));
 
         l33_1.add(l43_1);
         l33_2.add(l43_2);
@@ -106,6 +108,7 @@ public class App {
         l11.add(l21);
         mapa.add(l11);
         mapa.add(loja);
+        mapa.add(fonte);
         return mapa;
     }
 

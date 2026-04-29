@@ -17,6 +17,11 @@ public class CartaEfeito extends Carta {
         this.efeito = efeito;
     }
 
+    public CartaEfeito(String nome, String descricao, int custo, Efeito efeito, int moedas) {
+        super(nome, descricao, custo, efeito.getAcumulos(), moedas);
+        this.efeito = efeito;
+    }
+
     public Efeito getEfeito() {
         return this.efeito;
     }

@@ -2,6 +2,7 @@ package org.penguinfight.Efeitos;
 import org.penguinfight.App;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
+import org.penguinfight.Eventos.Batalha;
 
 /**
  * Debuff reativo que causa dano de reflexo/periódico na entidade adversária
@@ -25,7 +26,8 @@ public class EfeitoAcido extends Efeito {
      */
     @Override
     public void ativar(Entidade entidade) {
-        Inimigo inimigo = App.manager.getBattle().getInimigo();
+        Batalha batalha = (Batalha) App.manager.getEvento();
+        Inimigo inimigo = batalha.getInimigo();
         IO.println(inimigo.getNome() + " jogou ácido em " + entidade.getNome() + "!\n");
         App.manager.getPlayer().receberDano(this.dano);
         this.addAcumulos(-1);

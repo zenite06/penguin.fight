@@ -40,7 +40,7 @@ public class Batalha extends Evento {
         App.limparTela();
         IO.println();
 
-        IO.println(player.getNome() + " chegou a " + local + "\n");
+        IO.println(player.getNome() + " chegou a " + this.local + "\n");
         IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC() + "\n");
         IO.println("Deseja confrontá-lo?\n");

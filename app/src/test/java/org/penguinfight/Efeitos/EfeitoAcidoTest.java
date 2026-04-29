@@ -24,7 +24,7 @@ public class EfeitoAcidoTest {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
         App.manager.setPlayer(player);
         efeito.ativar(player);
 
@@ -37,7 +37,7 @@ public class EfeitoAcidoTest {
         EfeitoAcido efeito = new EfeitoAcido(1, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", new CartaDano("O CHUTE", "Carta de Ataque", 0, 20), new CartaDano("O SOCO", "Carta de Ataque", 0, 10), new CartaEscudo("A ESQUIVA", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, efeito));
         Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira"));
+        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
         App.manager.setPlayer(player);
         efeito.ativar(player);
 
