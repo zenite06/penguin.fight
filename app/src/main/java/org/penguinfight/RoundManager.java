@@ -119,7 +119,8 @@ public class RoundManager {
                     IO.println("2 - Não...\n");
                     ans = scanner.nextInt();
                     if (ans == 2) {
-                        App.run(); // TROCAR
+                        Heroi.resetInstance();
+                        App.run();
                         return;
                     }
                 }
@@ -135,8 +136,9 @@ public class RoundManager {
                 IO.println("1 - Sim!");
                 IO.println("2 - Não...\n");
                 ans = scanner.nextInt();
-                if (ans == 2) {               
-                    App.run(); // TROCAR
+                if (ans == 2) { 
+                    Heroi.resetInstance();              
+                    App.run(); 
                     return;
                 } 
                 player.setVida(player.getMaxVida());
@@ -148,6 +150,7 @@ public class RoundManager {
                     newPilhaCompra.push(newPilhaDescarte.remove(0));
                 player.setPilhaDescarte(newPilhaDescarte);
                 player.setPilhaCompra(newPilhaCompra);
+                player.setMoedas(0);
             }
         }
     }

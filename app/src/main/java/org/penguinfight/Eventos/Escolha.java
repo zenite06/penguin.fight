@@ -24,6 +24,13 @@ public class Escolha extends Evento {
     }
 
     public boolean iniciar() {
+        App.limparTela();
+        IO.println(story);
+        IO.println(img);
+        IO.println("1 - Sim!");
+        IO.println("2 - Não...");
+        int ans = App.scanner.nextInt();
+        App.limparTela();
         return true;
     }
 }

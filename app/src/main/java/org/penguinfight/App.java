@@ -53,12 +53,13 @@ public class App {
         IO.println(lerTXT("src/main/resources/Assets/letreiro.txt"));
         IO.println("\nSaudações, pinguim! A ilha está em apuros e precisa da sua ajuda, só lhe resta lutar para encontrar o verdadeiro inimigo. Aceita essa aventura?\n");  
         IO.println("1 - Sim!");
-        IO.println("2 - Não...\n");
+        IO.println("2 - Não...");
+        IO.println("3 - Sair\n");
 
         int answer = scanner.nextInt();
         scanner.nextLine();
 
-        if (answer != 1) {
+        if (answer == 2) {
             limparTela();
             IO.println();
             IO.println(lerTXT("src/main/resources/Assets/desistir1.txt"));
@@ -67,6 +68,12 @@ public class App {
             String rand = scanner.nextLine();
         } else  
             rota.addEscolha(1);
+
+        if (answer == 3) {
+            limparTela();
+            IO.println(lerTXT("src/main/resources/Assets/agradecimento.txt"));
+            return;
+        }
 
         mapa = criaMapa();
         cartas = criaCartas();
@@ -99,7 +106,7 @@ public class App {
         DefaultMutableTreeNode iceberg2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
         DefaultMutableTreeNode iceberg3 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
         DefaultMutableTreeNode iceberg4 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
-        DefaultMutableTreeNode loja = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho", new ArrayList<>(List.of(new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10)))));
+        DefaultMutableTreeNode loja = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho", new ArrayList<>(List.of(new CartaEfeito("O GRITO DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1)), new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10)))));
         DefaultMutableTreeNode fonte = new DefaultMutableTreeNode(new Fonte("Lago Secreto"));
         DefaultMutableTreeNode fonte2 = new DefaultMutableTreeNode(new Fonte("Lago Secreto"));
         DefaultMutableTreeNode escolha1 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));

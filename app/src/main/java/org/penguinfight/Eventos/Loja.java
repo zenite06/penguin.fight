@@ -1,8 +1,6 @@
 package org.penguinfight.Eventos;
-
 import java.util.List;
 import java.util.Stack;
-
 import org.penguinfight.App;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Efeitos.Efeito;

@@ -17,7 +17,7 @@ public class Fonte extends Evento {
         Scanner scanner = App.getScanner();
         App.limparTela();
         IO.println(Heroi.getInstance().getNome() + " acaba de chegar à " + this.local);
-        IO.println(App.lerTXT("src/main/resources/Assets/fonte.txt"));
+        IO.println(App.lerTXT("src/main/resources/Assets/fonte.txt" + "\n\n"));
 
         int result = 0;
         while (result < 3) {
@@ -29,7 +29,7 @@ public class Fonte extends Evento {
             switch (ans) {
                 case 1:
                     App.limparTela();
-                    IO.println(App.lerTXT("src/main/resources/Assets/f2.txt"));
+                    IO.println(App.lerTXT("src/main/resources/Assets/f2.txt" + "\n\n"));
                     IO.println("Recuperando a vida...\n");
 
                     for (int i = 0; i < Heroi.getInstance().getVida(); i++) 
@@ -46,6 +46,7 @@ public class Fonte extends Evento {
                     }
 
                     Heroi.getInstance().setVida(Heroi.getInstance().getMaxVida());
+                    App.limparTela();
                     IO.println("\nPronto!");
                     IO.println("Digite qualquer coisa para continuar\n");
                     String rand = scanner.nextLine();

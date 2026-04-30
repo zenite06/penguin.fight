@@ -44,6 +44,10 @@ public class Heroi extends Entidade {
         return this.moedas;
     }
 
+    public void setMoedas(int moedas) {
+        this.moedas = moedas;
+    }
+
     public List <Carta> getPilhaDescarte() {
         return this.pilhaDescarte;
     }
@@ -78,5 +82,9 @@ public class Heroi extends Entidade {
 
     public void ganharMoedas(int moedas) {
         this.moedas += moedas;
+    }
+
+    public static void resetInstance() {
+        instance = null;
     }
 }
