@@ -81,13 +81,15 @@ A progressão do jogo funciona com base no seguinte mapa:
 
 ```text
 
-    [Montanha]       [Pátio do Dojo]      [Iceberg]
-       |                   |                  |
-[Estação de Esqui]  _[Forte Nevado]  _[Casinha da Mina]
-       |           |       |        |         |
-    [Centro]_______|     [Plaza]____|      [Praia]
-       |                   |                  |
-       |________________[Iglu] _______________|
+                           [Montanha]        [Pátio do Dojo]       [Iceberg]
+                               |                    |                  |
+                             [???]                [???]              [???]_____________
+                               |                    |                  |              |
+[Loja do Tigrinho]____[Estação de Esqui]    _[Forte Nevado]  _[Casinha da Mina]__[Lago Secreto]
+       |                       |            |       |        |         |              |
+       |____________________[Centro]________|    [Plaza]_____|      [Praia]___________|
+                              |                     |                  |
+                              |___________________[Iglu] ______________|
 
 ```
 
