@@ -97,7 +97,6 @@ public class App {
         DefaultMutableTreeNode forte2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Rookie", 40, lerTXT("src/main/resources/Assets/inimigo5_capa.txt"), lerTXT("src/main/resources/Assets/inimigo5_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo5_capa_d.txt"), new CartaDano("A VOADORA ESTILOSA", "Carta de Ataque", 0, 14), new CartaDano("A NADADEIRA SÔNICA", "Carta de Ataque", 0, 16), new CartaEscudo("O BLOQUEIO DANÇANTE", "Carta de Defesa", 0, 8), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))), "Forte Nevado", 15));
         DefaultMutableTreeNode casinha = new DefaultMutableTreeNode(new Batalha(new Inimigo("Operário", 40, lerTXT("src/main/resources/Assets/inimigo6_capa.txt"), lerTXT("src/main/resources/Assets/inimigo6_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo6_capa_d.txt"), new CartaDano("O SOCO DE CONCRETO", "Carta de Ataque", 0, 14), new CartaDano("A MARTELADA (você é o prego)", "Carta de Ataque", 0, 16), new CartaEscudo("O DESVIO CAVERNOSO", "Carta de Defesa", 0, 8), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))), "Casinha da Mina", 15));
         DefaultMutableTreeNode casinha2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Operário", 40, lerTXT("src/main/resources/Assets/inimigo6_capa.txt"), lerTXT("src/main/resources/Assets/inimigo6_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo6_capa_d.txt"), new CartaDano("O SOCO DE CONCRETO", "Carta de Ataque", 0, 14), new CartaDano("A MARTELADA (você é o prego)", "Carta de Ataque", 0, 16), new CartaEscudo("O DESVIO CAVERNOSO", "Carta de Defesa", 0, 8), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))), "Casinha da Mina", 15));
-        // DefaultMutableTreeNode casinha3 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Operário", 40, lerTXT("src/main/resources/Assets/inimigo6_capa.txt"), lerTXT("src/main/resources/Assets/inimigo6_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo6_capa_d.txt"), new CartaDano("O SOCO DE CONCRETO", "Carta de Ataque", 0, 14), new CartaDano("A MARTELADA (você é o prego)", "Carta de Ataque", 0, 16), new CartaEscudo("O DESVIO CAVERNOSO", "Carta de Defesa", 0, 8), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, new EfeitoAcido(3, 6))), "Casinha da Mina", 15));
         DefaultMutableTreeNode montanha = new DefaultMutableTreeNode(new Batalha(new Inimigo("Herbert", 60, lerTXT("src/main/resources/Assets/inimigo7_capa.txt"), lerTXT("src/main/resources/Assets/inimigo7_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo7_capa_d.txt"), new CartaDano("A MORDIDA TRANSCEDENTAL", "Carta de Ataque", 0, 30), new CartaDano("A ARRANHADA FEROZ", "Carta de Ataque", 0, 20), new CartaEscudo("O DESVIO POLAR", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Montanha", 20));
         DefaultMutableTreeNode montanha2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Herbert", 60, lerTXT("src/main/resources/Assets/inimigo7_capa.txt"), lerTXT("src/main/resources/Assets/inimigo7_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo7_capa_d.txt"), new CartaDano("A MORDIDA TRANSCEDENTAL", "Carta de Ataque", 0, 30), new CartaDano("A ARRANHADA FEROZ", "Carta de Ataque", 0, 20), new CartaEscudo("O DESVIO POLAR", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Montanha", 20));
         DefaultMutableTreeNode patio = new DefaultMutableTreeNode(new Batalha(new Inimigo("Sensei", 60, lerTXT("src/main/resources/Assets/inimigo8_capa.txt"), lerTXT("src/main/resources/Assets/inimigo8_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo8_capa_d.txt"), new CartaDano("O ESTRANGULAMENTO MILENAR", "Carta de Ataque", 0, 30), new CartaDano("A CHAVE DE OMBRO ANCESTRAL", "Carta de Ataque", 0, 20), new CartaEscudo("O BLOQUEIO SECULAR", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Pátio do Dojo", 20));
@@ -106,26 +105,103 @@ public class App {
         DefaultMutableTreeNode iceberg2 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
         DefaultMutableTreeNode iceberg3 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
         DefaultMutableTreeNode iceberg4 = new DefaultMutableTreeNode(new Batalha(new Inimigo("Klutzy", 60, lerTXT("src/main/resources/Assets/inimigo9_capa.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_v.txt"), lerTXT("src/main/resources/Assets/inimigo9_capa_d.txt"), new CartaDano("O CORTE AFIADO", "Carta de Ataque", 0, 20), new CartaDano("O BELISCÃO DE AÇO", "Carta de Ataque", 0, 20), new CartaEscudo("A ESQUIVA CRUSTÁCEA", "Carta de Defesa", 0, 10), new CartaEfeito("REGENERAÇÃO", "Carta de Efeito", 0, new EfeitoCura(5))), "Iceberg", 20));
-        DefaultMutableTreeNode loja = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho", new ArrayList<>(List.of(new CartaEfeito("O GRITO DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1)), new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10), new CartaDano("A MORDIDA ESPERANÇOSA", "Carta de Ataque", 0, 5, 10)))));
+        DefaultMutableTreeNode loja = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaDano("A COTOVELADA ANCESTRAL", "Carta de Ataque", 60, 30, 10),
+                        new CartaDano("O CHUTE ITINERANTE", "Carta de Ataque", 50, 20, 5),
+                        new CartaEscudo("O BLOQUEIO DA MURALHA", "Carta de Ataque", 60, 30, 10),
+                        new CartaEscudo("A ESQUIVA NINJA", "Carta de Ataque", 50, 20, 5)))));
+        DefaultMutableTreeNode loja2 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja3 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja4 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja5 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja6 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja7 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja8 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
+        DefaultMutableTreeNode loja9 = new DefaultMutableTreeNode(new Loja("Loja do Tigrinho",
+                new ArrayList<>(List.of(
+                        new CartaEfeito("NEVASCA DAS MONTANHAS", "Fiquei surdo! Reduz o ataque do inimigo em 50%", 50, new EfeitoNevasca(1), 20),
+                        new CartaEfeito("O ELIXIR ANTÁRTICO", "Receita secreta das terras frias!", 80, new EfeitoCura(30), 50),
+                        new CartaDano("A JOELHADA LENDÁRIA", "Carta de Ataque", 70, 40, 20),
+                        new CartaDano("A BICADA ESTRATOSFÉRICA", "Carta de Ataque", 80, 50, 50),
+                        new CartaEscudo("O BLOQUEIO TRANSATLÂNTICO", "Carta de Ataque", 80, 30, 50),
+                        new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
         DefaultMutableTreeNode fonte = new DefaultMutableTreeNode(new Fonte("Lago Secreto"));
         DefaultMutableTreeNode fonte2 = new DefaultMutableTreeNode(new Fonte("Lago Secreto"));
-        DefaultMutableTreeNode escolha1 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha1_2 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha2 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha2_2 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha3 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha3_2 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha3_3 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
-        DefaultMutableTreeNode escolha3_4 = new DefaultMutableTreeNode(new Escolha("???", "???", "", 0, true));
+        DefaultMutableTreeNode escolha1 = new DefaultMutableTreeNode(new Escolha("Beira da Montanha", "Ao avistar a montanha de longe, você escuta um estranho som estrondoso. Você chega mais perto e encontra um filhote de urso machucado! Ursos provavelmente não seriam amigáveis com pinguins, mas esse parece tão inofensivo... Deseja ajudar o pequeno urso a se recuperar?", "", 50, true));
+        DefaultMutableTreeNode escolha1_2 = new DefaultMutableTreeNode(new Escolha("Beira da Montanha", "Ao avistar a montanha de longe, você escuta um estranho som estrondoso. Você chega mais perto e encontra um filhote de urso machucado! Ursos provavelmente não seriam amigáveis com pinguins, mas esse parece tão inofensivo... Deseja ajudar o pequeno urso a se recuperar?", "", 50, true));
+        DefaultMutableTreeNode escolha2 = new DefaultMutableTreeNode(new Escolha("Torre do Relógio", "Perto da torre do relógio, você percebe que um pinguim perdeu sua carteira! 60 moedas... Isso te ajudaria a comprar cartas melhores e salvar a ilha... Será que é certo? Deseja devolver a carteira perdida ao pinguim?", "", 60, false));
+        DefaultMutableTreeNode escolha2_2 = new DefaultMutableTreeNode(new Escolha("Torre do Relógio", "Perto da torre do relógio, você percebe que um pinguim perdeu sua carteira! 60 moedas... Isso te ajudaria a comprar cartas melhores e salvar a ilha... Será que é certo? Deseja devolver a carteira perdida ao pinguim?", "", 60, false));
+        DefaultMutableTreeNode escolha3 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
+        DefaultMutableTreeNode escolha3_2 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
+        DefaultMutableTreeNode escolha3_3 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
+        DefaultMutableTreeNode escolha3_4 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
 
-        escolha1.add(montanha);
-        escolha1_2.add(montanha2);
-        escolha2.add(patio);
-        escolha2_2.add(patio2);
-        escolha3.add(iceberg);
-        escolha3_2.add(iceberg2);
-        escolha3_3.add(iceberg3);
-        escolha3_4.add(iceberg4);
+        loja2.add(montanha);
+        loja3.add(montanha2);
+        loja4.add(patio);
+        loja5.add(patio2);
+        loja6.add(iceberg);
+        loja7.add(iceberg2);
+        loja8.add(iceberg3);
+        loja9.add(iceberg4);
+        escolha1.add(loja2);
+        escolha1_2.add(loja3);
+        escolha2.add(loja4);
+        escolha2_2.add(loja5);
+        escolha3.add(loja6);
+        escolha3_2.add(loja7);
+        escolha3_3.add(loja8);
+        escolha3_4.add(loja9);
         fonte.add(escolha3_3);
         fonte2.add(escolha3_4);
         casinha.add(escolha3);

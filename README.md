@@ -110,7 +110,28 @@ Cada local representa uma batalha com um inimigo diferente, de acordo com a tabe
 
 Dessa forma, existem 3 finais (com um boss diferente em cada um) possíveis, e qualquer caminho resulta em um jogo com exatamente 4 batalhas.
 
-## O Baralho
+## Sistemas de Progressão
+
+O jogo conta com um sistema de mapa composto por diferentes tipos de eventos, além das **Batalhas**, que modificam o estado do jogador ao longo da aventura. Foram desenvolvidos três sistemas principais: **Loja**, **Fonte** e **Escolha**.
+
+### 1. Loja
+A Loja é um evento pacífico no mapa onde o jogador pode trocar o ouro (moedas) obtido em batalhas ou escolhas anteriores por cartas novas para fortalecer seu baralho.
+
+### 2. Fonte
+A Fonte atua como um local seguro de descanso (fogueira). Ao encontrar uma Fonte, o jogador pode escolher recuperar toda a sua vida antes de enfrentar os próximos desafios.
+
+### 3. Escolha
+Ao chegar em um local de Escolha, o jogador se depara com um acontecimento e toma uma decisão. Fazer as escolhas certas pode garantir recursos valiosos para sobreviver às próximas batalhas.
+
+---
+
+### Padrão de Design Utilizado: Singleton
+
+Para a implementação destes três sistemas, utilizamos o padrão de projeto criacional **Singleton**. Nós aplicamos esse padrão de design diretamente nas classes `Heroi` e `RoundManager`.
+
+A implementação do padrão foi guiada pelo material do [Refactoring.Guru - Padrão Singleton](https://refactoring.guru/pt-br/design-patterns/singleton).
+
+## Baralho
 
 O jogo conta com um sistema balanceado de cartas divididas em três categorias principais. Conhecer seu arsenal é o primeiro passo para a vitória!
 

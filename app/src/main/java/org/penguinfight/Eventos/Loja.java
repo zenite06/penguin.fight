@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Stack;
 import org.penguinfight.App;
 import org.penguinfight.Cartas.Carta;
+import org.penguinfight.Cartas.CartaDano;
+import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
 
@@ -24,8 +26,14 @@ public class Loja extends Evento {
             IO.println(App.lerTXT("src/main/resources/Assets/loja1.txt"));
             IO.println("Você possui " + player.getMoedas() + " moedas em suas nadadeiras. O que deseja fazer?\n");
             int i = 0;
-            for ( ; i < cartas.size(); i++)
-                IO.println(i + " - Comprar " + cartas.get(i).getDescricao() + ": " + App.ANSI_PURPLE + cartas.get(i).getNome() + App.ANSI_RESET + " (Dano = " + cartas.get(i).getValor() + " / Custo = " + cartas.get(i).getCusto() + ") " + App.ANSI_GREEN + "(" + cartas.get(i).getMoedas() + " moedas)" + App.ANSI_RESET);
+            for ( ; i < cartas.size(); i++) {
+                if (cartas.get(i) instanceof CartaEfeito)
+                    IO.println(i + " - Comprar " + App.ANSI_PURPLE + cartas.get(i).getNome() + App.ANSI_RESET + ": " + cartas.get(i).getDescricao() + " (Custo = " + cartas.get(i).getCusto() + ") " + App.ANSI_GREEN + "(" + cartas.get(i).getMoedas() + " moedas)" + App.ANSI_RESET);
+                else if (cartas.get(i) instanceof CartaDano)
+                    IO.println(i + " - Comprar " + cartas.get(i).getDescricao() + ": " + App.ANSI_PURPLE + cartas.get(i).getNome() + App.ANSI_RESET + " (Dano = " + cartas.get(i).getValor() + " / Custo = " + cartas.get(i).getCusto() + ") " + App.ANSI_GREEN + "(" + cartas.get(i).getMoedas() + " moedas)" + App.ANSI_RESET);
+                else
+                    IO.println(i + " - Comprar " + cartas.get(i).getDescricao() + ": " + App.ANSI_PURPLE + cartas.get(i).getNome() + App.ANSI_RESET + " (Defesa = " + cartas.get(i).getValor() + " / Custo = " + cartas.get(i).getCusto() + ") " + App.ANSI_GREEN + "(" + cartas.get(i).getMoedas() + " moedas)" + App.ANSI_RESET);
+            }
             IO.println(i + " - Sair\n");
 
             int ans = App.scanner.nextInt();

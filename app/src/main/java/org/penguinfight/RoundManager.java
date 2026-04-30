@@ -26,7 +26,7 @@ public class RoundManager {
     }
 
     public static RoundManager getInstance() {
-        if ( instance == null) {
+        if (instance == null) {
             instance = new RoundManager();
         }
         return instance;

@@ -1,8 +1,6 @@
 package org.penguinfight.Entidades;
-
 import java.util.List;
 import java.util.Stack;
-
 import org.penguinfight.Cartas.Carta;
 
 /**
