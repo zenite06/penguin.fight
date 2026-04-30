@@ -112,6 +112,7 @@ public class RoundManager {
             DefaultMutableTreeNode no = (DefaultMutableTreeNode) noAtual.getChildAt(ans);
             Evento evento = (Evento) no.getUserObject(); // Atualiza a fase no mapa
             evento.setPlayer(player);
+            noAtual = no;
             setEvento(evento);
             if (evento.iniciar(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
                 if (!no.isLeaf()) {
@@ -145,7 +146,12 @@ public class RoundManager {
                     return;
                 } 
                 player.setVida(player.getMaxVida());
-                noAtual = App.getMapa();
+                noAtual = App.criaMapa();
+                pilhaDescarte = App.getCartas();
+                pilhaCompra = new Stack<>();
+                Collections.shuffle(pilhaDescarte);
+                while (!pilhaDescarte.isEmpty())
+                    pilhaCompra.push(pilhaDescarte.remove(0));
             }
         }
     }

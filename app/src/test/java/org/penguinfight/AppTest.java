@@ -22,12 +22,12 @@ public class AppTest {
         DefaultMutableTreeNode mapa = App.criaMapa();
 
         assertNotNull(mapa);
-        assertEquals(3, mapa.getChildCount());
+        assertEquals(1, mapa.getChildCount());
 
-        DefaultMutableTreeNode l11 = (DefaultMutableTreeNode) mapa.getChildAt(0);
+        DefaultMutableTreeNode iglu = (DefaultMutableTreeNode) mapa.getChildAt(0);
 
-        assertEquals(3, l11.getChildCount());
-        assertEquals(4, mapa.getDepth());
-        assertTrue(l11.getUserObject() instanceof Batalha);
+        assertEquals(3, iglu.getChildCount());
+        assertEquals(6, mapa.getDepth());
+        assertTrue(iglu.getUserObject() instanceof Batalha);
     }
 }
