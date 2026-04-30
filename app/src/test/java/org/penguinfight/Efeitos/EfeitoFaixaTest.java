@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EfeitoFaixaTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
 
     @Test
     public void criarEfeitoFaixa() {
@@ -22,7 +23,6 @@ public class EfeitoFaixaTest {
     @Test
     public void setPlayerComoDono() {
         EfeitoFaixa efeito = new EfeitoFaixa(5);
-        Heroi player = new Heroi("Player", 40);
         efeito.setDono(player);
 
         assertEquals(player, efeito.getDono());
@@ -31,7 +31,6 @@ public class EfeitoFaixaTest {
     @Test
     public void ativarEAumentarEscudoDoPlayer() {
         EfeitoFaixa efeito = new EfeitoFaixa(5);
-        Heroi player = new Heroi("Player", 40);
         efeito.setDono(player);
         efeito.ativar(player);
 
@@ -41,7 +40,6 @@ public class EfeitoFaixaTest {
     @Test
     public void ativarImediatoEAumentarEscudoDoPlayer() {
         EfeitoFaixa efeito = new EfeitoFaixa(5);
-        Heroi player = new Heroi("Player", 40);
         efeito.ativarImediato(player);
 
         assertEquals(10, player.getEscudo());
@@ -50,7 +48,6 @@ public class EfeitoFaixaTest {
     @Test
     public void serNotificadoEAumentarEscudoDoPlayer() {
         EfeitoFaixa efeito = new EfeitoFaixa(5);
-        Heroi player = new Heroi("Player", 40);
         efeito.setDono(player);
         efeito.serNotificado("FIM DO ROUND");
 
@@ -60,7 +57,6 @@ public class EfeitoFaixaTest {
     @Test
     public void ativarImediatoEAumentarEscudoDoPlayerComSomaDeAcumulos() {
         EfeitoFaixa efeito = new EfeitoFaixa(5);
-        Heroi player = new Heroi("Player", 40);
         efeito.setDono(player);
         efeito.ativarImediato(player);
 

@@ -1,5 +1,6 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
 
@@ -25,7 +26,7 @@ public class EfeitoCura extends Efeito {
 
         if (this.getAcumulos() == 0) { // O efeito acabou!
             entidade.removerEfeito(this);
-            App.manager.desinscrever(this);
+            RoundManager.getInstance().desinscrever(this);
         }
     }
 

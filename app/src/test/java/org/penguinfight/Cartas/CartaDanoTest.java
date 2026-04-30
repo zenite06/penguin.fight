@@ -5,6 +5,7 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 public class CartaDanoTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
 
     @Test
     public void criarCartaDano() {
@@ -18,7 +19,6 @@ public class CartaDanoTest {
 
     @Test
     public void usarCartaDanoComEnergiaSuficiente() {
-        Heroi player = new Heroi("Pinguim", 40);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         CartaDano carta = new CartaDano("COTOVELADA", "Carta de Ataque", 10, 2);
         carta.usar(player, inimigo);
@@ -29,7 +29,6 @@ public class CartaDanoTest {
 
     @Test
     public void usarCartaDanoSemEnergiaSuficiente() {
-        Heroi player = new Heroi("Pinguim", 40);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         CartaDano carta = new CartaDano("COTOVELADA", "Carta de Ataque", 10, 2);
         player.setEnergia(5);

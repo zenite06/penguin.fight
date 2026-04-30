@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
@@ -36,12 +37,15 @@ public class Batalha extends Evento {
      * @param pilhaCompra Pilha de cartas disponíveis para compra.
      * @return {@code true} se o jogador vencer a batalha, {@code false} se perder.
      */
-    public boolean iniciar(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
+    public boolean iniciar() {
+        Heroi player = Heroi.getInstance();
+        Stack <Carta> pilhaCompra = player.getPilhaCompra();
+        List <Carta> pilhaDescarte = player.getPilhaDescarte();
         App.limparTela();
         IO.println();
 
-        IO.println(player.getNome() + " chegou a " + this.local + "\n");
-        IO.println(player.getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
+        IO.println(Heroi.getInstance().getNome() + " chegou a " + this.local + "\n");
+        IO.println(Heroi.getInstance().getNome() + " acaba de encontrar " + inimigo.getNome() + "\n");
         IO.println(inimigo.getC() + "\n");
         IO.println("Deseja confrontá-lo?\n");
         IO.println("1 - Sim!");
@@ -61,29 +65,29 @@ public class Batalha extends Evento {
 
         App.limparTela();
 
-        while (inimigo.estaVivo() && player.estaVivo()) {
+        while (inimigo.estaVivo() && Heroi.getInstance().estaVivo()) {
             startRound(pilhaDescarte, pilhaCompra);
-            App.manager.notificar("FIM DO ROUND"); // Manager notifica os efeitos de que o round acabou
+            RoundManager.getInstance().notificar("FIM DO ROUND"); // Manager notifica os efeitos de que o round acabou
         }
         App.limparTela();
 
         // A batalha terminou...
-        if (inimigo.estaVivo()) { // O player perdeu
+        if (inimigo.estaVivo()) { // O Heroi.getInstance() perdeu
             IO.println("\n");
             IO.println(App.ANSI_YELLOW + "Você perdeu...\n" + App.ANSI_RESET);
             IO.println();
             IO.println(inimigo.getCD());
             IO.println();
-            recompensa();
             resetBattle();
             return false;
         }
-        else { // O player ganhou
+        else { // O Heroi.getInstance() ganhou
             IO.println("\n");
             IO.println(App.ANSI_YELLOW + "Você ganhou!\n" + App.ANSI_RESET);
             IO.println();
             IO.println(inimigo.getCV());
             IO.println();
+            recompensa();
             resetBattle();
             return true;
         }
@@ -109,7 +113,7 @@ public class Batalha extends Evento {
                 while (!pilhaDescarte.isEmpty())
                     pilhaCompra.push(pilhaDescarte.remove(0)); 
             } 
-            nadadeira.add(pilhaCompra.pop()); // São compradas cinco cartas da pilha de compra pra mão do player (nadadeira)
+            nadadeira.add(pilhaCompra.pop()); // São compradas cinco cartas da pilha de compra pra mão do Heroi.getInstance() (nadadeira)
         }
         inimigo.decidirAcao();
         while (true) {
@@ -117,9 +121,9 @@ public class Batalha extends Evento {
             inimigo.declarar();
             IO.println(App.ANSI_YELLOW + "                  " + inimigo.getNome() + " (Vida = " + inimigo.getVida() + ")\n" + App.ANSI_RESET);
             IO.println(inimigo.getC() + "\n");
-            IO.println(App.ANSI_YELLOW + "  " + player.getNome() + " (Vida = " + player.getVida() + " / Defesa = " + player.getEscudo() + ")\n" + App.ANSI_RESET);
+            IO.println(App.ANSI_YELLOW + "  " + Heroi.getInstance().getNome() + " (Vida = " + Heroi.getInstance().getVida() + " / Defesa = " + Heroi.getInstance().getEscudo() + ")\n" + App.ANSI_RESET);
             IO.println("Nas suas nadadeiras existem cartas\nDeseja usá-las?\n");
-            IO.println("Energia: " + player.getEnergia());
+            IO.println("Energia: " + Heroi.getInstance().getEnergia());
             IO.println();
 
             int i = 0;
@@ -145,16 +149,16 @@ public class Batalha extends Evento {
                 while (!nadadeira.isEmpty())
                     pilhaDescarte.add(nadadeira.remove(0)); 
                 App.limparTela();
-                App.manager.notificar("INIMIGO VAI ATACAR"); // Manager notifica os efeitos de que o inimigo vai atacar
-                inimigo.atacar(player);
+                RoundManager.getInstance().notificar("INIMIGO VAI ATACAR"); // Manager notifica os efeitos de que o inimigo vai atacar
+                inimigo.atacar(Heroi.getInstance());
                 inimigo.usarEfeito();
-                App.manager.notificar("INIMIGO ATACOU"); // Manager notifica os efeitos de que o inimigo atacou
+                RoundManager.getInstance().notificar("INIMIGO ATACOU"); // Manager notifica os efeitos de que o inimigo atacou
                 resetRound();
                 break;
             }
             // O jogador escolheu uma carta
             App.limparTela();
-            nadadeira.get(ans).usar(player, inimigo); 
+            nadadeira.get(ans).usar(Heroi.getInstance(), inimigo); 
             pilhaDescarte.add(nadadeira.remove(ans)); 
             if (!inimigo.estaVivo()) {
                 while (!nadadeira.isEmpty())
@@ -171,8 +175,8 @@ public class Batalha extends Evento {
      */
     public void resetRound() {
         inimigo.setEscudo(0);
-        player.setEscudo(0);
-        player.setEnergia(100);
+        Heroi.getInstance().setEscudo(0);
+        Heroi.getInstance().setEnergia(100);
     }
 
     /**
@@ -181,20 +185,20 @@ public class Batalha extends Evento {
      * e restaura a vida do inimigo para um estado inicial.
      */
     public void resetBattle() {
-        for (Efeito efeito : player.getEfeitos())
-            App.manager.desinscrever(efeito);
+        for (Efeito efeito : Heroi.getInstance().getEfeitos())
+            RoundManager.getInstance().desinscrever(efeito);
         for (Efeito efeito : inimigo.getEfeitos())
-            App.manager.desinscrever(efeito);
-        player.getEfeitos().clear();
+            RoundManager.getInstance().desinscrever(efeito);
+        Heroi.getInstance().getEfeitos().clear();
         inimigo.getEfeitos().clear();
-        App.manager.resetCapa(inimigo);
+        RoundManager.getInstance().resetCapa(inimigo);
         inimigo.setVida(inimigo.getMaxVida());
-        player.setEscudo(0);
+        Heroi.getInstance().setEscudo(0);
     }
 
     public void recompensa() {
-        player.ganharMoedas(this.recompensa);
-        // Mensagem
+        Heroi.getInstance().ganharMoedas(this.recompensa);
+        IO.println(App.ANSI_GREEN + "+ " + this.recompensa + " MOEDAS!\n" + App.ANSI_RESET);
     }
 }
 

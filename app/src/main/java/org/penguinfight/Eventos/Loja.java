@@ -6,6 +6,7 @@ import java.util.Stack;
 import org.penguinfight.App;
 import org.penguinfight.Cartas.Carta;
 import org.penguinfight.Efeitos.Efeito;
+import org.penguinfight.Entidades.Heroi;
 
 public class Loja extends Evento {
     private List<Carta> cartas;
@@ -15,14 +16,15 @@ public class Loja extends Evento {
         this.cartas = cartas;
     }
 
-    public boolean iniciar(List<Carta> pilhaDescarte, Stack<Carta> pilhaCompra) {
+    public boolean iniciar() {
+        Heroi player = Heroi.getInstance();
         App.limparTela();
         IO.println();
         IO.println(player.getNome() + " chegou a " + this.local + "\n");
         
         while(true) {
             IO.println(App.lerTXT("src/main/resources/Assets/loja1.txt"));
-            IO.println("Você possui " + this.player.getMoedas() + " moedas em suas nadadeiras. O que deseja fazer?\n");
+            IO.println("Você possui " + player.getMoedas() + " moedas em suas nadadeiras. O que deseja fazer?\n");
             int i = 0;
             for ( ; i < cartas.size(); i++)
                 IO.println(i + " - Comprar " + cartas.get(i).getDescricao() + ": " + App.ANSI_PURPLE + cartas.get(i).getNome() + App.ANSI_RESET + " (Dano = " + cartas.get(i).getValor() + " / Custo = " + cartas.get(i).getCusto() + ") " + App.ANSI_GREEN + "(" + cartas.get(i).getMoedas() + " moedas)" + App.ANSI_RESET);
@@ -50,21 +52,23 @@ public class Loja extends Evento {
             }
             else {
                 App.limparTela();
-                comprar(pilhaDescarte, pilhaCompra, cartas.get(ans));
+                comprar(cartas.get(ans));
                 continue;
             }
         }
     }
 
-    public void comprar(List<Carta> pilhaDescarte, Stack <Carta> pilhaCompra, Carta carta) {
-        if (this.player.getMoedas() >= carta.getMoedas()) {
-            IO.println("Você possui " + this.player.getMoedas() + " moedas em suas nadadeiras. Deseja mesmo usar " + carta.getMoedas() + " delas para comprar " + carta.getDescricao() + ": " + App.ANSI_PURPLE + carta.getNome() + App.ANSI_RESET + " (Dano = " + carta.getValor() + " / Custo = " + carta.getCusto() + ")?\n");
+    public void comprar(Carta carta) {
+        Heroi player = Heroi.getInstance();
+        Stack <Carta> pilhaCompra = player.getPilhaCompra();
+        if (player.getMoedas() >= carta.getMoedas()) {
+            IO.println("Você possui " + player.getMoedas() + " moedas em suas nadadeiras. Deseja mesmo usar " + carta.getMoedas() + " delas para comprar " + carta.getDescricao() + ": " + App.ANSI_PURPLE + carta.getNome() + App.ANSI_RESET + " (Dano = " + carta.getValor() + " / Custo = " + carta.getCusto() + ")?\n");
                     IO.println("1 - Sim");
                     IO.println("2 - Não\n");
             int ans = App.scanner.nextInt();
             if (ans == 1) {
                 App.limparTela();
-                this.player.usarMoedas(carta.getMoedas());
+                player.usarMoedas(carta.getMoedas());
                 this.cartas.remove(carta);
                 pilhaCompra.push(carta);
                 IO.println("Você adicionou " + carta.getDescricao() + ": " + App.ANSI_PURPLE + carta.getNome() + App.ANSI_RESET + " (Dano = " + carta.getValor() + " / Custo = " + carta.getCusto() + ") ao seu baralho!" + App.ANSI_RED + " (- " + carta.getMoedas() + " moedas)" + App.ANSI_RESET + "\n");

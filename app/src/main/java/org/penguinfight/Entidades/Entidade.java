@@ -1,6 +1,7 @@
 package org.penguinfight.Entidades;
 import java.util.List;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Efeitos.EfeitoFaixa;
 import org.penguinfight.Efeitos.EfeitoNevasca;
@@ -97,7 +98,7 @@ public abstract class Entidade {
             }
         efeito.setDono(this);
         this.efeitos.add(efeito);
-        App.manager.inscrever(efeito);
+        RoundManager.getInstance().inscrever(efeito);
 
         // Efeitos com alguma aplicação imediata
         if (efeito instanceof EfeitoFaixa || efeito instanceof EfeitoNevasca || efeito instanceof EfeitoCura) {

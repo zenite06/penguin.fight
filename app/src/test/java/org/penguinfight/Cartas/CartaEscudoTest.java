@@ -5,6 +5,7 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 public class CartaEscudoTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
 
     @Test
     public void criarCartaEscudo() {
@@ -18,7 +19,6 @@ public class CartaEscudoTest {
 
     @Test
     public void usarCartaEscudoComEnergiaSuficiente() {
-        Heroi player = new Heroi("Pinguim", 40);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         CartaEscudo carta = new CartaEscudo("ESQUIVA", "Carta de Defesa", 10, 2);
         carta.usar(player, inimigo);
@@ -29,7 +29,6 @@ public class CartaEscudoTest {
 
     @Test
     public void usarCartaEscudoSemEnergiaSuficiente() {
-        Heroi player = new Heroi("Pinguim", 40);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         CartaEscudo carta = new CartaEscudo("ESQUIVA", "Carta de Defesa", 10, 2);
         player.setEnergia(5);

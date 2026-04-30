@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EfeitoPeixeTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
+
     @Test
     public void criarEfeitoPeixe() {
         EfeitoPeixe efeito = new EfeitoPeixe(20);
@@ -18,9 +20,7 @@ public class EfeitoPeixeTest {
     @Test
     public void ativarEAumentarEnergiaDoPlayer() {
         EfeitoPeixe efeito = new EfeitoPeixe(20);
-        Heroi player = new Heroi("Pinguim", 40);
         efeito.setDono(player);
-        App.manager.setPlayer(player);
         efeito.ativar(player);
 
         assertEquals(120, player.getEnergia());
@@ -30,10 +30,8 @@ public class EfeitoPeixeTest {
     @Test
     public void serNotificadoEAumentarEnergiaDoPlayer() { 
         EfeitoPeixe efeito = new EfeitoPeixe(20);
-        Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.setDono(player);
-        App.manager.setPlayer(player);
         efeito.serNotificado("FIM DO ROUND");
 
         assertEquals(120, player.getEnergia());

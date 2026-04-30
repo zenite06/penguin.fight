@@ -23,7 +23,7 @@ public class Escolha extends Evento {
         this.type = type;
     }
 
-    public boolean iniciar(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
+    public boolean iniciar() {
         return true;
     }
 }

@@ -1,5 +1,6 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Inimigo;
 import org.penguinfight.Eventos.Batalha;
@@ -17,7 +18,7 @@ public class EfeitoNevasca extends Efeito {
      */
     @Override
     public void ativar(Entidade entidade) {
-        Batalha batalha = (Batalha) App.manager.getEvento();
+        Batalha batalha = (Batalha) RoundManager.getInstance().getEvento();
         Inimigo inimigo = batalha.getInimigo();
         IO.println("Uma grande nevasca atrapalhou o ataque de " + entidade.getNome() + "...");
         inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 0.5));
@@ -37,13 +38,13 @@ public class EfeitoNevasca extends Efeito {
         inimigo.getAtaque(inimigo.getDecisao(0)).setValor((int)(inimigo.getAtaque(inimigo.getDecisao(0)).getValor() * 2));
         if (this.getAcumulos() == 0) { // O efeito acabou!
             this.getDono().removerEfeito(this);
-            App.manager.desinscrever(this);
+            RoundManager.getInstance().desinscrever(this);
         }
     }
 
     @Override
     public void serNotificado(String evento) {
-        Batalha batalha = (Batalha) App.manager.getEvento();
+        Batalha batalha = (Batalha) RoundManager.getInstance().getEvento();
         if (evento.equals("INIMIGO VAI ATACAR"))
             ativar(batalha.getInimigo());
         else if (evento.equals("INIMIGO ATACOU"))

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EfeitoCuraTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
     
     @Test
     public void criarEfeitoCura() {
@@ -22,7 +23,6 @@ public class EfeitoCuraTest {
     @Test
     public void ativarImediatoECurar() {
         EfeitoCura efeito = new EfeitoCura(10);
-        Heroi player = new Heroi("Pinguim", 40);
         player.setVida(30);
         efeito.ativarImediato(player);
 
@@ -33,7 +33,6 @@ public class EfeitoCuraTest {
     @Test
     public void ativarImediatoECurarSemUltrapassarAVidaMaxima() {
         EfeitoCura efeito = new EfeitoCura(10);
-        Heroi player = new Heroi("Pinguim", 40);
         efeito.ativarImediato(player);
 
         assertEquals(40, player.getVida());
@@ -43,7 +42,6 @@ public class EfeitoCuraTest {
     @Test
     public void removerEfeitoQuandoAcaba() { 
         EfeitoCura efeito = new EfeitoCura(10);
-        Heroi player = new Heroi("Pinguim", 40);
         player.aplicarEfeito(efeito);
         efeito.ativarImediato(player);
 

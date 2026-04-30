@@ -1,6 +1,8 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
+import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 import org.penguinfight.Eventos.Batalha;
 
@@ -26,22 +28,22 @@ public class EfeitoAcido extends Efeito {
      */
     @Override
     public void ativar(Entidade entidade) {
-        Batalha batalha = (Batalha) App.manager.getEvento();
+        Batalha batalha = (Batalha) RoundManager.getInstance().getEvento();
         Inimigo inimigo = batalha.getInimigo();
         IO.println(inimigo.getNome() + " jogou ácido em " + entidade.getNome() + "!\n");
-        App.manager.getPlayer().receberDano(this.dano);
+        Heroi.getInstance().receberDano(this.dano);
         this.addAcumulos(-1);
 
         if (this.getAcumulos() == 0) { // O efeito acabou!
             inimigo.removerEfeito(this);
-            App.manager.desinscrever(this);
+            RoundManager.getInstance().desinscrever(this);
         }
     }
 
     @Override
     public void serNotificado(String evento) {
         if (evento.equals("INIMIGO ATACOU"))
-            ativar(App.manager.getPlayer());
+            ativar(Heroi.getInstance());
     }
 
     @Override

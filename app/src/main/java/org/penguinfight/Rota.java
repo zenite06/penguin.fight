@@ -22,7 +22,7 @@ public class Rota {
     List<String> frames = new ArrayList<>(); 
 
     public Rota() {
-        this.manager = App.getManager();
+        this.manager = RoundManager.getInstance();
         this.escolhas = new ArrayList<Integer>();
         this.frames.add("\n\n\n    *Barulhos de pinguim andando*\n" + //
                         "\n" + //

@@ -16,24 +16,24 @@ import org.penguinfight.Eventos.Evento;
  */
 public class RoundManager {
 
-    private Heroi player;
+    private static RoundManager instance;
+    private static Heroi player;
     private Evento evento;
     private List<Observer> subscribers; // Efeitos serão os subscribers desse publisher!
 
-    public RoundManager() {
+    private RoundManager() {
         this.subscribers = new ArrayList<>();
     }
 
-    public Heroi getPlayer() {
-        return this.player;
+    public static RoundManager getInstance() {
+        if ( instance == null) {
+            instance = new RoundManager();
+        }
+        return instance;
     }
 
     public Evento getEvento() {
         return this.evento;
-    }
-
-    public void setPlayer(Heroi player) {
-        this.player = player;
     }
     
     public void setEvento(Evento evento) {
@@ -68,20 +68,19 @@ public class RoundManager {
      * Loop principal da campanha. Interage com o jogador para criar o herói 
      * e navega pela árvore de batalhas do jogo até o fim da rota.
      */
-    public void startGame() { 
-        Scanner scanner = App.getScanner();
-        App.limparTela();
-        IO.println();
-        IO.println("Como devemos te chamar?\n");
-        String name = scanner.nextLine();
-        Heroi player = new Heroi(name, 40);
-        setPlayer(player);
-
+    public void startGame() {
         List <Carta> pilhaDescarte = App.getCartas();
         Stack <Carta> pilhaCompra = new Stack<>();
         Collections.shuffle(pilhaDescarte);
         while (!pilhaDescarte.isEmpty())
             pilhaCompra.push(pilhaDescarte.remove(0));
+        
+        Scanner scanner = App.getScanner();
+        App.limparTela();
+        IO.println();
+        IO.println("Como devemos te chamar?\n");
+        String name = scanner.nextLine();
+        player = Heroi.getInstance(name, 40, pilhaDescarte, pilhaCompra);
 
         App.limparTela();
         IO.println();
@@ -111,19 +110,16 @@ public class RoundManager {
 
             DefaultMutableTreeNode no = (DefaultMutableTreeNode) noAtual.getChildAt(ans);
             Evento evento = (Evento) no.getUserObject(); // Atualiza a fase no mapa
-            evento.setPlayer(player);
             noAtual = no;
             setEvento(evento);
-            if (evento.iniciar(pilhaDescarte, pilhaCompra)) { // O player venceu a batalha
+            if (evento.iniciar()) { // O player venceu a batalha
                 if (!no.isLeaf()) {
                     IO.println("Deseja continuar nessa aventura?\n");
                     IO.println("1 - Sim!");
                     IO.println("2 - Não...\n");
                     ans = scanner.nextInt();
                     if (ans == 2) {
-                        App.limparTela();
-                        IO.println();
-                        IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
+                        App.run(); // TROCAR
                         return;
                     }
                 }
@@ -140,18 +136,18 @@ public class RoundManager {
                 IO.println("2 - Não...\n");
                 ans = scanner.nextInt();
                 if (ans == 2) {               
-                    App.limparTela();
-                    IO.println();
-                    IO.println(App.ANSI_YELLOW + App.lerTXT("src/main/resources/Assets/agradecimento.txt") + App.ANSI_RESET);
+                    App.run(); // TROCAR
                     return;
                 } 
                 player.setVida(player.getMaxVida());
                 noAtual = App.criaMapa();
-                pilhaDescarte = App.getCartas();
-                pilhaCompra = new Stack<>();
-                Collections.shuffle(pilhaDescarte);
-                while (!pilhaDescarte.isEmpty())
-                    pilhaCompra.push(pilhaDescarte.remove(0));
+                List <Carta> newPilhaDescarte = App.getCartas();
+                Stack <Carta> newPilhaCompra = new Stack<>();
+                Collections.shuffle(newPilhaDescarte);
+                while (!newPilhaDescarte.isEmpty())
+                    newPilhaCompra.push(newPilhaDescarte.remove(0));
+                player.setPilhaDescarte(newPilhaDescarte);
+                player.setPilhaCompra(newPilhaCompra);
             }
         }
     }

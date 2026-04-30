@@ -8,6 +8,7 @@ import org.penguinfight.Entidades.Heroi;
 import org.penguinfight.Entidades.Inimigo;
 
 public class CartaEfeitoTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
 
     @Test
     public void criarCartaEfeito() {
@@ -22,7 +23,6 @@ public class CartaEfeitoTest {
 
     @Test
     public void usarCartaEfeitoComEnergiaSuficiente() {
-        Heroi player = new Heroi("Pinguim", 40);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         EfeitoPeixe efeito = new EfeitoPeixe(10);
         CartaEfeito carta = new CartaEfeito("PEIXE", "Aumenta em 10 pontos a energia para a próxima rodada", 10, efeito);
@@ -43,7 +43,6 @@ public class CartaEfeitoTest {
 
     @Test
     public void usarCartaEfeitoSemEnergiaSuficiente() {
-        Heroi player = new Heroi("Pinguim", 40);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
         EfeitoPeixe efeito = new EfeitoPeixe(10);
         CartaEfeito carta = new CartaEfeito("PEIXE", "Aumenta em 10 pontos a energia para a próxima rodada", 10, efeito);

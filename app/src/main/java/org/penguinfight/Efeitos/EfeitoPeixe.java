@@ -1,5 +1,6 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Entidades.Heroi;
 
@@ -16,18 +17,18 @@ public class EfeitoPeixe extends Efeito {
      */
     @Override
     public void ativar(Entidade entidade) {
-        Heroi player = App.manager.getPlayer();
+        Heroi player = Heroi.getInstance();
         IO.println("Delícia! " + player.getNome() + " comeu um peixe e aumentou sua energia para essa rodada\n");
         player.setEnergia(player.getEnergia() + this.getAcumulos()); 
         
         this.getDono().removerEfeito(this); // O efeito acabou!
-        App.manager.desinscrever(this);
+        RoundManager.getInstance().desinscrever(this);
     }
 
     @Override
     public void serNotificado(String evento) {
         if (evento.equals("FIM DO ROUND"))
-            ativar(App.manager.getPlayer());
+            ativar(Heroi.getInstance());
     }
 
     @Override
@@ -35,3 +36,4 @@ public class EfeitoPeixe extends Efeito {
         return new EfeitoPeixe(this.getAcumulos());
     }
 }
+

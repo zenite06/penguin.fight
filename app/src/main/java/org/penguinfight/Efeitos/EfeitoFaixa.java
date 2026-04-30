@@ -1,5 +1,6 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Entidades.Entidade;
 import org.penguinfight.Eventos.Batalha;
 
@@ -29,7 +30,7 @@ public class EfeitoFaixa extends Efeito {
      * nos acúmulos (nível da faixa).
      */
     public void aplicarFaixa() {
-        Batalha batalha = (Batalha) App.manager.getEvento();
+        Batalha batalha = (Batalha) RoundManager.getInstance().getEvento();
         String cor = ANSI_RESET;
         
         switch (this.getAcumulos()) {

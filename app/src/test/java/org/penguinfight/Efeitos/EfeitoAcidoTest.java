@@ -1,5 +1,6 @@
 package org.penguinfight.Efeitos;
 import org.penguinfight.App;
+import org.penguinfight.RoundManager;
 import org.penguinfight.Cartas.CartaDano;
 import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Cartas.CartaEscudo;
@@ -10,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EfeitoAcidoTest {
+    private static RoundManager manager = RoundManager.getInstance();
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
+
     @Test
     public void criarEfeitoAcido() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
@@ -23,9 +27,7 @@ public class EfeitoAcidoTest {
     public void ativarECausarDanoEmPlayer() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", null, null, null, null);
-        Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
-        App.manager.setPlayer(player);
+        RoundManager.getInstance().setEvento(new Batalha(inimigo, "Geleira", 0));
         efeito.ativar(player);
 
         assertEquals(2, efeito.getAcumulos());
@@ -36,9 +38,7 @@ public class EfeitoAcidoTest {
     public void removerEfeitoQuandoAcaba() {
         EfeitoAcido efeito = new EfeitoAcido(1, 5);
         Inimigo inimigo = new Inimigo("Pinguim Malvado", 50, "", "", "", new CartaDano("O CHUTE", "Carta de Ataque", 0, 20), new CartaDano("O SOCO", "Carta de Ataque", 0, 10), new CartaEscudo("A ESQUIVA", "Carta de Defesa", 0, 5), new CartaEfeito("ÁCIDO", "Carta de Efeito", 0, efeito));
-        Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setEvento(new Batalha(inimigo, "Geleira", 0));
-        App.manager.setPlayer(player);
+        RoundManager.getInstance().setEvento(new Batalha(inimigo, "Geleira", 0));
         efeito.ativar(player);
 
         assertEquals(0, inimigo.getEfeitos().size());
@@ -48,8 +48,6 @@ public class EfeitoAcidoTest {
     @Test
     public void serNotificadoECausarDanoEmPlayer() {
         EfeitoAcido efeito = new EfeitoAcido(3, 5);
-        Heroi player = new Heroi("Pinguim", 40);
-        App.manager.setPlayer(player);
         efeito.serNotificado("INIMIGO ATACOU");
 
         assertEquals(35, player.getVida());

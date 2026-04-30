@@ -35,7 +35,7 @@ public class App {
     public static final String ANSI_PURPLE = "\033[1;35m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static Scanner scanner = new Scanner(System.in);
-    public static RoundManager manager = new RoundManager(); // Gerenciador de batalhas
+    private static RoundManager manager = RoundManager.getInstance(); // Gerenciador de batalhas
     private static DefaultMutableTreeNode mapa; // Mapa de batalhas e inimigos
     private static List<Carta> cartas; // Lista com todas as cartas do jogo
     private static Rota rota = new Rota(); // Rota do jogador
@@ -45,6 +45,10 @@ public class App {
      * o jogador para a rota do jogo baseada em sua escolha.
      */
     public static void main(String[] args) throws Exception {
+        run();
+    }
+
+    public static void run() {
         limparTela();
         IO.println(lerTXT("src/main/resources/Assets/letreiro.txt"));
         IO.println("\nSaudações, pinguim! A ilha está em apuros e precisa da sua ajuda, só lhe resta lutar para encontrar o verdadeiro inimigo. Aceita essa aventura?\n");  
@@ -181,10 +185,6 @@ public class App {
 
     public static Scanner getScanner() {
         return scanner;
-    }
-
-    public static RoundManager getManager() {
-        return manager;
     }
 
     public static DefaultMutableTreeNode getMapa() {

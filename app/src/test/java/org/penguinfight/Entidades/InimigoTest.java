@@ -8,6 +8,7 @@ import org.penguinfight.Cartas.CartaEfeito;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InimigoTest {
+    private static Heroi player = Heroi.getInstance("Pinguim", 40, null, null);
 
     @Test
     public void criarInimigo() {
@@ -38,7 +39,6 @@ public class InimigoTest {
 
     @Test
     public void atacar() {
-        Heroi player = new Heroi("Pinguim", 40);
         CartaDano ataque1 = new CartaDano("COTOVELADA", "Carta de Ataque", 0, 2);
         CartaDano ataque2 = new CartaDano("SOCO", "Carta de Ataque", 0, 4);
         CartaEscudo defesa = new CartaEscudo("ESQUIVA", "Carta de Defesa", 0, 2);

@@ -5,6 +5,7 @@ import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 import org.penguinfight.App;
 import org.penguinfight.Cartas.Carta;
+import org.penguinfight.Entidades.Heroi;
 
 public class Fonte extends Evento {
 
@@ -12,10 +13,10 @@ public class Fonte extends Evento {
         super(local);
     }
     
-    public boolean iniciar(List <Carta> pilhaDescarte, Stack <Carta> pilhaCompra) {
+    public boolean iniciar() {
         Scanner scanner = App.getScanner();
         App.limparTela();
-        IO.println(player.getNome() + " acaba de chegar à " + this.local);
+        IO.println(Heroi.getInstance().getNome() + " acaba de chegar à " + this.local);
         IO.println(App.lerTXT("src/main/resources/Assets/fonte.txt"));
 
         int result = 0;
@@ -31,10 +32,10 @@ public class Fonte extends Evento {
                     IO.println(App.lerTXT("src/main/resources/Assets/f2.txt"));
                     IO.println("Recuperando a vida...\n");
 
-                    for (int i = 0; i < player.getVida(); i++) 
+                    for (int i = 0; i < Heroi.getInstance().getVida(); i++) 
                         IO.print("|");
 
-                    int vidaFaltante = player.getMaxVida() - player.getVida();
+                    int vidaFaltante = Heroi.getInstance().getMaxVida() - Heroi.getInstance().getVida();
                     for (int i = 0; i < vidaFaltante; i ++) {
                         IO.print(App.ANSI_GREEN + "|" + App.ANSI_RESET);
                         try {
@@ -44,7 +45,7 @@ public class Fonte extends Evento {
                         }
                     }
 
-                    player.setVida(player.getMaxVida());
+                    Heroi.getInstance().setVida(Heroi.getInstance().getMaxVida());
                     IO.println("\nPronto!");
                     IO.println("Digite qualquer coisa para continuar\n");
                     String rand = scanner.nextLine();
