@@ -41,13 +41,15 @@ public class App {
     private static Rota rota = new Rota(); // Rota do jogador
 
     /**
-     * Ponto de entrada do programa. Apresenta o menu inicial e direciona
-     * o jogador para a rota do jogo baseada em sua escolha.
+     * Ponto de entrada do programa. Chama o método que inicia o jogo.
      */
     public static void main(String[] args) throws Exception {
         run();
     }
 
+    /**
+     * Apresenta o menu inicial e direciona o jogador para a rota do jogo baseada em sua escolha.
+     */
     public static void run() {
         limparTela();
         IO.println(lerTXT("src/main/resources/Assets/letreiro.txt"));
@@ -82,7 +84,7 @@ public class App {
     }
 
     /**
-     * Instancia e configura todos os elementos do jogo (mapa, lugares, inimigos, cartas)
+     * Instancia e configura todos os elementos do jogo (mapa, eventos, inimigos, cartas)
      */
     public static DefaultMutableTreeNode criaMapa() {
         mapa = new DefaultMutableTreeNode();
@@ -177,14 +179,14 @@ public class App {
                         new CartaEscudo("A ESQUIVA SENOIDAL", "Carta de Ataque", 70, 20, 20)))));
         DefaultMutableTreeNode fonte = new DefaultMutableTreeNode(new Fonte("Lago Secreto"));
         DefaultMutableTreeNode fonte2 = new DefaultMutableTreeNode(new Fonte("Lago Secreto"));
-        DefaultMutableTreeNode escolha1 = new DefaultMutableTreeNode(new Escolha("Beira da Montanha", "Ao avistar a montanha de longe, você escuta um estranho som estrondoso. Você chega mais perto e encontra um filhote de urso machucado! Ursos provavelmente não seriam amigáveis com pinguins, mas esse parece tão inofensivo... Deseja ajudar o pequeno urso a se recuperar?", "", 50, true));
-        DefaultMutableTreeNode escolha1_2 = new DefaultMutableTreeNode(new Escolha("Beira da Montanha", "Ao avistar a montanha de longe, você escuta um estranho som estrondoso. Você chega mais perto e encontra um filhote de urso machucado! Ursos provavelmente não seriam amigáveis com pinguins, mas esse parece tão inofensivo... Deseja ajudar o pequeno urso a se recuperar?", "", 50, true));
-        DefaultMutableTreeNode escolha2 = new DefaultMutableTreeNode(new Escolha("Torre do Relógio", "Perto da torre do relógio, você percebe que um pinguim perdeu sua carteira! 60 moedas... Isso te ajudaria a comprar cartas melhores e salvar a ilha... Será que é certo? Deseja devolver a carteira perdida ao pinguim?", "", 60, false));
-        DefaultMutableTreeNode escolha2_2 = new DefaultMutableTreeNode(new Escolha("Torre do Relógio", "Perto da torre do relógio, você percebe que um pinguim perdeu sua carteira! 60 moedas... Isso te ajudaria a comprar cartas melhores e salvar a ilha... Será que é certo? Deseja devolver a carteira perdida ao pinguim?", "", 60, false));
-        DefaultMutableTreeNode escolha3 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
-        DefaultMutableTreeNode escolha3_2 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
-        DefaultMutableTreeNode escolha3_3 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
-        DefaultMutableTreeNode escolha3_4 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", "", 0, true));
+        DefaultMutableTreeNode escolha1 = new DefaultMutableTreeNode(new Escolha("Beira da Montanha", "Ao avistar a montanha de longe, você escuta um estranho som estrondoso. Você chega mais perto e encontra um filhote de urso machucado! Ursos provavelmente não seriam amigáveis com pinguins, mas esse parece tão inofensivo... Deseja ajudar o pequeno urso a se recuperar?", lerTXT("src/main/resources/Assets/s.txt"), 50, true));
+        DefaultMutableTreeNode escolha1_2 = new DefaultMutableTreeNode(new Escolha("Beira da Montanha", "Ao avistar a montanha de longe, você escuta um estranho som estrondoso. Você chega mais perto e encontra um filhote de urso machucado! Ursos provavelmente não seriam amigáveis com pinguins, mas esse parece tão inofensivo... Deseja ajudar o pequeno urso a se recuperar?", lerTXT("src/main/resources/Assets/s.txt"), 50, true));
+        DefaultMutableTreeNode escolha2 = new DefaultMutableTreeNode(new Escolha("Torre do Relógio", "Perto da torre do relógio, você percebe que um pinguim perdeu sua carteira! 60 moedas... Isso te ajudaria a comprar cartas melhores e salvar a ilha... Será que é certo? Deseja devolver a carteira perdida ao pinguim?", lerTXT("src/main/resources/Assets/s.txt"), 60, false));
+        DefaultMutableTreeNode escolha2_2 = new DefaultMutableTreeNode(new Escolha("Torre do Relógio", "Perto da torre do relógio, você percebe que um pinguim perdeu sua carteira! 60 moedas... Isso te ajudaria a comprar cartas melhores e salvar a ilha... Será que é certo? Deseja devolver a carteira perdida ao pinguim?", lerTXT("src/main/resources/Assets/s.txt"), 60, false));
+        DefaultMutableTreeNode escolha3 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", lerTXT("src/main/resources/Assets/s.txt"), 50, true));
+        DefaultMutableTreeNode escolha3_2 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", lerTXT("src/main/resources/Assets/s.txt"), 70, true));
+        DefaultMutableTreeNode escolha3_3 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?", lerTXT("src/main/resources/Assets/s.txt"), 70, true));
+        DefaultMutableTreeNode escolha3_4 = new DefaultMutableTreeNode(new Escolha("Costa da Ilha", "Observando os barcos atracarem na costa, um marinheiro perdido te pede ajuda para chegar até o farol. É longe e você quer acabar logo com sua missão de salvar a ilha... Ele diz ter uma recompensa. Deseja ajudar o marinheiro?",lerTXT("src/main/resources/Assets/s.txt"), 70, true));
 
         loja2.add(montanha);
         loja3.add(montanha2);

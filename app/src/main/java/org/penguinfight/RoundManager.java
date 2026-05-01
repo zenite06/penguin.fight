@@ -11,8 +11,8 @@ import org.penguinfight.Entidades.Inimigo;
 import org.penguinfight.Eventos.Evento;
 
 /**
- * Classe central que gerencia o percurso de batalhas. Possui a implementação dos métodos de Observer,
- * criação do player e navegação na árvore de batalhas. 
+ * Classe central que gerencia o percurso de batalhas. Segue o padrão de projeto Singleton para garantir apenas um controlador ativo. 
+ * Atua como "Publisher" no padrão Observer, inscrevendo e notificando as cartas/efeitos de acordo com os gatilhos das rodadas. 
  */
 public class RoundManager {
 
@@ -25,6 +25,10 @@ public class RoundManager {
         this.subscribers = new ArrayList<>();
     }
 
+    /**
+     * Obtém a instância única do gerenciador de rounds.
+     * @return A instância Singleton ativa de RoundManager.
+     */
     public static RoundManager getInstance() {
         if (instance == null) {
             instance = new RoundManager();
@@ -49,6 +53,9 @@ public class RoundManager {
         subscribers.add(subscriber);
     }
 
+    /**
+     * Remove um Observer da lista de inscritos, parando de enviar notificações a ele.
+     */
     public void desinscrever(Observer subscriber) {
         subscribers.remove(subscriber);
     }

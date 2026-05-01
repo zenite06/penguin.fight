@@ -8,6 +8,11 @@ import org.penguinfight.Cartas.CartaEfeito;
 import org.penguinfight.Efeitos.Efeito;
 import org.penguinfight.Entidades.Heroi;
 
+/**
+ * Sistema de progressão focado na economia e no aprimoramento do deck.
+ * Atua como um comerciante (evento pacífico), listando cartas disponíveis para 
+ * compra em troca de moedas obtidas previamente ao longo das batahas.
+ */
 public class Loja extends Evento {
     private List<Carta> cartas;
 
@@ -16,6 +21,12 @@ public class Loja extends Evento {
         this.cartas = cartas;
     }
 
+    /**
+     * Exibe a interface da loja e mantém o herói no fluxo de transações até que opte por encerrar as compras, 
+     * exibindo as informações da mercadoria, custos e verificando a disponibilidade de moedas.
+     * 
+     * @return true, indicando que o herói finalizou suas negociações e prosseguiu.
+     */
     public boolean iniciar() {
         Heroi player = Heroi.getInstance();
         App.limparTela();
@@ -64,6 +75,13 @@ public class Loja extends Evento {
         }
     }
 
+    /**
+     * Realiza a tentativa compra de um item. Se o herói possui moedas suficientes, a compra
+     * é realizada, descontando os fundos do herói, removendo a carta da vitrine e a inserindo 
+     * permanentemente no baralho do jogador.
+     * 
+     * @param carta A referência direta carta selecionada pelo usuário.
+     */
     public void comprar(Carta carta) {
         Heroi player = Heroi.getInstance();
         Stack <Carta> pilhaCompra = player.getPilhaCompra();
