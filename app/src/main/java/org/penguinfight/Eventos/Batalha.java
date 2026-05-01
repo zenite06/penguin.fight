@@ -33,8 +33,6 @@ public class Batalha extends Evento {
     /**
      * Inicia a sequência de combate. Apresenta o inimigo, solicita confirmação do 
      * jogador e mantém o loop de rounds enquanto ambos estiverem vivos.
-     * * @param pilhaDescarte Lista de cartas já utilizadas.
-     * @param pilhaCompra Pilha de cartas disponíveis para compra.
      * @return {@code true} se o jogador vencer a batalha, {@code false} se perder.
      */
     public boolean iniciar() {
@@ -196,6 +194,9 @@ public class Batalha extends Evento {
         Heroi.getInstance().setEscudo(0);
     }
 
+    /**
+     * Entrega a recompensa estipulada para o herói.
+     */
     public void recompensa() {
         Heroi.getInstance().ganharMoedas(this.recompensa);
         IO.println(App.ANSI_GREEN + "+ " + this.recompensa + " MOEDAS!\n" + App.ANSI_RESET);

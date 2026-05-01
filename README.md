@@ -82,10 +82,14 @@ A progressão do jogo funciona com base no seguinte mapa:
 ```text
 
                            [Montanha]        [Pátio do Dojo]       [Iceberg]
+                               |____________________|__________________|
+                                                    |
+                                            [Loja do Tigrinho]
+                               _____________________|___________________
                                |                    |                  |
                              [???]                [???]              [???]_____________
                                |                    |                  |              |
-[Loja do Tigrinho]____[Estação de Esqui]    _[Forte Nevado]  _[Casinha da Mina]__[Lago Secreto]
+[Loja do Tigrinho]____[Estação de Esqui]    _[Forte Nevado]  _[Casinha da Mina]  [Lago Secreto]
        |                       |            |       |        |         |              |
        |____________________[Centro]________|    [Plaza]_____|      [Praia]___________|
                               |                     |                  |
@@ -93,7 +97,7 @@ A progressão do jogo funciona com base no seguinte mapa:
 
 ```
 
-Cada local representa uma batalha com um inimigo diferente, de acordo com a tabela abaixo:
+Cada local de batalha representa uma batalha com um inimigo diferente, de acordo com a tabela abaixo:
 
 | Local | Inimigo |
 | :--- | :---: | 
@@ -130,6 +134,10 @@ Ao chegar em um local de Escolha, o jogador se depara com um acontecimento e tom
 Para a implementação destes três sistemas, utilizamos o padrão de projeto criacional **Singleton**. Nós aplicamos esse padrão de design diretamente nas classes `Heroi` e `RoundManager`.
 
 A implementação do padrão foi guiada pelo material do [Refactoring.Guru - Padrão Singleton](https://refactoring.guru/pt-br/design-patterns/singleton).
+
+## Diagrama de Classes dos Sistemas
+
+![alt text](assets/diagrama.png)
 
 ## Baralho
 
